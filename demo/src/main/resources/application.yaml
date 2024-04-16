@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: F1 Manager Miage Project
+  datasource:
+    url: jdbc:postgresql://localhost:5432/F1Manager
+    username: postgres
+    password: 1234
+  jpa:
+    ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

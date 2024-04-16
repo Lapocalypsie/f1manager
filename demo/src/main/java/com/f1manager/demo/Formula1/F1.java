@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class F1 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
     private int id;
     private double poidsF1;
     private double vitesseMax;
