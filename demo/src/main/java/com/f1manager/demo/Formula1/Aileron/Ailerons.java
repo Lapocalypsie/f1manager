@@ -1,18 +1,9 @@
 package com.f1manager.demo.Formula1.Aileron;
-
 public class Ailerons {
-    private int idAileron;
+
     private double coefAileron;
-    private double lenghtAileron;
+    private double lengthAileron;
     private double heightAileron;
-
-    public int getIdAileron() {
-        return idAileron;
-    }
-
-    public void setIdAileron(int idAileron) {
-        this.idAileron = idAileron;
-    }
 
     public double getCoefAileron() {
         return coefAileron;
@@ -22,12 +13,12 @@ public class Ailerons {
         this.coefAileron = coefAileron;
     }
 
-    public double getLenghtAileron() {
-        return lenghtAileron;
+    public double getLengthAileron() {
+        return lengthAileron;
     }
 
-    public void setLenghtAileron(double lenghtAileron) {
-        this.lenghtAileron = lenghtAileron;
+    public void setLengthAileron(double lengthAileron) {
+        this.lengthAileron = lengthAileron;
     }
 
     public double getHeightAileron() {
