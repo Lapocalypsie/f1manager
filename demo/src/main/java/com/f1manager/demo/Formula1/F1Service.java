@@ -2,6 +2,8 @@ package com.f1manager.demo.Formula1;
 
 import com.f1manager.demo.Formula1.Aileron.Ailerons;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
+import com.f1manager.demo.Formula1.Utils.assignCoef;
+import com.f1manager.demo.Formula1.Utils.findCloserInList;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +21,9 @@ public class F1Service {
         } else if (f1.getManiabilty().equals(Level.MEDIUM)) {
             maniabilityCoef = 0.6;
         } else if (f1.getManiabilty().equals(Level.LOW)) {
-            maniabilityCoef = 0.3;
+            maniabilityCoef = 0.4;
+        } else if (f1.getManiabilty().equals(Level.DISASTER)) {
+            maniabilityCoef = 0.2;
         } else {
             throw new IllegalArgumentException("Le Coefficient de Maniabilité est erroné");
         }
@@ -27,49 +31,13 @@ public class F1Service {
     }
 
     public Double vMaxCoef(F1 f1) {
-
-        double vMaxCoef = 0.1;
-
-        if (f1.getVitesseMax() < 0) {
-            throw new IllegalArgumentException("La vitesse max ne peut pas être négative");
-        } else if (f1.getVitesseMax() < 300) {
-            vMaxCoef = 0.3;
-        } else if (f1.getVitesseMax() < 320) {
-            vMaxCoef = 0.5;
-        } else if (f1.getVitesseMax() < 340) {
-            vMaxCoef = 0.7;
-        } else if (f1.getVitesseMax() < 360) {
-            vMaxCoef = 0.8;
-        } else {
-            vMaxCoef = 0.8;
-        }
-        return vMaxCoef;
-
+        int[] vitessList = {300, 310, 320, 330, 340, 350, 360};
+        return assignCoef.assignCoeficient(findCloserInList.findCloser(f1.getVitesseMax(), vitessList),vitessList);
     }
         //
     public Double getPoidsCoef(F1 f1) {
-
-        double poidsCoef = 0.1;
-
-        if (f1.getPoidsF1() < 798) {
-            throw new IllegalArgumentException("Le poids de la F1 n'a pas le droit d'être inférieur à 798 KG depuis 2022");
-        }
-        if (f1.getPoidsF1() == 798) {
-            poidsCoef = 1.0;
-        }
-        if (f1.getPoidsF1() > 800) {
-            poidsCoef = 0.8;
-        }
-        if (f1.getPoidsF1() > 810) {
-            poidsCoef = 0.6;
-        }
-        if (f1.getPoidsF1() > 830) {
-            poidsCoef = 0.4;
-        }
-        if (f1.getPoidsF1() > 850) {
-            poidsCoef = 0.2;
-        }
-        return poidsCoef;
+        int[] poidsList = {798,800,810,830,850};
+        return 1-assignCoef.assignCoeficient(findCloserInList.findCloser(f1.getPoidsF1(),poidsList), poidsList);
     }
         //
     public Double getZeroTo100Coef(F1 f1) {
