@@ -1,5 +1,10 @@
 package com.f1manager.demo.Formula1.Moteurs;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class Moteurs {
 
     private int id;
@@ -8,43 +13,18 @@ public abstract class Moteurs {
     private int puissance;
     private double coefMoteur;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public Moteurs(int id, String nomMoteur, double consommationEssence, int puissance, double coefMoteur) {
         this.id = id;
-    }
-
-    public String getNomMoteur() {
-        return nomMoteur;
-    }
-
-    public void setNomMoteur(String nomMoteur) {
         this.nomMoteur = nomMoteur;
-    }
-
-    public double getConsommationEssence() {
-        return consommationEssence;
-    }
-
-    public void setConsommationEssence(double consommationEssence) {
         this.consommationEssence = consommationEssence;
-    }
-
-    public int getPuissance() {
-        return puissance;
-    }
-
-    public void setPuissance(int puissance) {
         this.puissance = puissance;
+        this.coefMoteur = coefMoteur;
     }
 
-    public double getCoefMoteur() {
-        return coefMoteur;
-    }
-
-    public void setCoefMoteur(double coefMoteur) {
+    public Moteurs(String nomMoteur, double consommationEssence, int puissance, double coefMoteur) {
+        this.nomMoteur = nomMoteur;
+        this.consommationEssence = consommationEssence;
+        this.puissance = puissance;
         this.coefMoteur = coefMoteur;
     }
 }

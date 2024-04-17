@@ -1,22 +1,19 @@
 package com.f1manager.demo.Formula1.Aileron;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
+
+@Getter
+@Setter
 public class Ailerons {
 
-    private double coefAileron;
-    private double heightAileron;
+    private final double coefAileron;
+    private double poidsAileron;
 
-    public double getCoefAileron() {
-        return coefAileron;
-    }
-
-    public void setCoefAileron(double coefAileron) {
+    public Ailerons(double coefAileron, double poidsAileron) {
         this.coefAileron = coefAileron;
+        this.poidsAileron = poidsAileron;
     }
 
-    public double getHeightAileron() {
-        return heightAileron;
-    }
-
-    public void setHeightAileron(double heightAileron) {
-        this.heightAileron = heightAileron;
-    }
 }

@@ -1,32 +1,37 @@
 package com.f1manager.demo.Formula1.Utils;
 
-import java.util.Arrays;
+import com.f1manager.demo.Formula1.ErrorHandling.throwException;
+
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 public class assignCoef {
-    public Double assignCoeficient(int target, int[] liste){
+    private static double calculateCoefficient(int index, int length) {
+        double coef = (double) (index) / (length);
+
+        if (coef < 0.0) {
+            throwException.throwUnsuportedOperationException("Le coefficient ne peut pas être négatif");
+        }
+        return coef;
+    }
+
+    public static Double assignCoefficient(double target, double[] liste) {
         OptionalInt index = IntStream.range(0, liste.length)
                 .filter(i -> liste[i] == target)
                 .findFirst();
         if (index.isPresent()) {
-            return (double) (index.getAsInt()+1) / (liste.length + 2); // Calculate coefficient
+            System.out.println(index);
+            return calculateCoefficient(index.getAsInt(), liste.length);
         } else {
-            throw new IllegalArgumentException("La target n'est pas présente dans la liste");
+            throwException.throwIllegalArgumentException("La target n'est pas présente dans la liste");
+            return null; // Just for the sake of compilation, this line will never be reached
         }
     }
-    public static Double assignCoeficient(double target, int[] liste){
-        OptionalInt index = IntStream.range(0, liste.length)
-                .filter(i -> liste[i] == target)
-                .findFirst();
-        if (index.isPresent()) {
-            return (double) (index.getAsInt()+1) / (liste.length ); // Calculate coefficient
-        } else {
-            throw new IllegalArgumentException("La target n'est pas présente dans la liste");
-        }
-    }
-    public static void main(String[] args){
-        int[] poidsList = {798,800,810,830,850};
-        System.out.println(assignCoef.assignCoeficient(findCloserInList.findCloser(840,poidsList), poidsList));
+
+    public static void main(String[] args) {
+        double[] timeList = {1.46, 1.6, 1.9, 2.8};
+        System.out.println(findCloserInList.findCloser(2.8, timeList));
+        System.out.println(timeList.length);
+        System.out.println(1 - assignCoefficient(findCloserInList.findCloser(2.8, timeList), timeList));
     }
 }
