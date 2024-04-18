@@ -32,14 +32,24 @@ public class F1 {
 
     public F1(){}
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Double coef) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;
         this.maniabilty = maniabilty;
         this.wheels = wheels;
         this.moteur = moteur;
+        this.ailerons = ailerons;
         this.coef = coef;
     }
 
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons) {
+        this.poidsF1 = poidsF1;
+        this.vitesseMax = vitesseMax;
+        this.zeroTo100 = zeroTo100;
+        this.maniabilty = maniabilty;
+        this.wheels = wheels;
+        this.moteur = moteur;
+        this.ailerons = ailerons;
+    }
 }

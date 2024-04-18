@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class Moteurs {
+public class Moteurs {
 
     private int id;
     private String nomMoteur;
@@ -26,5 +26,11 @@ public abstract class Moteurs {
         this.consommationEssence = consommationEssence;
         this.puissance = puissance;
         this.coefMoteur = coefMoteur;
+    }
+
+    public Moteurs(String nomMoteur, double consommationEssence, int puissance) {
+        this.nomMoteur = nomMoteur;
+        this.consommationEssence = consommationEssence;
+        this.puissance = puissance;
     }
 }

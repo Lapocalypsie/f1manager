@@ -30,4 +30,11 @@ public class Wheels {
         this.typePneus = typePneus;
         this.coefPneus = coefPneus;
     }
+
+    public Wheels(String nomPneu, double poidsPneus, double prixUnitairePneus, String typePneus) {
+        this.nomPneu = nomPneu;
+        this.poidsPneus = poidsPneus;
+        this.prixUnitairePneus = prixUnitairePneus;
+        this.typePneus = typePneus;
+    }
 }
