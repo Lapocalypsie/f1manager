@@ -26,4 +26,6 @@ public class PiloteService {
     public void deletePilote(Long id) {
         piloteRepository.deleteById(id);
     }
+
+    // test
 }
