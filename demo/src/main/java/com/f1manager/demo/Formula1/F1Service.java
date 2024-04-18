@@ -8,10 +8,17 @@ import com.f1manager.demo.Formula1.Moteurs.MoteursService;
 import com.f1manager.demo.Formula1.Utils.assignCoef;
 import com.f1manager.demo.Formula1.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.WheelsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class F1Service {
+
+    private final F1Repository repository;
+
     public Double coefTotal(F1 f1, Moteurs moteur, Ailerons ailerons){
         return f1.getCoef() + moteur.getCoefMoteur() + ailerons.getCoefAileron();
     }
@@ -66,7 +73,15 @@ public class F1Service {
         zeroTo100Coef = (zeroTo100Coef * 2 + MoteursService.getMoteurCoef(f1.getMoteur())) / 3;
         return zeroTo100Coef;
     }
-    public Double f1MoyenneCoef (F1 f1){
-        return (getPoidsCoef(f1) + getManiabilityCoef(f1) + vMaxCoef(f1) + getZeroTo100Coef(f1))/4;
+    public Double f1MoyenneCoef (int idF1){
+        Optional<F1> f1Optional = repository.findById(idF1);
+        if (f1Optional.isPresent()) {
+            F1 f1 = f1Optional.get();
+            return (getPoidsCoef(f1) + getManiabilityCoef(f1) + vMaxCoef(f1) + getZeroTo100Coef(f1))/4;
+        } else {
+            throwException.throwIllegalArgumentException("La F1 n'est pas présente en base");
+            return null; // Just for the sake of compilation, this line will never be reached
+        }
+
     }
 }
