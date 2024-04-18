@@ -10,29 +10,42 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "f1")
 public class F1 {
-    @Id
-    @Column(insertable = false, updatable = false)
-    private int id;
-    private double poidsF1;
-    private double vitesseMax;
-    private double zeroTo100;
-    private Level maniabilty;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name ="poidsf1")
+    private double poidsF1;
+
+    @Column(name ="vitessemax")
+    private double vitesseMax;
+
+    @Column(name ="zeroto100")
+    private double zeroTo100;
+
+    @Column(name ="maniability")
+    private int maniabilty;
+
+    @Column(name = "coef")
     private Double coef;
 
-    @Embedded
+    @ManyToOne
+    @JoinColumn(name = "wheels_id")
     private Wheels wheels;
 
-    @Embedded
+    @ManyToOne
+    @JoinColumn(name = "moteur_id")
     private Moteurs moteur;
 
-    @Embedded
+    @OneToOne
+    @JoinColumn(name = "ailerons_id")
     private Ailerons ailerons;
-
     public F1(){}
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, int maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;
@@ -43,7 +56,7 @@ public class F1 {
         this.coef = coef;
     }
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, int maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;

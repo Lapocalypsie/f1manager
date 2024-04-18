@@ -11,6 +11,7 @@ import com.f1manager.demo.Formula1.wheels.WheelsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,20 +25,7 @@ public class F1Service {
     }
 
     public Double getManiabilityCoef(F1 f1) {
-        double maniabilityCoef = 0.1;
-        if (f1.getManiabilty().equals(Level.PERFECTION)) {
-            maniabilityCoef = 1.0;
-        } else if (f1.getManiabilty().equals(Level.HIGH)) {
-            maniabilityCoef = 0.8;
-        } else if (f1.getManiabilty().equals(Level.MEDIUM)) {
-            maniabilityCoef = 0.6;
-        } else if (f1.getManiabilty().equals(Level.LOW)) {
-            maniabilityCoef = 0.4;
-        } else if (f1.getManiabilty().equals(Level.DISASTER)) {
-            maniabilityCoef = 0.2;
-        } else {
-            throwException.throwIllegalArgumentException("Le Coefficient de Maniabilité est erroné");
-        }
+        double maniabilityCoef = f1.getManiabilty();
         maniabilityCoef = (maniabilityCoef * 2 + AileronsService.getAileronCoef(f1.getAilerons())) /3;
         return maniabilityCoef;
     }
@@ -84,4 +72,13 @@ public class F1Service {
         }
 
     }
+
+    public F1 saveF1(F1 f1) {
+        return repository.save(f1);
+    }
+
+    public List<F1> getAllF1() {
+        return repository.findAll();
+    }
+
 }

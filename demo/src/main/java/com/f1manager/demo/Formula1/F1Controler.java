@@ -1,14 +1,9 @@
 package com.f1manager.demo.Formula1;
 
-import com.f1manager.demo.Formula1.Aileron.Ailerons;
-import com.f1manager.demo.Formula1.Moteurs.Moteurs;
-import com.f1manager.demo.Formula1.wheels.Wheels;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,4 +27,17 @@ public class F1Controler {
         Double moyenne = f1Service.f1MoyenneCoef();
         return new ResponseEntity<>(moyenne, HttpStatus.OK);
     }*/
+
+    @PostMapping("/add")
+    public ResponseEntity<F1> addF1(@RequestBody F1 f1) {
+        F1 savedF1 = f1Service.saveF1(f1);
+        return ResponseEntity.ok(savedF1);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<F1>> getAllF1() {
+        List<F1> allF1 = f1Service.getAllF1();
+        return ResponseEntity.ok(allF1);
+    }
+
+
 }
