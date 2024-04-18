@@ -10,4 +10,5 @@ public class F1ManagerMiageProjectApplication {
 		SpringApplication.run(F1ManagerMiageProjectApplication.class, args);
 	}
 
+
 }
