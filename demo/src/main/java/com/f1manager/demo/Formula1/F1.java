@@ -12,12 +12,13 @@ import lombok.Setter;
 @Setter
 public class F1 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, updatable = false)
-    private int id;
+    private Integer id;
     private double poidsF1;
     private double vitesseMax;
     private double zeroTo100;
-    private Level maniabilty;
+    private double maniabilty;
 
     private Double coef;
 
@@ -32,7 +33,7 @@ public class F1 {
 
     public F1(){}
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, double maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;
@@ -43,13 +44,4 @@ public class F1 {
         this.coef = coef;
     }
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, Level maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons) {
-        this.poidsF1 = poidsF1;
-        this.vitesseMax = vitesseMax;
-        this.zeroTo100 = zeroTo100;
-        this.maniabilty = maniabilty;
-        this.wheels = wheels;
-        this.moteur = moteur;
-        this.ailerons = ailerons;
-    }
 }
