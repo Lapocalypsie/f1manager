@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Setter
 public class Ailerons {
 
-    private final double coefAileron;
+    private double coefAileron;
     private double poidsAileron;
 
     public Ailerons(double coefAileron, double poidsAileron) {
@@ -16,4 +16,7 @@ public class Ailerons {
         this.poidsAileron = poidsAileron;
     }
 
+    public Ailerons(double poidsAileron) {
+        this.poidsAileron = poidsAileron;
+    }
 }
