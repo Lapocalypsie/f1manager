@@ -1,4 +1,4 @@
-package com.f1manager.demo.Personnel;
+package com.f1manager.demo.Personnel.pilote;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

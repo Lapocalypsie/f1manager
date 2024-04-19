@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/F1Manager
     username: postgres
-    password: 1234
+    password: MadaA
   jpa:
     ddl-auto: update
     show-sql: true

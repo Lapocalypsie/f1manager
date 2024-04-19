@@ -1,6 +1,5 @@
 package com.f1manager.demo.Formula1.ErrorHandling;
 
-import java.util.concurrent.ExecutionException;
 
 public class throwException {
     public static void throwIllegalArgumentException(String destription) {
