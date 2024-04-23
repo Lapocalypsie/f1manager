@@ -2,17 +2,16 @@ package com.f1manager.demo.Formula1;
 
 import com.f1manager.demo.Formula1.Aileron.Ailerons;
 import com.f1manager.demo.Formula1.Aileron.AileronsService;
-import com.f1manager.demo.Formula1.ErrorHandling.throwException;
+import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.Moteurs.MoteursService;
-import com.f1manager.demo.Formula1.Utils.assignCoef;
-import com.f1manager.demo.Formula1.Utils.findCloserInList;
+import com.f1manager.demo.Utils.assignCoef;
+import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.Wheels;
 import com.f1manager.demo.Formula1.wheels.WheelsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;

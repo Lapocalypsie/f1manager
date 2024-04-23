@@ -1,6 +1,6 @@
-package com.f1manager.demo.Formula1.Utils;
+package com.f1manager.demo.Utils;
 
-import com.f1manager.demo.Formula1.ErrorHandling.throwException;
+import com.f1manager.demo.ErrorHandling.throwException;
 
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
@@ -13,6 +13,7 @@ Calculate coefficient calcule le coefficient en se basant sur la taille de la li
 
 
 public class assignCoef {
+
     private static double calculateCoefficient(int index, int length) {
         double coef = (double) (index) / (length);
 

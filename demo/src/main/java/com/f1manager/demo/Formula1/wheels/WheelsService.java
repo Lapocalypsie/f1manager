@@ -1,9 +1,8 @@
 package com.f1manager.demo.Formula1.wheels;
 
-import com.f1manager.demo.Formula1.ErrorHandling.throwException;
-import com.f1manager.demo.Formula1.Moteurs.Moteurs;
-import com.f1manager.demo.Formula1.Utils.assignCoef;
-import com.f1manager.demo.Formula1.Utils.findCloserInList;
+import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Utils.assignCoef;
+import com.f1manager.demo.Utils.findCloserInList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

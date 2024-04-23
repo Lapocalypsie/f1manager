@@ -1,8 +1,5 @@
-package com.f1manager.demo.Formula1.Utils;
+package com.f1manager.demo.Utils;
 
-
-import java.util.Arrays;
-import java.util.List;
 
 import static java.lang.Math.abs;
 /*

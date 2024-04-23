@@ -1,7 +1,6 @@
 package com.f1manager.demo.Personnel.pilote;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
