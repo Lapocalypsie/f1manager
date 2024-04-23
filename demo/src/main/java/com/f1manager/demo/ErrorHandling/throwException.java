@@ -1,4 +1,4 @@
-package com.f1manager.demo.Formula1.ErrorHandling;
+package com.f1manager.demo.ErrorHandling;
 
 
 public class throwException {

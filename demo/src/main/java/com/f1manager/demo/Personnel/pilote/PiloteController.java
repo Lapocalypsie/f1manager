@@ -22,7 +22,6 @@ public class PiloteController {
         return pilotes;
     }
 
-
     // Endpoint pour récupérer un pilote par son ID
     @GetMapping("/{id}")
     public Pilote getPiloteById(@PathVariable Long id) {
