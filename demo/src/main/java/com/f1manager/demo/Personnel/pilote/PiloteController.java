@@ -42,8 +42,8 @@ public class PiloteController {
     }
 
     @PutMapping("name/{id}")
-    public void modifyNamePilote(@PathVariable Long id, @RequestBody String newName) {
-        piloteService.modifyNamePilote(id, newName);
+    public void modifyNamePilote(@PathVariable Long id, @RequestParam String firstName, @RequestParam String lastName) {
+        piloteService.modifyNamePilote(id, firstName, lastName);
     }
 
     @PutMapping("number/{id}")

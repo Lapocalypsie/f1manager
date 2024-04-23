@@ -1,6 +1,7 @@
 package com.f1manager.demo.Personnel.pilote;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +28,11 @@ public class PiloteService {
         piloteRepository.deleteById(id);
     }
 
-    public void modifyNamePilote(Long id, String piloteName) {
+    public void modifyNamePilote(Long id, String firstName, String lastName) {
         Pilote pilote = getPiloteById(id);
         if(pilote !=null) {
-            pilote.setName(piloteName);
+            pilote.setNom(firstName);
+            pilote.setPrenom(lastName);
             piloteRepository.save(pilote);
         } else {
             System.out.println("Pilot Not Found ...");
