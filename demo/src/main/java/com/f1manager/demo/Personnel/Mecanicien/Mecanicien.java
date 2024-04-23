@@ -9,4 +9,20 @@ import jakarta.persistence.Table;
 public class Mecanicien extends Personne {
     private double vitesse;
     private double performance;
+
+    public double getVitesse() {
+        return vitesse;
+    }
+
+    public double getPerformance() {
+        return performance;
+    }
+
+    public void setVitesse(double vitesse) {
+        this.vitesse = vitesse;
+    }
+
+    public void setPerformance(double performance) {
+        this.performance = performance;
+    }
 }
