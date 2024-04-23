@@ -1,4 +1,4 @@
-package com.f1manager.demo.Personnel;
+package com.f1manager.demo.Personnel.pilote;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +35,34 @@ public class PiloteController {
         return piloteService.createPilote(pilote);
     }
 
-
     // Endpoint pour supprimer un pilote
     @DeleteMapping("/{id}")
     public void deletePilote(@PathVariable Long id) {
         piloteService.deletePilote(id);
+    }
+
+    @PutMapping("name/{id}")
+    public void modifyNamePilote(@PathVariable Long id, @RequestParam String firstName, @RequestParam String lastName) {
+        piloteService.modifyNamePilote(id, firstName, lastName);
+    }
+
+    @PutMapping("number/{id}")
+    public void modifyNumberPilote(@PathVariable Long id, @RequestBody int newNumber) {
+        piloteService.modifyNumberPilote(id, newNumber);
+    }
+
+    @PutMapping("price/{id}")
+    public void modifyPricePilote(@PathVariable Long id, @RequestBody int newPrice) {
+        piloteService.modifyPricePilote(id, newPrice);
+    }
+
+    @PutMapping("force/{id}")
+    public void modifyForcePilote(@PathVariable Long id, @RequestBody int force) {
+        piloteService.modifyForcePilote(id, force);
+    }
+
+    @PutMapping("endurance/{id}")
+    public void modifyEndurancePilote(@PathVariable Long id, @RequestBody int endurance) {
+        piloteService.modifyEndurancePilote(id, endurance);
     }
 }

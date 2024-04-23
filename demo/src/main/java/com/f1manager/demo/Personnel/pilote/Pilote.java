@@ -1,15 +1,12 @@
-package com.f1manager.demo.Personnel;
+package com.f1manager.demo.Personnel.pilote;
 
+import com.f1manager.demo.Personnel.Personne;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "pilotes")
-public class Pilote {
-    @Id
-    private int id;
-    private String name;
+@Table(name = "pilote")
+public class Pilote extends Personne {
     private int number;
     private int price;
     private int force;
@@ -18,29 +15,11 @@ public class Pilote {
     public Pilote() {
     }
 
-    public Pilote(int id, String name, int number, int price, int force, int endurance) {
-        this.id = id;
-        this.name = name;
+    public Pilote(int number, int price, int force, int endurance) {
         this.number = number;
         this.price = price;
         this.force = force;
         this.endurance = endurance;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getNumber() {
@@ -78,8 +57,8 @@ public class Pilote {
     @Override
     public String toString() {
         return "Pilote{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + getId() +
+                ", name='" + getNom() + ' ' + getPrenom() +
                 ", number=" + number +
                 ", price=" + price +
                 ", force=" + force +
