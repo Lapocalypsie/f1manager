@@ -1,4 +1,4 @@
-package com.f1manager.demo.Formula1.ErrorHandling;
+package com.f1manager.demo.ErrorHandling;
 /*
 Cette class est faite pour générer des exceptions génériques à tout le code (aide pour le débeugage)
 Toutes les erreurs ont ce format : ERROR plus la desciption
