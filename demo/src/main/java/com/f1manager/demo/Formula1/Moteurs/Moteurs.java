@@ -18,6 +18,4 @@ public class Moteurs {
     private double puissance;
     private double coefMoteur;
 
-
-
 }

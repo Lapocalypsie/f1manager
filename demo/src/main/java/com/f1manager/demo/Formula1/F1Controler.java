@@ -1,7 +1,10 @@
 package com.f1manager.demo.Formula1;
 
 
+import com.f1manager.demo.Formula1.Moteurs.Moteurs;
+import com.f1manager.demo.Formula1.wheels.Wheels;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +20,6 @@ public class F1Controler {
     public F1Controler(F1Service f1Service) {
         this.f1Service = f1Service;
     }
-/*
-    @GetMapping
-    public ResponseEntity<Double> getF1Moyenne() {
-        Wheels roues1 = new Wheels("Michelin 1", 40.5, 100, "Pluie");
-        Ailerons aileron1 = new Ailerons(341);
-        Moteurs moteurs1 = new Moteurs("Moteur Hider", 45, 890);
-        F1 f1 = new F1()
-        Double moyenne = f1Service.f1MoyenneCoef();
-        return new ResponseEntity<>(moyenne, HttpStatus.OK);
-    }*/
 
     @PostMapping("/add")
     public ResponseEntity<F1> addF1(@RequestBody F1 f1) {
@@ -39,5 +32,15 @@ public class F1Controler {
         return ResponseEntity.ok(allF1);
     }
 
+    @GetMapping("/moyenne/{id}")
+    public ResponseEntity<Double> getMoyenneF1(@PathVariable int id){
+        Double moyenne = f1Service.f1MoyenneCoef(id);
+        return ResponseEntity.ok(moyenne);
+    }
+    @PostMapping("createF1/{poidsF1}/{vitesseMax}/{zeroTo100}/{maniabilty}/{wheelsId}/{moteurId}/{aileronsId}")
+    public ResponseEntity<F1> createNewF1(@PathVariable double poidsF1, @PathVariable double vitesseMax, @PathVariable double zeroTo100,
+                                        @PathVariable int maniabilty, @PathVariable int wheelsId, @PathVariable int moteurId, @PathVariable int aileronsId){
+        return new ResponseEntity<>(f1Service.createNewF1(poidsF1, vitesseMax, zeroTo100, maniabilty, wheelsId, moteurId, aileronsId), HttpStatus.CREATED);
+    }
 
 }
