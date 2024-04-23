@@ -4,6 +4,13 @@ import com.f1manager.demo.Formula1.ErrorHandling.throwException;
 
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
+/*
+Cette classe est faite pour assignier un coefficient. On lui passe une liste et une valeur qui se trouve dans la liste.
+Partant de la position de l'élément dans la liste et de la taille de la liste on calcule le coefficient.
+Assign coefficient trouve l'index de l'élément dans la liste et retourne une erreur si l'élément cherché n'est pas dans la liste
+Calculate coefficient calcule le coefficient en se basant sur la taille de la liste et la position du coefficient dans la liste.
+ */
+
 
 public class assignCoef {
     private static double calculateCoefficient(int index, int length) {

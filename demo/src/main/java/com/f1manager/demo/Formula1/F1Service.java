@@ -95,6 +95,13 @@ public class F1Service {
     public Optional<F1> getF1ById(int id) {
         return repository.findById(id);
     }
+    /*
+    Pour créer une nouvelle f1, on créé d'abord un moteur en le récupérant en base avec son ID
+    On fait de même pour l'aileron et les roues. Ensuite, on créé une f1 sans coefficent à l'aide du
+    constructeur ne contenant pas de coef de la classe F1. On lui assigne ensuite le coefficient avec un setCoef
+    qui va calculer ce coefficient puis on enregistre le f1 en base et on la renvoie au cas ou l'utilisateur en
+    aurait besoin.
+     */
     public F1 createNewF1(double poidsF1, double vitesseMax, double zeroTo100,
                            int maniabilty,  int wheelsId,  int moteurId, int aileronsId){
         Moteurs moteur = moteursService.getMoteurById(moteurId);
@@ -105,5 +112,4 @@ public class F1Service {
         saveF1(f1);
         return f1;
     }
-
 }
