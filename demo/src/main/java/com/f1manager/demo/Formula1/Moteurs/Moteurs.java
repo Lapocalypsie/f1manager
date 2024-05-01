@@ -18,4 +18,13 @@ public class Moteurs {
     private double puissance;
     private double coefMoteur;
 
+    public Moteurs(String nomMoteur, double consommationEssence, double puissance) {
+        this.nomMoteur = nomMoteur;
+        this.consommationEssence = consommationEssence;
+        this.puissance = puissance;
+    }
+
+    public Moteurs() {
+    }
+
 }
