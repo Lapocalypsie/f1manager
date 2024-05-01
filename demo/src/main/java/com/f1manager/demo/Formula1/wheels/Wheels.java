@@ -18,5 +18,10 @@ public class Wheels {
     private String typePneus;
     private double coefPneus;
 
-
+    public Wheels(String nomPneu, double poidsPneus, double prixUnitairePneus, String typePneus) {
+        this.nomPneu = nomPneu;
+        this.poidsPneus = poidsPneus;
+        this.prixUnitairePneus = prixUnitairePneus;
+        this.typePneus = typePneus;
+    }
 }

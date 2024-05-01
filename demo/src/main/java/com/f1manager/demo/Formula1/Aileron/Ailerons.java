@@ -19,4 +19,8 @@ public class Ailerons {
 
     @Column(name="poidsAileron")
     private double poidsAileron;
+
+    public Ailerons(double poidsAileron) {
+        this.poidsAileron = poidsAileron;
+    }
 }
