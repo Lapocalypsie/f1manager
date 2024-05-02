@@ -44,12 +44,18 @@ public class WheelsService {
         return wheels;
     }
     public Wheels updatePoidsWheels(int idPneus, double poidsPneus){
+        if(poidsPneus < 0){
+            throwException.throwIllegalArgumentException("Le poids des pneus doit être supérieure à 0");
+        }
         Wheels wheels = getWheelsById(idPneus);
         wheels.setPoidsPneus(poidsPneus);
         saveWheels(wheels);
         return wheels;
     }
     public Wheels updatePrixWheels(int idPneus, double prixPneus){
+        if(prixPneus < 0){
+            throwException.throwIllegalArgumentException("Le prix des roues doit être supérieure à 0");
+        }
         Wheels wheels = getWheelsById(idPneus);
         wheels.setPrixUnitairePneus(prixPneus);
         saveWheels(wheels);

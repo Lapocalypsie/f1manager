@@ -56,12 +56,18 @@ public class MoteursService{
         return moteurs;
     }
     public Moteurs updatePuissanceMoteur(int idMoteur, double puissance){
+        if(puissance < 0){
+            throwException.throwIllegalArgumentException("Lapuissance doit être supérieure à 0");
+        }
         Moteurs moteurs = getMoteurById(idMoteur);
         moteurs.setPuissance(puissance);
         saveMoteur(moteurs);
         return moteurs;
     }
     public Moteurs updateConsommationMoteur(int idMoteur, double consommation){
+        if(consommation < 0){
+            throwException.throwIllegalArgumentException("La consommation doit être supérieure à 0");
+        }
         Moteurs moteurs = getMoteurById(idMoteur);
         moteurs.setConsommationEssence(consommation);
         saveMoteur(moteurs);

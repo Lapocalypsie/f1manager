@@ -69,15 +69,8 @@ public class F1Service {
     }
 
     public Double f1MoyenneCoef (int idF1){
-        Optional<F1> f1Optional = getF1ById(idF1);
-        if (f1Optional.isPresent()) {
-            F1 f1 = f1Optional.get();
-            System.out.println(f1.getMoteur().getCoefMoteur());
-            return (getPoidsCoef(f1) + getManiabilityCoef(f1) + vMaxCoef(f1) + getZeroTo100Coef(f1))/4;
-        } else {
-            throwException.throwIllegalArgumentException("La F1 n'est pas présente en base");
-            return null; // Just for the sake of compilation, this line will never be reached
-        }
+        F1 f1 = getF1ById(idF1);
+        return (getPoidsCoef(f1) + getManiabilityCoef(f1) + vMaxCoef(f1) + getZeroTo100Coef(f1))/4;
     }
     public Double f1MoyenneCoef (F1 f1){
         System.out.println(f1.getMoteur().getCoefMoteur());
@@ -91,8 +84,14 @@ public class F1Service {
     public List<F1> getAllF1() {
         return repository.findAll();
     }
-    public Optional<F1> getF1ById(int id) {
-        return repository.findById(id);
+    public F1 getF1ById(int id) {
+        Optional<F1> f1Oprional =  repository.findById(id);
+        if (f1Oprional.isPresent()) {
+            return f1Oprional.get();
+        } else {
+            throwException.throwIllegalArgumentException("La F1 n'est pas présent en base");
+            return null;
+        }
     }
     /*
     Pour créer une nouvelle f1, on créé d'abord un moteur en le récupérant en base avec son ID
@@ -106,9 +105,53 @@ public class F1Service {
         Moteurs moteur = moteursService.getMoteurById(moteurId);
         Ailerons aileron = aileronsService.getAileronsById(aileronsId);
         Wheels wheel = wheelsService.getWheelsById(wheelsId);
-        F1 f1 = new F1(poidsF1, vitesseMax, zeroTo100, maniabilty,wheel, moteur,aileron );
+        F1 f1 = new F1(poidsF1, vitesseMax, zeroTo100, maniabilty,wheel, moteur, aileron);
         f1.setCoef(f1MoyenneCoef(f1));
         saveF1(f1);
+        return f1;
+    }
+    public F1 changeMoteurF1(int idF1, int idMoteur){
+        F1 f1 = getF1ById(idF1);
+        Moteurs moteur = moteursService.getMoteurById(idMoteur);
+        f1.setMoteur(moteur);
+        return f1;
+    }
+    public F1 changeAileronF1(int ifF1, int idAileron){
+        F1 f1 = getF1ById(ifF1);
+        Ailerons ailerons = aileronsService.getAileronsById(idAileron);
+        f1.setAilerons(ailerons);
+        return f1;
+    }
+    public F1 changeWheelsF1(int idF1, int idWheels){
+        F1 f1 = getF1ById(idF1);
+        Wheels wheels = wheelsService.getWheelsById(idWheels);
+        f1.setWheels(wheels);
+        return f1;
+    }
+    public F1 changeManiabilityF1(int idF1, int maniability){
+        if(maniability < 0){
+            throwException.throwIllegalArgumentException("La maniabilité ne peut pas être négative");
+        }
+        F1 f1 = getF1ById(idF1);
+        f1.setManiabilty(maniability);
+        saveF1(f1);
+        return f1;
+    }
+    public F1 changeZeroTo100(int idF1, double zeroTo100){
+        if(zeroTo100 < 0){
+            throwException.throwIllegalArgumentException("Le zéro à 100 doit être supérieure à 0");
+        }
+        F1 f1 = getF1ById(idF1);
+        f1.setZeroTo100(zeroTo100);
+        saveF1(f1);
+        return f1;
+    }
+    public F1 changeVitesseMax(int idF1, double vitesseMax){
+        if(vitesseMax < 0){
+            throwException.throwIllegalArgumentException("La vitesse max doit être supérieure à 0");
+        }
+        F1 f1 = getF1ById(idF1);
+        f1.setVitesseMax(vitesseMax);
         return f1;
     }
 }

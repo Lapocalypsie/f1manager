@@ -44,6 +44,9 @@ public class AileronsService {
         return ailerons;
     }
     public Ailerons updatePoidsAileron(int idAileron, double poids){
+        if(poids < 0){
+            throwException.throwIllegalArgumentException("Le poids de l'aileron doit être supérieure à 0");
+        }
         Ailerons ailerons = getAileronsById(idAileron);
         ailerons.setPoidsAileron(poids);
         saveAileron(ailerons);
