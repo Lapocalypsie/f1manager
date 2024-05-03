@@ -42,27 +42,27 @@ public class F1Controler {
                                         @PathVariable int maniabilty, @PathVariable int wheelsId, @PathVariable int moteurId, @PathVariable int aileronsId){
         return new ResponseEntity<>(f1Service.createNewF1(poidsF1, vitesseMax, zeroTo100, maniabilty, wheelsId, moteurId, aileronsId), HttpStatus.CREATED);
     }
-    @PostMapping("updateMoteurF1/{idF1}/{idMoteur}")
+    @PutMapping("updateMoteurF1/{idF1}/{idMoteur}")
     public ResponseEntity<F1> updateMoteurF1(@PathVariable int idF1, @PathVariable int idMoteur){
         return new ResponseEntity<>(f1Service.changeMoteurF1(idF1, idMoteur), HttpStatus.OK);
     }
-    @PostMapping("updateAileronF1/{idF1}/{idAileron}")
+    @PutMapping("updateAileronF1/{idF1}/{idAileron}")
     public ResponseEntity<F1> updateAileronF1(@PathVariable int idF1, @PathVariable int idAileron){
         return new ResponseEntity<>(f1Service.changeAileronF1(idF1, idAileron), HttpStatus.OK);
     }
-    @PostMapping("updateWheelsF1/{idF1}/{idWheels}")
+    @PutMapping("updateWheelsF1/{idF1}/{idWheels}")
     public ResponseEntity<F1> updateWheelsF1(@PathVariable int idF1, @PathVariable int idWheels){
         return new ResponseEntity<>(f1Service.changeWheelsF1(idF1, idWheels), HttpStatus.OK);
     }
-    @PostMapping("updateManiabilityF1/{idF1}/{maniability}")
+    @PutMapping("updateManiabilityF1/{idF1}/{maniability}")
     public ResponseEntity<F1> updateManiabilityF1(@PathVariable int idF1, @PathVariable int maniability){
         return new ResponseEntity<>(f1Service.changeManiabilityF1(idF1, maniability), HttpStatus.OK);
     }
-    @PostMapping("updateZeroTo100F1/{idF1}/{zeroTo100}")
+    @PutMapping("updateZeroTo100F1/{idF1}/{zeroTo100}")
     public ResponseEntity<F1> updateZeroTo100F1(@PathVariable int idF1, @PathVariable int zeroTo100){
         return new ResponseEntity<>(f1Service.changeZeroTo100(idF1, zeroTo100), HttpStatus.OK);
     }
-    @PostMapping("updateVitesseMaxF1/{idF1}/{vitesseMax}")
+    @PutMapping("updateVitesseMaxF1/{idF1}/{vitesseMax}")
     public ResponseEntity<F1> updateVitesseMaxF1(@PathVariable int idF1, @PathVariable int vitesseMax){
         return new ResponseEntity<>(f1Service.changeVitesseMax(idF1, vitesseMax), HttpStatus.OK);
     }

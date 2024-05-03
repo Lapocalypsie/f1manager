@@ -23,11 +23,11 @@ public class MoteursControler {
     public ResponseEntity<Moteurs> updatePuissanceMoteur(@PathVariable int idMoteur, @PathVariable double puissance){
         return new ResponseEntity<>(moteursService.updatePuissanceMoteur(idMoteur, puissance), HttpStatus.OK);
     }
-    @PostMapping("/updateConsommationMoteur/{idMoteur}/{consommation}")
+    @PutMapping("/updateConsommationMoteur/{idMoteur}/{consommation}")
     public ResponseEntity<Moteurs> updateConsommationMoteur(@PathVariable int idMoteur, @PathVariable double consommation){
         return new ResponseEntity<>(moteursService.updateConsommationMoteur(idMoteur, consommation), HttpStatus.OK);
     }
-    @PostMapping("/updatePrixMoteur/{idMoteur}/{prix}")
+    @PutMapping("/updatePrixMoteur/{idMoteur}/{prix}")
     public ResponseEntity<Moteurs> updatePrixMoteur(@PathVariable int idMoteur, @PathVariable double prix){
         return new ResponseEntity<>(moteursService.updatePrixMoteur(idMoteur, prix), HttpStatus.OK);
     }

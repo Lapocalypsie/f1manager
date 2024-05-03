@@ -25,7 +25,7 @@ public class WheelsControler {
     public ResponseEntity<Wheels> updatePoidsWheels(@PathVariable int idPneus, @PathVariable double poidsPneus){
         return new ResponseEntity<>(wheelsService.updatePoidsWheels(idPneus, poidsPneus), HttpStatus.OK);
     }
-    @PostMapping("/updatePrixPneux/{idPneus}/{prixUnitairePneus}")
+    @PutMapping("/updatePrixPneux/{idPneus}/{prixUnitairePneus}")
     public ResponseEntity<Wheels> updateConsommationmoteur(@PathVariable int idPneus, @PathVariable double prixUnitairePneus){
         return new ResponseEntity<>(wheelsService.updatePrixWheels(idPneus, prixUnitairePneus), HttpStatus.OK);
     }

@@ -1,7 +1,6 @@
 package com.f1manager.demo.Joueur;
 
 import com.f1manager.demo.ErrorHandling.throwException;
-import com.f1manager.demo.Formula1.F1;
 import com.f1manager.demo.Utils.Niveaux;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,17 +30,15 @@ public class JoueurService {
             return null;
         }
     }
-    public boolean monterDeNiveauJoueur(int idJoueur){
+    public void monterDeNiveauJoueur(int idJoueur){
         Joueur joueur = getJoueurById(idJoueur);
         if (Niveaux.isLevelUp(joueur.getNivActuel(), joueur.getXpActuelle())){
             joueur.setXpActuelle(joueur.getXpActuelle() - Niveaux.nextLevel(joueur.getNivActuel()));
             joueur.setNivActuel(joueur.getNivActuel() + 1);
             saveJoueur(joueur);
-            return true;
         }
-        return false;
     }
-    public boolean gagnerXp(int idJoueur, int quantite){
+    public Joueur gagnerXp(int idJoueur, int quantite){
         if(quantite < 0 ){
             throwException.throwIllegalArgumentException("La quantité ne peut pas être négative");
         }
@@ -49,6 +46,11 @@ public class JoueurService {
         joueur.setXpActuelle(joueur.getXpActuelle() + quantite);
         saveJoueur(joueur);
         monterDeNiveauJoueur(idJoueur);
-        return true;
+        return joueur;
+    }
+    public Joueur creerJoueur(String nom, String prenom){
+        Joueur joueur = new Joueur(nom, prenom);
+        saveJoueur(joueur);
+        return joueur;
     }
 }
