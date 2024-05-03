@@ -27,7 +27,7 @@ public class F1 {
     private double zeroTo100;
 
     @Column(name ="maniability")
-    private int maniabilty;
+    private double maniabilty;
 
     @Column(name = "coef")
     private Double coef;
@@ -45,7 +45,7 @@ public class F1 {
     private Ailerons ailerons;
     public F1(){}
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, int maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, double maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;

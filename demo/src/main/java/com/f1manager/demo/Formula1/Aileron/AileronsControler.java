@@ -18,12 +18,16 @@ public class AileronsControler {
     public AileronsControler(AileronsService aileronsService) {
         this.aileronsService = aileronsService;
     }
-    @PostMapping("/createAileron/{poidsAileron}/")
-    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron){
-        return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron), HttpStatus.OK);
+    @PostMapping("/createAileron/{poidsAileron}/{prixAileron}")
+    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable double prixAileron){
+        return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron,prixAileron), HttpStatus.OK);
     }
     @PutMapping("/updatePoidsAileron/{idAileron}/{poidsAileron}")
-    public ResponseEntity<Ailerons> updateAileron(@PathVariable int idAileron, @PathVariable double poidsAileron){
+    public ResponseEntity<Ailerons> updatePoidsAileron(@PathVariable int idAileron, @PathVariable double poidsAileron){
         return new ResponseEntity<>(aileronsService.updatePoidsAileron(idAileron, poidsAileron), HttpStatus.OK);
+    }
+    @PutMapping("/updatePrixAileron/{idAileron}/{prixAileron}")
+    public ResponseEntity<Ailerons> updatePrixAileron(@PathVariable int idAileron, @PathVariable double prixAileron){
+        return new ResponseEntity<>(aileronsService.updatePrixAileron(idAileron, prixAileron), HttpStatus.OK);
     }
 }

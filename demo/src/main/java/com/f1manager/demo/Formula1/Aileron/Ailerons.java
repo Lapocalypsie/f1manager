@@ -19,8 +19,9 @@ public class Ailerons {
 
     @Column(name="poidsAileron")
     private double poidsAileron;
-
-    public Ailerons(double poidsAileron) {
+    private double prixAileron;
+    public Ailerons(double poidsAileron, double prixAileron) {
         this.poidsAileron = poidsAileron;
+        this.prixAileron = prixAileron;
     }
 }

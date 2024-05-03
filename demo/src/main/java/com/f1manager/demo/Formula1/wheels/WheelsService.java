@@ -2,6 +2,7 @@ package com.f1manager.demo.Formula1.wheels;
 
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
+import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,20 +45,16 @@ public class WheelsService {
         return wheels;
     }
     public Wheels updatePoidsWheels(int idPneus, double poidsPneus){
-        if(poidsPneus < 0){
-            throwException.throwIllegalArgumentException("Le poids des pneus doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(poidsPneus, "poids des pneus");
         Wheels wheels = getWheelsById(idPneus);
         wheels.setPoidsPneus(poidsPneus);
         saveWheels(wheels);
         return wheels;
     }
     public Wheels updatePrixWheels(int idPneus, double prixPneus){
-        if(prixPneus < 0){
-            throwException.throwIllegalArgumentException("Le prix des roues doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(prixPneus, "prix des pneus");
         Wheels wheels = getWheelsById(idPneus);
-        wheels.setPrixUnitairePneus(prixPneus);
+        wheels.setPrixPneus(prixPneus);
         saveWheels(wheels);
         return wheels;
     }

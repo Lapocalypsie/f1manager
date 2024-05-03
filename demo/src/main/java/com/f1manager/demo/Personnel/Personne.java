@@ -63,4 +63,8 @@ public class Personne {
     public void setXpNextLevel(double xpNextLevel) {
         this.xpNextLevel = xpNextLevel;
     }
+
+    public Personne() {
+    }
+
 }

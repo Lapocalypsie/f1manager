@@ -14,14 +14,18 @@ public class Wheels {
     private int id;
     private String nomPneu;
     private double poidsPneus;
-    private double prixUnitairePneus;
+    private double prixPneus;
     private String typePneus;
     private double coefPneus;
 
-    public Wheels(String nomPneu, double poidsPneus, double prixUnitairePneus, String typePneus) {
+    public Wheels(String nomPneu, double poidsPneus, double prixPneus, String typePneus) {
         this.nomPneu = nomPneu;
         this.poidsPneus = poidsPneus;
-        this.prixUnitairePneus = prixUnitairePneus;
+        this.prixPneus = prixPneus;
         this.typePneus = typePneus;
+    }
+
+    public Wheels() {
+
     }
 }

@@ -17,11 +17,13 @@ public class Moteurs {
     private double consommationEssence;
     private double puissance;
     private double coefMoteur;
+    private double prixMoteur;
 
-    public Moteurs(String nomMoteur, double consommationEssence, double puissance) {
+    public Moteurs(String nomMoteur, double consommationEssence, double puissance, double prixMoteur) {
         this.nomMoteur = nomMoteur;
         this.consommationEssence = consommationEssence;
         this.puissance = puissance;
+        this.prixMoteur = prixMoteur;
     }
 
     public Moteurs() {

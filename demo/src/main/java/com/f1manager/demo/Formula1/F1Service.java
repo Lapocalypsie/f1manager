@@ -5,11 +5,13 @@ import com.f1manager.demo.Formula1.Aileron.AileronsService;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.Moteurs.MoteursService;
+import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.Wheels;
 import com.f1manager.demo.Formula1.wheels.WheelsService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.event.internal.DefaultDirtyCheckEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -128,28 +130,22 @@ public class F1Service {
         f1.setWheels(wheels);
         return f1;
     }
-    public F1 changeManiabilityF1(int idF1, int maniability){
-        if(maniability < 0){
-            throwException.throwIllegalArgumentException("La maniabilité ne peut pas être négative");
-        }
+    public F1 changeManiabilityF1(int idF1, double maniability){
+        Check.doitEtrePlusgrandQueZero(maniability, "maniabilité");
         F1 f1 = getF1ById(idF1);
         f1.setManiabilty(maniability);
         saveF1(f1);
         return f1;
     }
     public F1 changeZeroTo100(int idF1, double zeroTo100){
-        if(zeroTo100 < 0){
-            throwException.throwIllegalArgumentException("Le zéro à 100 doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(zeroTo100, "zéro à 100");
         F1 f1 = getF1ById(idF1);
         f1.setZeroTo100(zeroTo100);
         saveF1(f1);
         return f1;
     }
     public F1 changeVitesseMax(int idF1, double vitesseMax){
-        if(vitesseMax < 0){
-            throwException.throwIllegalArgumentException("La vitesse max doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(vitesseMax, "vitesse maximum de la F1");
         F1 f1 = getF1ById(idF1);
         f1.setVitesseMax(vitesseMax);
         return f1;

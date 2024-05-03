@@ -1,7 +1,7 @@
 package com.f1manager.demo.Formula1.Aileron;
 
 import com.f1manager.demo.ErrorHandling.throwException;
-import com.f1manager.demo.Formula1.Moteurs.Moteurs;
+import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,25 +30,30 @@ public class AileronsService {
             return null;
         }
     }
-    public Ailerons saveAileron(Ailerons ailerons) {
-        return aileronsRepository.save(ailerons);
+    public void saveAileron(Ailerons ailerons) {
+        aileronsRepository.save(ailerons);
     }
 
     public List<Ailerons> getAllAilerons() {
         return aileronsRepository.findAll();
     }
-    public Ailerons createNewAileron(double poids){
-        Ailerons ailerons = new Ailerons(poids);
+    public Ailerons createNewAileron(double poids, double prixAileron){
+        Ailerons ailerons = new Ailerons(poids, prixAileron);
         ailerons.setCoefAileron(getAileronCoef(ailerons));
         saveAileron(ailerons);
         return ailerons;
     }
     public Ailerons updatePoidsAileron(int idAileron, double poids){
-        if(poids < 0){
-            throwException.throwIllegalArgumentException("Le poids de l'aileron doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(poids, "poids de l'aileron");
         Ailerons ailerons = getAileronsById(idAileron);
         ailerons.setPoidsAileron(poids);
+        saveAileron(ailerons);
+        return ailerons;
+    }
+    public Ailerons updatePrixAileron(int idAileron, double prix){
+        Check.doitEtrePlusgrandQueZero(prix, "prix de l'aileron");
+        Ailerons ailerons = getAileronsById(idAileron);
+        ailerons.setPrixAileron(prix);
         saveAileron(ailerons);
         return ailerons;
     }

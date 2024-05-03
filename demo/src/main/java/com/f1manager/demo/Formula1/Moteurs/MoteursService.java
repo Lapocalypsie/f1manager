@@ -1,6 +1,6 @@
 package com.f1manager.demo.Formula1.Moteurs;
 
-import com.f1manager.demo.Formula1.F1;
+import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.ErrorHandling.throwException;
@@ -42,34 +42,37 @@ public class MoteursService{
             return null;
         }
     }
-    public Moteurs saveMoteur(Moteurs moteurs) {
-        return moteurRepository.save(moteurs);
+    public void saveMoteur(Moteurs moteurs) {
+        moteurRepository.save(moteurs);
     }
 
     public List<Moteurs> getAllMoteurs() {
         return moteurRepository.findAll();
     }
-    public Moteurs createNewMoteur(String nomMoteur, double consomationEscence, double puissance){
-        Moteurs moteurs = new Moteurs(nomMoteur, consomationEscence, puissance);
+    public Moteurs createNewMoteur(String nomMoteur, double consomationEscence, double puissance, double prixMoteur){
+        Moteurs moteurs = new Moteurs(nomMoteur, consomationEscence, puissance, prixMoteur);
         moteurs.setCoefMoteur(getMoteurCoef(moteurs));
         saveMoteur(moteurs);
         return moteurs;
     }
     public Moteurs updatePuissanceMoteur(int idMoteur, double puissance){
-        if(puissance < 0){
-            throwException.throwIllegalArgumentException("Lapuissance doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(puissance, "puissance du moteur");
         Moteurs moteurs = getMoteurById(idMoteur);
         moteurs.setPuissance(puissance);
         saveMoteur(moteurs);
         return moteurs;
     }
     public Moteurs updateConsommationMoteur(int idMoteur, double consommation){
-        if(consommation < 0){
-            throwException.throwIllegalArgumentException("La consommation doit être supérieure à 0");
-        }
+        Check.doitEtrePlusgrandQueZero(consommation, "consommation du moteur");
         Moteurs moteurs = getMoteurById(idMoteur);
         moteurs.setConsommationEssence(consommation);
+        saveMoteur(moteurs);
+        return moteurs;
+    }
+    public Moteurs updatePrixMoteur(int idMoteur, double prix){
+        Check.doitEtrePlusgrandQueZero(prix, "prix du moteur");
+        Moteurs moteurs = getMoteurById(idMoteur);
+        moteurs.setPrixMoteur(prix);
         saveMoteur(moteurs);
         return moteurs;
     }
