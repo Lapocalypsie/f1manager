@@ -22,7 +22,7 @@ public class Joueur {
     @Column(name = "xpActuelle")
     private double xpActuelle;
     @Column(name = "nivActuel")
-    private double nivActuel;
+    private int nivActuel;
 
     public Joueur(String nom, String prenom) {
         this.nom = nom;
@@ -32,7 +32,7 @@ public class Joueur {
         this.xpActuelle = 0;
     }
 
-    public Joueur(String nom, String prenom, double xpActuelle, double nivActuel, double argent) {
+    public Joueur(String nom, String prenom, double xpActuelle, int nivActuel, double argent) {
         this.nom = nom;
         this.prenom = prenom;
         this.xpActuelle = xpActuelle;
