@@ -1,67 +1,27 @@
 package com.f1manager.demo.Personnel;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @MappedSuperclass
 public class Personne {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "nom")
     private String nom;
+    @Column (name ="prenom")
     private String prenom;
-    @Column(name = "xpactuelle")
-    private double xpActuelle;
-    @Column(name = "nivactuelle")
-    private double nivActuelle;
-    @Column(name = "xpnextlevel")
-    private double xpNextLevel;
+    @Column(name = "niveauActuel")
+    private int niveauActuel;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public double getXpActuelle() {
-        return xpActuelle;
-    }
-
-    public double getNivActuelle() {
-        return nivActuelle;
-    }
-
-    public double getXpNextLevel() {
-        return xpNextLevel;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNom(String nom) {
+    public Personne(String nom, String prenom, int niveauActuel) {
         this.nom = nom;
-    }
-
-    public void setPrenom(String prenom) {
         this.prenom = prenom;
-    }
-
-    public void setXpActuelle(double xpActuelle) {
-        this.xpActuelle = xpActuelle;
-    }
-
-    public void setNivActuelle(double nivActuelle) {
-        this.nivActuelle = nivActuelle;
-    }
-
-    public void setXpNextLevel(double xpNextLevel) {
-        this.xpNextLevel = xpNextLevel;
+        this.niveauActuel = niveauActuel;
     }
 
     public Personne() {

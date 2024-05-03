@@ -1,28 +1,26 @@
 package com.f1manager.demo.Personnel.Mecanicien;
 
 import com.f1manager.demo.Personnel.Personne;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "mecanicien")
 public class Mecanicien extends Personne {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private double vitesse;
     private double performance;
-
-    public double getVitesse() {
-        return vitesse;
-    }
-
-    public double getPerformance() {
-        return performance;
-    }
-
-    public void setVitesse(double vitesse) {
+    public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance) {
+        super(nom, prenom, niveauActuel);
         this.vitesse = vitesse;
-    }
-
-    public void setPerformance(double performance) {
         this.performance = performance;
+    }
+    public Mecanicien() {
+
     }
 }
