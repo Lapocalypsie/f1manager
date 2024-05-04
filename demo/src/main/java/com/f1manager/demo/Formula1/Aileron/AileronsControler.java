@@ -1,10 +1,5 @@
-package com.f1manager.demo.Formula1.Moteurs;
+package com.f1manager.demo.Formula1.Aileron;
 
-
-import com.f1manager.demo.Formula1.Aileron.Ailerons;
-import com.f1manager.demo.Formula1.Aileron.AileronsRepository;
-import com.f1manager.demo.Formula1.Aileron.AileronsService;
-import com.f1manager.demo.Formula1.F1Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

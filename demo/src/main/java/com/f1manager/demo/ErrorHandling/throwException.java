@@ -5,8 +5,8 @@ Toutes les erreurs ont ce format : ERROR plus la desciption
  */
 
 public class throwException {
-    public static void throwIllegalArgumentException(String destription) {
-        throw new IllegalArgumentException("ERROR : " + destription);
+    public static void throwIllegalArgumentException(String description) {
+        throw new IllegalArgumentException("ERROR : " + description);
 
     }
 
