@@ -3,6 +3,7 @@ package com.f1manager.demo.Joueur;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Utils.Niveaux;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class JoueurService {
+    @Autowired
     private JoueurRepository joueurRepository;
+
 
     public Joueur saveJoueur(Joueur joueur) {
         return joueurRepository.save(joueur);
@@ -22,7 +25,7 @@ public class JoueurService {
     }
 
     public Joueur getJoueurById(int id) {
-        Optional<Joueur> joueurOptional =  joueurRepository.findById(id);
+        Optional<Joueur> joueurOptional = joueurRepository.findById(id);
         if (joueurOptional.isPresent()) {
             return joueurOptional.get();
         } else {

@@ -15,7 +15,9 @@ public class Mecanicien extends Personne {
     private int id;
     private double vitesse;
     private double performance;
-    public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance) {
+    private double price;
+    private boolean appartient;
+    public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance, boolean appartient) {
         super(nom, prenom, niveauActuel);
         this.vitesse = vitesse;
         this.performance = performance;

@@ -1,9 +1,13 @@
 package com.f1manager.demo.Personnel.pilote;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
+import com.f1manager.demo.systemeco.Vente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.f1manager.demo.systemeco.Achat;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +17,8 @@ public class PiloteService {
 
     @Autowired
     private PiloteRepository piloteRepository;
+    @Autowired
+    private JoueurService joueurService;
 
     public List<Pilote> getAllPilotes() {
         return piloteRepository.findAll();
@@ -21,8 +27,8 @@ public class PiloteService {
     public Pilote createPilote(Pilote pilote) {
         return piloteRepository.save(pilote);
     }
-    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance){
-        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance);
+    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, boolean appartient){
+        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient);
         savePilote(pilote);
         return pilote;
     }
@@ -74,4 +80,19 @@ public class PiloteService {
         pilote.setEndurance(endurance);
         savePilote(pilote);
     }
+
+    public double buyPilote(int idPilote, int idJoueur) {
+        Pilote pilote = getPiloteById(idPilote);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Achat.effectuerAchat(pilote, joueur);
+        return joueur.getArgent();
+    }
+
+    public double sellPilote(int idPilote, int idJoueur) {
+        Pilote pilote = getPiloteById(idPilote);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Vente.effectuerVente(pilote, joueur);
+        return joueur.getArgent();
+    }
+
 }

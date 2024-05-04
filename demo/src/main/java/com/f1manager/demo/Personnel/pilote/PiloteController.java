@@ -35,9 +35,9 @@ public class PiloteController {
     public Pilote createPilote(@RequestBody Pilote pilote) {
         return piloteService.createPilote(pilote);
     }
-    @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}")
-    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance){
-        return  new ResponseEntity<>(piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance), HttpStatus.OK);
+    @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}/{appartient}")
+    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance, @PathVariable boolean appartient){
+        return  new ResponseEntity<>(piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient), HttpStatus.OK);
     }
     // Endpoint pour supprimer un pilote
     @DeleteMapping("/{id}")
@@ -68,5 +68,15 @@ public class PiloteController {
     @PutMapping("endurance/{id}")
     public void modifyEndurancePilote(@PathVariable int id, @RequestBody int endurance) {
         piloteService.modifyEndurancePilote(id, endurance);
+    }
+
+    @PutMapping("acheterPilote/{idPilote}/{idJoueur}")
+    public ResponseEntity<Double> acheterPilote(@PathVariable int idPilote, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(piloteService.buyPilote(idPilote, idJoueur), HttpStatus.OK);
+    }
+
+    @PutMapping("vendrePilote/{idPilote}/{idJoueur}")
+    public ResponseEntity<Double> vendrePilote(@PathVariable int idPilote, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(piloteService.sellPilote(idPilote, idJoueur), HttpStatus.OK);
     }
 }
