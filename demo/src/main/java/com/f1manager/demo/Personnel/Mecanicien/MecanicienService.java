@@ -2,6 +2,7 @@ package com.f1manager.demo.Personnel.Mecanicien;
 
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Personnel.PersonneService;
+import com.f1manager.demo.Utils.CalculStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,9 @@ public class MecanicienService {
         PersonneService.upgradePersonneLevel(mecanicien);
         saveMecanicien(mecanicien);
         return mecanicien;
+    }
+    public double getMecanicienCoef(int idMecanicien){
+        Mecanicien mecanicien = getMecanicienById(idMecanicien);
+        return CalculStats.calculerCoefficientMecanicien(mecanicien.getNiveauActuel());
     }
 }

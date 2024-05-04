@@ -2,6 +2,7 @@ package com.f1manager.demo.Personnel.pilote;
 
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
+import com.f1manager.demo.Personnel.PersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,5 +74,11 @@ public class PiloteService {
         Pilote pilote = getPiloteById(id);
         pilote.setEndurance(endurance);
         savePilote(pilote);
+    }
+    public Pilote upgradePilote(int idPilote){
+        Pilote pilote = getPiloteById(idPilote);
+        PersonneService.upgradePersonneLevel(pilote);
+        savePilote(pilote);
+        return pilote;
     }
 }

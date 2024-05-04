@@ -12,6 +12,4 @@ public class F1ManagerMiageProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(F1ManagerMiageProjectApplication.class, args);
 	}
-
-
 }

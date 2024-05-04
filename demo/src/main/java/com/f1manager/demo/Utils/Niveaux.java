@@ -19,4 +19,9 @@ public class Niveaux {
          }
          return nextLevel(niveauActuel) < xpActuelle;
      }
+    public int getPrixNextUpdate(int niveau){
+        double basePrix = 100.0;
+        double tauxCroissance = 1.15;
+        return (int) (basePrix * Math.pow(tauxCroissance, niveau - 1));
+    }
 }

@@ -13,8 +13,11 @@ public class Mecanicien extends Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "vitesse")
     private double vitesse;
+    @Column(name = "performance")
     private double performance;
+
     public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance) {
         super(nom, prenom, niveauActuel);
         this.vitesse = vitesse;

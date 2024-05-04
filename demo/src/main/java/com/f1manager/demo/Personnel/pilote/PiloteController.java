@@ -45,28 +45,32 @@ public class PiloteController {
         piloteService.deletePilote(id);
     }
 
-    @PutMapping("name/{id}")
+    @PutMapping("/name/{id}")
     public void modifyNamePilote(@PathVariable int id, @RequestParam String firstName, @RequestParam String lastName) {
         piloteService.modifyNamePilote(id, firstName, lastName);
     }
 
-    @PutMapping("number/{id}")
+    @PutMapping("/number/{id}")
     public void modifyNumberPilote(@PathVariable int id, @RequestBody int newNumber) {
         piloteService.modifyNumberPilote(id, newNumber);
     }
 
-    @PutMapping("price/{id}")
+    @PutMapping("/price/{id}")
     public void modifyPricePilote(@PathVariable int id, @RequestBody int newPrice) {
         piloteService.modifyPricePilote(id, newPrice);
     }
 
-    @PutMapping("force/{id}")
+    @PutMapping("/force/{id}")
     public void modifyForcePilote(@PathVariable int id, @RequestBody int force) {
         piloteService.modifyForcePilote(id, force);
     }
 
-    @PutMapping("endurance/{id}")
+    @PutMapping("/endurance/{id}")
     public void modifyEndurancePilote(@PathVariable int id, @RequestBody int endurance) {
         piloteService.modifyEndurancePilote(id, endurance);
+    }
+    @PutMapping("/upgradePilote/{idPilote}")
+    public ResponseEntity<Pilote> upgradePilote(@PathVariable int idPilote){
+        return new ResponseEntity<>(piloteService.upgradePilote(idPilote), HttpStatus.OK);
     }
 }
