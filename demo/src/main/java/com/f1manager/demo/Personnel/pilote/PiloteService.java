@@ -1,9 +1,12 @@
 package com.f1manager.demo.Personnel.pilote;
 
+import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PiloteService {
@@ -15,66 +18,60 @@ public class PiloteService {
         return piloteRepository.findAll();
     }
 
-    public Pilote getPiloteById(Long id) {
-        return piloteRepository.findById(id).orElse(null);
-    }
-
     public Pilote createPilote(Pilote pilote) {
         return piloteRepository.save(pilote);
     }
+    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance){
+        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance);
+        savePilote(pilote);
+        return pilote;
+    }
 
-    public void deletePilote(Long id) {
+    public void deletePilote(int id) {
         piloteRepository.deleteById(id);
     }
 
-    public void modifyNamePilote(Long id, String firstName, String lastName) {
-        Pilote pilote = getPiloteById(id);
-        if(pilote !=null) {
-            pilote.setNom(firstName);
-            pilote.setPrenom(lastName);
-            piloteRepository.save(pilote);
-        } else {
-            System.out.println("Pilot Not Found ...");
-        }
-    }
-
-    public void modifyNumberPilote(Long id, int newNumber) {
-        Pilote pilote = getPiloteById(id);
-        if(pilote !=null){
-            pilote.setNumber(newNumber);
-            piloteRepository.save(pilote);
-        } else {
-            System.out.println("Pilot Not Found");
-        }
-    }
-
-    public void modifyPricePilote(Long id, int newPrice) {
-        Pilote pilote = getPiloteById(id);
-        if(pilote !=null){
-        pilote.setPrice( newPrice);
+    public void savePilote(Pilote pilote) {
         piloteRepository.save(pilote);
-    } else {
-        System.out.println("Pilot Not Found");
     }
+
+    public Pilote getPiloteById(int id) {
+        Optional<Pilote> piloteoptional =  piloteRepository.findById(id);
+        if (piloteoptional.isPresent()) {
+            return piloteoptional.get();
+        } else {
+            throwException.throwIllegalArgumentException("Le pilote n'est pas présent en base");
+            return null;
+        }
+    }
+    public void modifyNamePilote(int id, String firstName, String lastName) {
+        Pilote pilote = getPiloteById(id);
+        pilote.setNom(firstName);
+        pilote.setPrenom(lastName);
+        savePilote(pilote);
+    }
+
+    public void modifyNumberPilote(int id, int newNumber) {
+        Pilote pilote = getPiloteById(id);
+        pilote.setNumber(newNumber);
+        savePilote(pilote);
+    }
+
+    public void modifyPricePilote(int id, int newPrice) {
+        Pilote pilote = getPiloteById(id);
+        pilote.setPrice( newPrice);
+        savePilote(pilote);
 }
 
-    public void modifyForcePilote(Long id, int newForce) {
+    public void modifyForcePilote(int id, int newForce) {
         Pilote pilote = getPiloteById(id);
-        if(pilote !=null){
-            pilote.setForce(newForce);
-            piloteRepository.save(pilote);
-        } else {
-            System.out.println("Pilot Not Found");
-        }
+        pilote.setForce(newForce);
+        savePilote(pilote);
     }
 
-    public void modifyEndurancePilote(Long id, int endurance) {
+    public void modifyEndurancePilote(int id, int endurance) {
         Pilote pilote = getPiloteById(id);
-        if(pilote !=null){
-            pilote.setEndurance(endurance);
-            piloteRepository.save(pilote);
-        } else {
-            System.out.println("Pilot Not Found");
-        }
+        pilote.setEndurance(endurance);
+        savePilote(pilote);
     }
 }

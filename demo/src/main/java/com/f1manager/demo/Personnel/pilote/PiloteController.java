@@ -1,6 +1,8 @@
 package com.f1manager.demo.Personnel.pilote;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class PiloteController {
 
     // Endpoint pour récupérer un pilote par son ID
     @GetMapping("/{id}")
-    public Pilote getPiloteById(@PathVariable Long id) {
+    public Pilote getPiloteById(@PathVariable int id) {
         return piloteService.getPiloteById(id);
     }
 
@@ -33,35 +35,38 @@ public class PiloteController {
     public Pilote createPilote(@RequestBody Pilote pilote) {
         return piloteService.createPilote(pilote);
     }
-
+    @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}")
+    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance){
+        return  new ResponseEntity<>(piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance), HttpStatus.OK);
+    }
     // Endpoint pour supprimer un pilote
     @DeleteMapping("/{id}")
-    public void deletePilote(@PathVariable Long id) {
+    public void deletePilote(@PathVariable int id) {
         piloteService.deletePilote(id);
     }
 
     @PutMapping("name/{id}")
-    public void modifyNamePilote(@PathVariable Long id, @RequestParam String firstName, @RequestParam String lastName) {
+    public void modifyNamePilote(@PathVariable int id, @RequestParam String firstName, @RequestParam String lastName) {
         piloteService.modifyNamePilote(id, firstName, lastName);
     }
 
     @PutMapping("number/{id}")
-    public void modifyNumberPilote(@PathVariable Long id, @RequestBody int newNumber) {
+    public void modifyNumberPilote(@PathVariable int id, @RequestBody int newNumber) {
         piloteService.modifyNumberPilote(id, newNumber);
     }
 
     @PutMapping("price/{id}")
-    public void modifyPricePilote(@PathVariable Long id, @RequestBody int newPrice) {
+    public void modifyPricePilote(@PathVariable int id, @RequestBody int newPrice) {
         piloteService.modifyPricePilote(id, newPrice);
     }
 
     @PutMapping("force/{id}")
-    public void modifyForcePilote(@PathVariable Long id, @RequestBody int force) {
+    public void modifyForcePilote(@PathVariable int id, @RequestBody int force) {
         piloteService.modifyForcePilote(id, force);
     }
 
     @PutMapping("endurance/{id}")
-    public void modifyEndurancePilote(@PathVariable Long id, @RequestBody int endurance) {
+    public void modifyEndurancePilote(@PathVariable int id, @RequestBody int endurance) {
         piloteService.modifyEndurancePilote(id, endurance);
     }
 }
