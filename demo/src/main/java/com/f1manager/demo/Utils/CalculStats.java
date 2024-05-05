@@ -28,4 +28,10 @@ public class CalculStats {
         double tauxCroissanceEndurance = 1.05;
         return baseEndurance * Math.pow(tauxCroissanceEndurance, niveau - 1);
     }
+    public static double doublecalculerCoefficientPilote(int niveau){
+        double force = calculerForce(niveau);
+        double endurance = calculerEndurance(niveau);
+        double sommeMaxNiveauMax = calculerForce(niveauMaxPersonne) + calculerEndurance(niveauMaxPersonne);
+        return (force + endurance) / sommeMaxNiveauMax;
+    }
 }

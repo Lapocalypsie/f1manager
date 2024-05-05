@@ -3,6 +3,7 @@ package com.f1manager.demo.Personnel.pilote;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.PersonneService;
+import com.f1manager.demo.Utils.CalculStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class PiloteService {
     }
     public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance){
         Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance);
+        pilote.setCoefficient(CalculStats.doublecalculerCoefficientPilote(pilote.getNiveauActuel()));
         savePilote(pilote);
         return pilote;
     }
@@ -80,5 +82,9 @@ public class PiloteService {
         PersonneService.upgradePersonneLevel(pilote);
         savePilote(pilote);
         return pilote;
+    }
+    public double getPiloteCoef(int idPilote){
+        Pilote pilote = getPiloteById(idPilote);
+        return CalculStats.calculerCoefficientMecanicien(pilote.getNiveauActuel());
     }
 }

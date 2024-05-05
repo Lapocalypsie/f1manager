@@ -17,6 +17,8 @@ public class Mecanicien extends Personne {
     private double vitesse;
     @Column(name = "performance")
     private double performance;
+    @Column (name = "coefficient")
+    private double coefficient;
 
     public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance) {
         super(nom, prenom, niveauActuel);

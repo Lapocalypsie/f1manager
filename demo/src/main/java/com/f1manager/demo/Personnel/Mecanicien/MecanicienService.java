@@ -28,6 +28,7 @@ public class MecanicienService {
 
     public Mecanicien creerMecanicien(String nom, String prenom, int level, double vitesse, double performance){
         Mecanicien mecanicien = new Mecanicien(nom, prenom, level, vitesse, performance);
+        mecanicien.setCoefficient(CalculStats.calculerCoefficientMecanicien(mecanicien.getNiveauActuel()));
         saveMecanicien(mecanicien);
         return mecanicien;
     }

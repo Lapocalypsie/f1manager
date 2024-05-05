@@ -73,4 +73,8 @@ public class PiloteController {
     public ResponseEntity<Pilote> upgradePilote(@PathVariable int idPilote){
         return new ResponseEntity<>(piloteService.upgradePilote(idPilote), HttpStatus.OK);
     }
+    @GetMapping("/piloteCoefficientById/{idPilote}")
+    public ResponseEntity<Double>getPiloteCoef(@PathVariable int idPilote){
+        return new ResponseEntity<>(piloteService.getPiloteCoef(idPilote),HttpStatus.OK);
+    }
 }

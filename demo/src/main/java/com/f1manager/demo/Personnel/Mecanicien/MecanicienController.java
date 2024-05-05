@@ -29,10 +29,8 @@ public class MecanicienController {
     public ResponseEntity<Mecanicien> upgradeMecanicien(@PathVariable int idMecanicien){
         return new ResponseEntity<>(mecanicienService.upgradeMecanicien(idMecanicien), HttpStatus.OK);
     }
-    @GetMapping("/mecanicienCoefficient/{idMecanicien}")
+    @GetMapping("/mecanicienCoefficientById/{idMecanicien}")
     public ResponseEntity<Double>getMecanicienCoef(@PathVariable int idMecanicien){
         return new ResponseEntity<>(mecanicienService.getMecanicienCoef(idMecanicien),HttpStatus.OK);
     }
-
-
 }
