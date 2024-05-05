@@ -1,10 +1,14 @@
 package com.f1manager.demo.Formula1.wheels;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Formula1.Aileron.Ailerons;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
+import com.f1manager.demo.systemeco.MonteeDeNiveau;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,8 @@ import java.util.Optional;
 public class WheelsService {
     @Autowired
     private  wheelsRepository wheelsRepository;
+    @Autowired
+    private JoueurService joueurService;
     public  double getWheelsCoef(Wheels wheels){
         if (wheels.getPoidsPneus() < 0){
             throwException.throwIllegalArgumentException("Le poids des roues ne peut pas être négatif");
@@ -38,8 +44,8 @@ public class WheelsService {
     public List<Wheels> getAllWheels() {
         return wheelsRepository.findAll();
     }
-    public Wheels createNewWheels(String nomRoue, double poidsPneus, double prixPneus, String typePneus){
-        Wheels wheels = new Wheels(nomRoue, poidsPneus, prixPneus, typePneus);
+    public Wheels createNewWheels(String nomRoue, double poidsPneus, double prixPneus, String typePneus, int nivActuel){
+        Wheels wheels = new Wheels(nomRoue, poidsPneus, prixPneus, typePneus, nivActuel);
         wheels.setCoefPneus(getWheelsCoef(wheels));
         saveWheels(wheels);
         return wheels;
@@ -57,6 +63,12 @@ public class WheelsService {
         wheels.setPrixPneus(prixPneus);
         saveWheels(wheels);
         return wheels;
+    }
+    public double levelUpWheels(int idWheels, int idJoueur) {
+        Wheels wheels = getWheelsById(idWheels);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        MonteeDeNiveau.monteeWheels(wheels, joueur);
+        return joueur.getArgent();
     }
 
 }

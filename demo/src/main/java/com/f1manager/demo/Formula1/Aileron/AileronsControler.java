@@ -1,4 +1,4 @@
-package com.f1manager.demo.Formula1.Moteurs;
+package com.f1manager.demo.Formula1.Aileron;
 
 
 import com.f1manager.demo.Formula1.Aileron.Ailerons;
@@ -14,20 +14,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/aileron")
 public class AileronsControler {
     private final AileronsService aileronsService;
+
     @Autowired
     public AileronsControler(AileronsService aileronsService) {
         this.aileronsService = aileronsService;
     }
     @PostMapping("/createAileron/{poidsAileron}/{prixAileron}")
-    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable double prixAileron){
-        return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron,prixAileron), HttpStatus.OK);
+    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable double prixAileron, @PathVariable int nivActuel){
+        return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron,prixAileron,nivActuel), HttpStatus.OK);
     }
     @PutMapping("/updatePoidsAileron/{idAileron}/{poidsAileron}")
-    public ResponseEntity<Ailerons> updatePoidsAileron(@PathVariable int idAileron, @PathVariable double poidsAileron){
+    public ResponseEntity<Ailerons> updatePoidsAileron(@PathVariable int idAileron, @PathVariable double poidsAileron, @PathVariable int nivActuel){
         return new ResponseEntity<>(aileronsService.updatePoidsAileron(idAileron, poidsAileron), HttpStatus.OK);
     }
     @PutMapping("/updatePrixAileron/{idAileron}/{prixAileron}")
-    public ResponseEntity<Ailerons> updatePrixAileron(@PathVariable int idAileron, @PathVariable double prixAileron){
+    public ResponseEntity<Ailerons> updatePrixAileron(@PathVariable int idAileron, @PathVariable double prixAileron, @PathVariable int nivActuel){
         return new ResponseEntity<>(aileronsService.updatePrixAileron(idAileron, prixAileron), HttpStatus.OK);
+    }
+    @PutMapping("/monteeNivAileron/{idAileron}/{idJoueur}")
+    public ResponseEntity<Double> monteeNivAileron(@PathVariable int idAileron, @PathVariable int idJoueur){
+        return new ResponseEntity<>(aileronsService.levelUpAileron(idAileron, idJoueur), HttpStatus.OK);
     }
 }
