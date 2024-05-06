@@ -11,7 +11,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class JoueurService {
-    private JoueurRepository joueurRepository;
+
+    private final JoueurRepository joueurRepository;
 
     public Joueur saveJoueur(Joueur joueur) {
         return joueurRepository.save(joueur);

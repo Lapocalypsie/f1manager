@@ -22,7 +22,7 @@ public class Pilote extends Personne {
     private double force;
     @Column(name = "endurance")
     private double endurance;
-    @Column(name = "coefficient")
+    @Column(name = "coef")
     private double coefficient;
     @Column(name = "appartient")
     private boolean appartient;

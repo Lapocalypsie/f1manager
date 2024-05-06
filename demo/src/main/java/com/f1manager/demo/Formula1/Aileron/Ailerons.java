@@ -21,8 +21,8 @@ public class Ailerons {
     private double poidsAileron;
     @Column(name="prix_aileron")
     private double prixAileron;
+    @Column(name="niv_actuel")
     private int nivActuel;
-
     @Column(name = "image_aileron")
     private String imageAileron;
 

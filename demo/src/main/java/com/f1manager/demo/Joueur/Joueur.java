@@ -27,7 +27,7 @@ public class Joueur {
     public Joueur(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
-        this.argent = 0;
+        this.argent = 20000;
         this.nivActuel = 1;
         this.xpActuelle = 0;
     }

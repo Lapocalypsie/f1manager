@@ -17,6 +17,7 @@ public class Wheels {
     private double prixPneus;
     private String typePneus;
     private double coefPneus;
+    @Column(name = "niv_actuel")
     private int nivActuel;
 
     private String imagePneus;
