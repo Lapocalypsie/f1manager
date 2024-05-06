@@ -23,8 +23,8 @@ public class PiloteService {
     public Pilote createPilote(Pilote pilote) {
         return piloteRepository.save(pilote);
     }
-    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance){
-        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance);
+    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, boolean appartient){
+        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient);
         pilote.setCoefficient(CalculStats.doublecalculerCoefficientPilote(pilote.getNiveauActuel()));
         savePilote(pilote);
         return pilote;

@@ -13,8 +13,8 @@ public class MecanicienController {
     @Autowired
     private MecanicienService mecanicienService;
     @PostMapping("/creerMecanicien/{nom}/{prenom}/{niveauActuel}/{vitesse}/{performance}")
-    public ResponseEntity<Mecanicien> creerMecanicien(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable double vitesse, @PathVariable double performance ){
-        return new ResponseEntity<>(mecanicienService.creerMecanicien(nom, prenom, niveauActuel, vitesse, performance), HttpStatus.OK);
+    public ResponseEntity<Mecanicien> creerMecanicien(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable double vitesse, @PathVariable double performance, @PathVariable boolean appartient ){
+        return new ResponseEntity<>(mecanicienService.creerMecanicien(nom, prenom, niveauActuel, vitesse, performance, appartient), HttpStatus.OK);
     }
     @GetMapping("/vitesse/{id}")
     public double getVitesseMecanicienbyId(@PathVariable int id){

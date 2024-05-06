@@ -36,8 +36,8 @@ public class PiloteController {
         return piloteService.createPilote(pilote);
     }
     @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}")
-    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance){
-        return  new ResponseEntity<>(piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance), HttpStatus.OK);
+    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance, @PathVariable boolean appartient){
+        return  new ResponseEntity<>(piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient), HttpStatus.OK);
     }
     // Endpoint pour supprimer un pilote
     @DeleteMapping("/{id}")

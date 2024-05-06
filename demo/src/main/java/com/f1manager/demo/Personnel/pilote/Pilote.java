@@ -24,15 +24,18 @@ public class Pilote extends Personne {
     private double endurance;
     @Column(name = "coefficient")
     private double coefficient;
+    @Column(name = "appartient")
+    private boolean appartient;
     public Pilote() {
     }
 
-    public Pilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance) {
+    public Pilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, boolean appartient) {
         super(nom, prenom, niveauActuel);
         this.number = number;
         this.price = price;
         this.force = force;
         this.endurance = endurance;
+        this.appartient = appartient;
     }
     @Override
     public String toString() {
