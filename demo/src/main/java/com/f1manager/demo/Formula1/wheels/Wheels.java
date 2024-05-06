@@ -17,12 +17,14 @@ public class Wheels {
     private double prixPneus;
     private String typePneus;
     private double coefPneus;
+    private int nivActuel;
 
-    public Wheels(String nomPneu, double poidsPneus, double prixPneus, String typePneus) {
+    public Wheels(String nomPneu, double poidsPneus, double prixPneus, String typePneus, int nivActuel) {
         this.nomPneu = nomPneu;
         this.poidsPneus = poidsPneus;
         this.prixPneus = prixPneus;
         this.typePneus = typePneus;
+        this.nivActuel = nivActuel;
     }
 
     public Wheels() {

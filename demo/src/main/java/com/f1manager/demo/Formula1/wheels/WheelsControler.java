@@ -18,8 +18,8 @@ public class WheelsControler {
         this.wheelsService = wheelsService;
     }
     @PostMapping("/createWheels/{nomPneu}/{poidsPneus}/{prixUnitairePneus}/{typePneus}")
-    public ResponseEntity<Wheels> createPneu(@PathVariable String nomPneu, @PathVariable double poidsPneus, @PathVariable double prixUnitairePneus, @PathVariable String typePneus){
-        return new ResponseEntity<>(wheelsService.createNewWheels(nomPneu,poidsPneus, prixUnitairePneus,typePneus), HttpStatus.OK);
+    public ResponseEntity<Wheels> createPneu(@PathVariable String nomPneu, @PathVariable double poidsPneus, @PathVariable double prixUnitairePneus, @PathVariable String typePneus, @PathVariable int nivActuel){
+        return new ResponseEntity<>(wheelsService.createNewWheels(nomPneu,poidsPneus, prixUnitairePneus,typePneus, nivActuel), HttpStatus.OK);
     }
     @PutMapping("/updateWheelsPoids/{idPneus}/{poidsPneus}")
     public ResponseEntity<Wheels> updatePoidsWheels(@PathVariable int idPneus, @PathVariable double poidsPneus){
