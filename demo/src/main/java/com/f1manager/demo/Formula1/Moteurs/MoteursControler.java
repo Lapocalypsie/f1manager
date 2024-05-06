@@ -31,4 +31,8 @@ public class MoteursControler {
     public ResponseEntity<Moteurs> updatePrixMoteur(@PathVariable int idMoteur, @PathVariable double prix){
         return new ResponseEntity<>(moteursService.updatePrixMoteur(idMoteur, prix), HttpStatus.OK);
     }
+    @PutMapping("/monteeNivMoteur/{idMoteur}/{idJoueur}")
+    public ResponseEntity<Double> monteeNivMoteur(@PathVariable int idMoteur, @PathVariable int idJoueur){
+        return new ResponseEntity<>(moteursService.levelUpMoteur(idMoteur, idJoueur), HttpStatus.OK);
+    }
 }

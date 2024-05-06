@@ -25,4 +25,8 @@ public class AileronsControler {
     public ResponseEntity<Ailerons> updatePrixAileron(@PathVariable int idAileron, @PathVariable double prixAileron){
         return new ResponseEntity<>(aileronsService.updatePrixAileron(idAileron, prixAileron), HttpStatus.OK);
     }
+    @PutMapping("/monteeNivAileron/{idAileron}/{idJoueur}")
+    public ResponseEntity<Double> monteeNivAileron(@PathVariable int idAileron, @PathVariable int idJoueur){
+        return new ResponseEntity<>(aileronsService.levelUpAileron(idAileron, idJoueur), HttpStatus.OK);
+    }
 }
