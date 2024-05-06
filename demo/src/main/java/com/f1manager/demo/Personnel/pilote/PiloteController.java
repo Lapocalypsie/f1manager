@@ -77,4 +77,13 @@ public class PiloteController {
     public ResponseEntity<Double>getPiloteCoef(@PathVariable int idPilote){
         return new ResponseEntity<>(piloteService.getPiloteCoef(idPilote),HttpStatus.OK);
     }
+    @PutMapping("acheterPilote/{idPilote}/{idJoueur}")
+    public ResponseEntity<Double> acheterPilote(@PathVariable int idPilote, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(piloteService.buyPilote(idPilote, idJoueur), HttpStatus.OK);
+    }
+
+    @PutMapping("vendrePilote/{idPilote}/{idJoueur}")
+    public ResponseEntity<Double> vendrePilote(@PathVariable int idPilote, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(piloteService.sellPilote(idPilote, idJoueur), HttpStatus.OK);
+    }
 }
