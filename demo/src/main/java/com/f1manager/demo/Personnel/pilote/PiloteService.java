@@ -20,7 +20,7 @@ public class PiloteService {
     @Autowired
     private PiloteRepository piloteRepository;
     @Autowired
-    JoueurService joueurService;
+    private JoueurService joueurService;
 
     public List<Pilote> getAllPilotes() {
         return piloteRepository.findAll();

@@ -17,7 +17,7 @@ public class MecanicienService {
     @Autowired
     MecanicienRepository mecanicienRepository;
     @Autowired
-    JoueurService joueurService;
+    private JoueurService joueurService;
 
     public void saveMecanicien(Mecanicien mecanicien) {
         mecanicienRepository.save(mecanicien);
