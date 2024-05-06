@@ -52,6 +52,7 @@ public class Pilote extends Personne {
                 ", price=" + price +
                 ", force=" + force +
                 ", endurance=" + endurance +
+                ", appartient=" + appartient +
                 '}';
     }
 }

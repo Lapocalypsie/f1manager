@@ -17,15 +17,18 @@ public class Mecanicien extends Personne {
     private double vitesse;
     @Column(name = "performance")
     private double performance;
+    @Column(name = "price")
+    private double price;
     @Column (name = "coefficient")
     private double coefficient;
     @Column(name = "appartient")
     private boolean appartient;
 
-    public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance, boolean appartient) {
+    public Mecanicien(String nom, String prenom, int niveauActuel, double vitesse, double performance, double price, boolean appartient) {
         super(nom, prenom, niveauActuel);
         this.vitesse = vitesse;
         this.performance = performance;
+        this.price = price;
         this.appartient = appartient;
     }
     public Mecanicien() {

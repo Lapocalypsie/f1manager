@@ -1,9 +1,12 @@
 package com.f1manager.demo.Formula1.Aileron;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
+import com.f1manager.demo.systemeco.MonteeDeNiveau;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class AileronsService {
     @Autowired
     private  AileronsRepository aileronsRepository;
+    @Autowired
+    private JoueurService joueurService;
     public  Double getAileronCoef(Ailerons ailerons){
         if (ailerons.getPoidsAileron() < 0){
             throwException.throwIllegalArgumentException("Le poids de l'ailron ne peut pas être négatif");
@@ -58,5 +63,11 @@ public class AileronsService {
         ailerons.setPrixAileron(prix);
         saveAileron(ailerons);
         return ailerons;
+    }
+    public double levelUpAileron(int idAileron, int idJoueur) {
+        Ailerons ailerons = getAileronsById(idAileron);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        MonteeDeNiveau.monteeAilerons(ailerons, joueur);
+        return joueur.getArgent();
     }
 }

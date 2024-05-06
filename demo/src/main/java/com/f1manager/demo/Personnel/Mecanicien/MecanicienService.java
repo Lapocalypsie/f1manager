@@ -1,8 +1,12 @@
 package com.f1manager.demo.Personnel.Mecanicien;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Personnel.PersonneService;
 import com.f1manager.demo.Utils.CalculStats;
+import com.f1manager.demo.systemeco.Achat;
+import com.f1manager.demo.systemeco.Vente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +16,8 @@ import java.util.Optional;
 public class MecanicienService {
     @Autowired
     MecanicienRepository mecanicienRepository;
+    @Autowired
+    private JoueurService joueurService;
 
     public void saveMecanicien(Mecanicien mecanicien) {
         mecanicienRepository.save(mecanicien);
@@ -26,8 +32,8 @@ public class MecanicienService {
         return mecano.getPerformance();
     }
 
-    public Mecanicien creerMecanicien(String nom, String prenom, int level, double vitesse, double performance, boolean appartient){
-        Mecanicien mecanicien = new Mecanicien(nom, prenom, level, vitesse, performance, appartient);
+    public Mecanicien creerMecanicien(String nom, String prenom, int level, double vitesse, double performance, double price, boolean appartient){
+        Mecanicien mecanicien = new Mecanicien(nom, prenom, level, vitesse, performance, price, appartient);
         mecanicien.setCoefficient(CalculStats.calculerCoefficientMecanicien(mecanicien.getNiveauActuel()));
         saveMecanicien(mecanicien);
         return mecanicien;
@@ -50,5 +56,18 @@ public class MecanicienService {
     public double getMecanicienCoef(int idMecanicien){
         Mecanicien mecanicien = getMecanicienById(idMecanicien);
         return CalculStats.calculerCoefficientMecanicien(mecanicien.getNiveauActuel());
+    }
+    public double buyMecanicien(int idMecanicien, int idJoueur) {
+        Mecanicien mecanicien = getMecanicienById(idMecanicien);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Achat.effectuerAchat(mecanicien, joueur);
+        return joueur.getArgent();
+    }
+
+    public double sellMecanicien(int idMecanicien, int idJoueur) {
+        Mecanicien mecanicien = getMecanicienById(idMecanicien);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Vente.effectuerVente(mecanicien, joueur);
+        return joueur.getArgent();
     }
 }

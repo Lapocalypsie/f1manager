@@ -1,9 +1,13 @@
 package com.f1manager.demo.Formula1.Moteurs;
 
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurRepository;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.systemeco.MonteeDeNiveau;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,8 @@ public class MoteursService{
 
    @Autowired
     private MoteursRepository moteurRepository;
+   @Autowired
+    private JoueurService joueurService;
 
     public  Double getConsommationEscenceCoef(Moteurs moteur){
         if (moteur.getConsommationEssence() < 0) {
@@ -76,5 +82,11 @@ public class MoteursService{
         moteurs.setPrixMoteur(prix);
         saveMoteur(moteurs);
         return moteurs;
+    }
+    public double levelUpMoteur(int idMoteur, int idJoueur) {
+        Moteurs moteurs = getMoteurById(idMoteur);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        MonteeDeNiveau.monteeMoteurs(moteurs, joueur);
+        return joueur.getArgent();
     }
 }

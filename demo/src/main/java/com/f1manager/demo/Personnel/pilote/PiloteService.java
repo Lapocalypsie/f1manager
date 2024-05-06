@@ -1,9 +1,13 @@
 package com.f1manager.demo.Personnel.pilote;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.PersonneService;
 import com.f1manager.demo.Utils.CalculStats;
+import com.f1manager.demo.systemeco.Achat;
+import com.f1manager.demo.systemeco.Vente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +20,8 @@ public class PiloteService {
 
     @Autowired
     private PiloteRepository piloteRepository;
+    @Autowired
+    private JoueurService joueurService;
 
     public List<Pilote> getAllPilotes() {
         return piloteRepository.findAll();
@@ -88,5 +94,18 @@ public class PiloteService {
     public double getPiloteCoef(int idPilote){
         Pilote pilote = getPiloteById(idPilote);
         return CalculStats.calculerCoefficientMecanicien(pilote.getNiveauActuel());
+    }
+    public double buyPilote(int idPilote, int idJoueur) {
+        Pilote pilote = getPiloteById(idPilote);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Achat.effectuerAchat(pilote, joueur);
+        return joueur.getArgent();
+    }
+
+    public double sellPilote(int idPilote, int idJoueur) {
+        Pilote pilote = getPiloteById(idPilote);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Vente.effectuerVente(pilote, joueur);
+        return joueur.getArgent();
     }
 }

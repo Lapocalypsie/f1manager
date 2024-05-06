@@ -13,8 +13,8 @@ public class MecanicienController {
     @Autowired
     private MecanicienService mecanicienService;
     @PostMapping("/creerMecanicien/{nom}/{prenom}/{niveauActuel}/{vitesse}/{performance}")
-    public ResponseEntity<Mecanicien> creerMecanicien(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable double vitesse, @PathVariable double performance, @PathVariable boolean appartient ){
-        return new ResponseEntity<>(mecanicienService.creerMecanicien(nom, prenom, niveauActuel, vitesse, performance, appartient), HttpStatus.OK);
+    public ResponseEntity<Mecanicien> creerMecanicien(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable double vitesse, @PathVariable double performance,@PathVariable double price, @PathVariable boolean appartient ){
+        return new ResponseEntity<>(mecanicienService.creerMecanicien(nom, prenom, niveauActuel, vitesse, performance, price, appartient), HttpStatus.OK);
     }
     @GetMapping("/vitesse/{id}")
     public double getVitesseMecanicienbyId(@PathVariable int id){
@@ -33,4 +33,15 @@ public class MecanicienController {
     public ResponseEntity<Double>getMecanicienCoef(@PathVariable int idMecanicien){
         return new ResponseEntity<>(mecanicienService.getMecanicienCoef(idMecanicien),HttpStatus.OK);
     }
+    @PutMapping("acheterMecanicien/{idMecanicien}/{idJoueur}")
+    public ResponseEntity<Double> acheterMecanicien(@PathVariable int idMecanicien, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(mecanicienService.buyMecanicien(idMecanicien, idJoueur), HttpStatus.OK);
+    }
+
+    @PutMapping("vendreMecanicien/{idMecanicien}/{idJoueur}")
+    public ResponseEntity<Double> vendreMecanicien(@PathVariable int idMecanicien, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(mecanicienService.sellMecanicien(idMecanicien, idJoueur), HttpStatus.OK);
+    }
+
+
 }
