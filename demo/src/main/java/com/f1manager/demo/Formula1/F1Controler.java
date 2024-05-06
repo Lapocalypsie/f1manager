@@ -39,8 +39,8 @@ public class F1Controler {
     }
     @PostMapping("/createF1/{poidsF1}/{vitesseMax}/{zeroTo100}/{maniabilty}/{wheelsId}/{moteurId}/{aileronsId}")
     public ResponseEntity<F1> createNewF1(@PathVariable double poidsF1, @PathVariable double vitesseMax, @PathVariable double zeroTo100,
-                                        @PathVariable int maniabilty, @PathVariable int wheelsId, @PathVariable int moteurId, @PathVariable int aileronsId){
-        return new ResponseEntity<>(f1Service.createNewF1(poidsF1, vitesseMax, zeroTo100, maniabilty, wheelsId, moteurId, aileronsId), HttpStatus.CREATED);
+                                        @PathVariable int maniabilty, @PathVariable int wheelsId, @PathVariable int moteurId, @PathVariable int aileronsId, @PathVariable String imageF1){
+        return new ResponseEntity<>(f1Service.createNewF1(poidsF1, vitesseMax, zeroTo100, maniabilty, wheelsId, moteurId, aileronsId, imageF1), HttpStatus.CREATED);
     }
     @PutMapping("updateMoteurF1/{idF1}/{idMoteur}")
     public ResponseEntity<F1> updateMoteurF1(@PathVariable int idF1, @PathVariable int idMoteur){

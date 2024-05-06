@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "moteurs")
+@Table(name = "moteur")
 public class Moteurs {
 
     @Id
@@ -18,12 +18,14 @@ public class Moteurs {
     private double puissance;
     private double coefMoteur;
     private double prixMoteur;
+    private String imageMoteur;
 
-    public Moteurs(String nomMoteur, double consommationEssence, double puissance, double prixMoteur) {
+    public Moteurs(String nomMoteur, double consommationEssence, double puissance, double prixMoteur, String imageMoteur) {
         this.nomMoteur = nomMoteur;
         this.consommationEssence = consommationEssence;
         this.puissance = puissance;
         this.prixMoteur = prixMoteur;
+        this.imageMoteur = imageMoteur;
     }
 
     public Moteurs() {

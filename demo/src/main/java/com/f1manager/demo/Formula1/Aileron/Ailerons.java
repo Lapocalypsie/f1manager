@@ -8,20 +8,29 @@ import org.springframework.stereotype.Service;
 @Entity
 @Getter
 @Setter
-@Table(name = "ailerons") // Assurez-vous que le nom de la table est correct
+@Table(name = "aileron") 
 public class Ailerons {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="coefAileron")
+    @Column(name="coef_aileron")
     private double coefAileron;
 
-    @Column(name="poidsAileron")
+    @Column(name="poid_aileron")
     private double poidsAileron;
+    @Column(name="prix_aileron")
     private double prixAileron;
-    public Ailerons(double poidsAileron, double prixAileron) {
+    @Column(name = "image_aileron")
+    private String imageAileron;
+
+    public Ailerons(double poidsAileron, double prixAileron, String imageAileron) {
         this.poidsAileron = poidsAileron;
         this.prixAileron = prixAileron;
+        this.imageAileron = imageAileron;
     }
+    // Default constructor
+    public Ailerons() {
+    }
+
 }

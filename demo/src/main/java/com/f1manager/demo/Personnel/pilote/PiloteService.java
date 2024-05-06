@@ -21,8 +21,8 @@ public class PiloteService {
     public Pilote createPilote(Pilote pilote) {
         return piloteRepository.save(pilote);
     }
-    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance){
-        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance);
+    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, String imagePilote){
+        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance, imagePilote);
         savePilote(pilote);
         return pilote;
     }

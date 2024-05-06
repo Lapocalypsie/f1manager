@@ -38,8 +38,8 @@ public class WheelsService {
     public List<Wheels> getAllWheels() {
         return wheelsRepository.findAll();
     }
-    public Wheels createNewWheels(String nomRoue, double poidsPneus, double prixPneus, String typePneus){
-        Wheels wheels = new Wheels(nomRoue, poidsPneus, prixPneus, typePneus);
+    public Wheels createNewWheels(String nomRoue, double poidsPneus, double prixPneus, String typePneus, String imagePneus){
+        Wheels wheels = new Wheels(nomRoue, poidsPneus, prixPneus, typePneus, imagePneus);
         wheels.setCoefPneus(getWheelsCoef(wheels));
         saveWheels(wheels);
         return wheels;

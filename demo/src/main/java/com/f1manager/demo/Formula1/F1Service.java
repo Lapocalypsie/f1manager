@@ -103,11 +103,11 @@ public class F1Service {
     aurait besoin.
      */
     public F1 createNewF1(double poidsF1, double vitesseMax, double zeroTo100,
-                           int maniabilty,  int wheelsId,  int moteurId, int aileronsId){
+                           int maniabilty,  int wheelsId,  int moteurId, int aileronsId, String imageF1){
         Moteurs moteur = moteursService.getMoteurById(moteurId);
         Ailerons aileron = aileronsService.getAileronsById(aileronsId);
         Wheels wheel = wheelsService.getWheelsById(wheelsId);
-        F1 f1 = new F1(poidsF1, vitesseMax, zeroTo100, maniabilty,wheel, moteur, aileron);
+        F1 f1 = new F1(poidsF1, vitesseMax, zeroTo100, maniabilty,wheel, moteur, aileron, imageF1);
         f1.setCoef(f1MoyenneCoef(f1));
         saveF1(f1);
         return f1;

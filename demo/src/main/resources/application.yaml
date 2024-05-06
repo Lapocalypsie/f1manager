@@ -2,9 +2,9 @@ spring:
   application:
     name: F1 Manager Miage Project
   datasource:
-    url: jdbc:postgresql://localhost:5432/F1Manager
-    username: postgres
-    password: MadaA
+    url: jdbc:postgresql://ep-wispy-feather-59013458-pooler.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require
+    username: default
+    password: Dz5HFyP8lVhG
   jpa:
     ddl-auto: update
     show-sql: true

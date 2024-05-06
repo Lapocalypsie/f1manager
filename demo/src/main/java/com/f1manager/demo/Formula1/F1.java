@@ -17,7 +17,7 @@ public class F1 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name ="poidsf1")
+    @Column(name ="poid_f1")
     private double poidsF1;
 
     @Column(name ="vitessemax")
@@ -33,7 +33,7 @@ public class F1 {
     private Double coef;
 
     @ManyToOne
-    @JoinColumn(name = "wheels_id")
+    @JoinColumn(name = "wheel_id")
     private Wheels wheels;
 
     @ManyToOne
@@ -41,11 +41,13 @@ public class F1 {
     private Moteurs moteur;
 
     @OneToOne
-    @JoinColumn(name = "ailerons_id")
+    @JoinColumn(name = "aileron_id")
     private Ailerons ailerons;
+    @Column(name = "image_f1")
+    private String imageF1;
     public F1(){}
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, double maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, double maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef, String imageF1) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;
@@ -54,9 +56,10 @@ public class F1 {
         this.moteur = moteur;
         this.ailerons = ailerons;
         this.coef = coef;
+        this.imageF1 = imageF1;
     }
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, int maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons) {
+    public F1(double poidsF1, double vitesseMax, double zeroTo100, int maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, String imageF1) {
         this.poidsF1 = poidsF1;
         this.vitesseMax = vitesseMax;
         this.zeroTo100 = zeroTo100;
@@ -64,5 +67,6 @@ public class F1 {
         this.wheels = wheels;
         this.moteur = moteur;
         this.ailerons = ailerons;
+        this.imageF1 = imageF1;
     }
 }
