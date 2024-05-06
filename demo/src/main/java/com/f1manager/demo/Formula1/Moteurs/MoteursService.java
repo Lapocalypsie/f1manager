@@ -49,8 +49,8 @@ public class MoteursService{
     public List<Moteurs> getAllMoteurs() {
         return moteurRepository.findAll();
     }
-    public Moteurs createNewMoteur(String nomMoteur, double consomationEscence, double puissance, double prixMoteur){
-        Moteurs moteurs = new Moteurs(nomMoteur, consomationEscence, puissance, prixMoteur);
+    public Moteurs createNewMoteur(String nomMoteur, double consomationEscence, double puissance, double prixMoteur, int nivActuel){
+        Moteurs moteurs = new Moteurs(nomMoteur, consomationEscence, puissance, prixMoteur, nivActuel);
         moteurs.setCoefMoteur(getMoteurCoef(moteurs));
         saveMoteur(moteurs);
         return moteurs;
