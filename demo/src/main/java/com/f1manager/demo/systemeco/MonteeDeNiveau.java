@@ -19,10 +19,7 @@ public class MonteeDeNiveau {
     private static WheelsService wheelsService;
 
     public static boolean isAmeliorationPossible(int nivActuel){
-        if(nivActuel < 10) {
-            return true;
-        }
-        return false;
+        return nivActuel < 10;
     }
     public static void monteeAilerons(Ailerons ailerons, Joueur joueur) {
         if (isAmeliorationPossible(ailerons.getNivActuel())) {

@@ -1,8 +1,5 @@
 package com.f1manager.demo.Formula1;
 
-
-import com.f1manager.demo.Formula1.Moteurs.Moteurs;
-import com.f1manager.demo.Formula1.wheels.Wheels;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

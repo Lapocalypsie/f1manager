@@ -41,6 +41,29 @@ public class Joueur {
     }
 
     public Joueur() {
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public double getArgent() {
+        return argent;
+    }
+
+    public double getXpActuelle() {
+        return xpActuelle;
+    }
+
+    public int getNivActuel() {
+        return nivActuel;
     }
 }

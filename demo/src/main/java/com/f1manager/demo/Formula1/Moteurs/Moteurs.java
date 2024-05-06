@@ -3,7 +3,6 @@ package com.f1manager.demo.Formula1.Moteurs;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CollectionId;
 
 @Entity
 @Getter
