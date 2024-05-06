@@ -20,8 +20,10 @@ public class Ailerons {
     @Column(name="poidsAileron")
     private double poidsAileron;
     private double prixAileron;
-    public Ailerons(double poidsAileron, double prixAileron) {
+    private int nivActuel;
+    public Ailerons(double poidsAileron, double prixAileron, int nivActuel) {
         this.poidsAileron = poidsAileron;
         this.prixAileron = prixAileron;
+        this.nivActuel = nivActuel;
     }
 }
