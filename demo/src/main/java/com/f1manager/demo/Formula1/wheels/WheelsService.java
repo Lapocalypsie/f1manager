@@ -1,13 +1,14 @@
 package com.f1manager.demo.Formula1.wheels;
 
 import com.f1manager.demo.ErrorHandling.throwException;
-import com.f1manager.demo.Formula1.Moteurs.Moteurs;
+import com.f1manager.demo.Formula1.F1Service;
 import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Formula1.F1;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Utils.Check;
+import com.f1manager.demo.Utils.Niveaux;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
-import com.f1manager.demo.systemeco.MonteeDeNiveau;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,7 @@ import java.util.Optional;
 @Service
 public class WheelsService {
     @Autowired
-    private  wheelsRepository wheelsRepository;
-    @Autowired
-    private JoueurService joueurService;
+    private WheelsRepository wheelsRepository;
 
     public  double getWheelsCoef(Wheels wheels){
         if (wheels.getPoidsPneus() < 0){
@@ -37,8 +36,8 @@ public class WheelsService {
             return null;
         }
     }
-    public Wheels saveWheels(Wheels wheels) {
-        return wheelsRepository.save(wheels);
+    public void saveWheels(Wheels wheels) {
+        wheelsRepository.save(wheels);
     }
 
     public List<Wheels> getAllWheels() {
@@ -64,11 +63,4 @@ public class WheelsService {
         saveWheels(wheels);
         return wheels;
     }
-    public double levelUpWheels(int idWheels, int idJoueur) {
-        Wheels wheels = getWheelsById(idWheels);
-        Joueur joueur = joueurService.getJoueurById(idJoueur);
-        MonteeDeNiveau.monteeWheels(wheels, joueur);
-        return joueur.getArgent();
-    }
-
 }

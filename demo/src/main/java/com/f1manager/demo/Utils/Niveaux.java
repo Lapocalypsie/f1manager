@@ -25,4 +25,11 @@ public class Niveaux {
         double tauxCroissance = 1.15;
         return (int) (basePrix * Math.pow(tauxCroissance, niveau - 1));
     }
+    public static boolean isAmeliorationPossible(int nivActuel){
+        if(nivActuel < 10){
+            return true;
+        }
+        throwException.throwIllegalArgumentException("Le niveau est déjà au maximum");
+        return false;
+    }
 }

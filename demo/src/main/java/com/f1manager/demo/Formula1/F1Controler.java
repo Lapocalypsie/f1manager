@@ -63,5 +63,16 @@ public class F1Controler {
     public ResponseEntity<F1> updateVitesseMaxF1(@PathVariable int idF1, @PathVariable int vitesseMax){
         return new ResponseEntity<>(f1Service.changeVitesseMax(idF1, vitesseMax), HttpStatus.OK);
     }
-
+    @PutMapping("/monteeNivRouesByF1/{idF1}/{idJoueur}")
+    public ResponseEntity<Double> monteeRoues(@PathVariable int idF1, @PathVariable int idJoueur){
+        return new ResponseEntity<>(f1Service.levelUpWheels(idF1, idJoueur), HttpStatus.OK);
+    }
+    @PutMapping("/monteeNivMoteurByF1/{idF1}/{idJoueur}")
+    public ResponseEntity<Double> monteeNivMoteurByF1(@PathVariable int idF1, @PathVariable int idJoueur){
+        return new ResponseEntity<>(f1Service.levelUpMoteur(idF1, idJoueur), HttpStatus.OK);
+    }
+    @PutMapping("/monteeNivAileronByF1/{idF1}/{idJoueur}")
+    public ResponseEntity<Double> monteeNivAileronByF1(@PathVariable int idF1, @PathVariable int idJoueur){
+        return new ResponseEntity<>(f1Service.levelUpAileron(idF1, idJoueur), HttpStatus.OK);
+    }
 }

@@ -1,6 +1,7 @@
 package com.f1manager.demo.Utils;
 
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
+import com.f1manager.demo.Personnel.pilote.Pilote;
 
 public class CalculStats {
     private static final int niveauMaxPersonne = 10;
@@ -30,20 +31,30 @@ public class CalculStats {
         double sommeMaxNiveauMax = calculerPerformance(mecanicien,niveauMaxPersonne) + calculerVitesse(mecanicien,niveauMaxPersonne); // La somme des valeurs de vitesse et productivité au niveau 10
         return (vitesse + performance) / sommeMaxNiveauMax;
     }
-    public static double calculerForce(int niveau){
-        double baseForce = 5.0;
+    public static double calculerForce(Pilote pilote){
+        double baseForce = pilote.getForce();
         double tauxCroissanceForce = 1.04;
-        return baseForce * Math.pow(tauxCroissanceForce, niveau-1);
+        return baseForce * Math.pow(tauxCroissanceForce, pilote.getNiveauActuel()-1);
     }
-    public static double calculerEndurance(int niveau){
-        double baseEndurance = 8.0;
+    public static double calculerForce(Pilote pilote, int niveauMaxPersonne){
+        double baseForce = pilote.getForce();
+        double tauxCroissanceForce = 1.04;
+        return baseForce * Math.pow(tauxCroissanceForce, niveauMaxPersonne);
+    }
+    public static double calculerEndurance(Pilote pilote){
+        double baseEndurance = pilote.getEndurance();
         double tauxCroissanceEndurance = 1.05;
-        return baseEndurance * Math.pow(tauxCroissanceEndurance, niveau - 1);
+        return baseEndurance * Math.pow(tauxCroissanceEndurance, pilote.getNiveauActuel() - 1);
     }
-    public static double doublecalculerCoefficientPilote(int niveau){
-        double force = calculerForce(niveau);
-        double endurance = calculerEndurance(niveau);
-        double sommeMaxNiveauMax = calculerForce(niveauMaxPersonne) + calculerEndurance(niveauMaxPersonne);
+    public static double calculerEndurance(Pilote pilote, int niveauMaxPersonne){
+        double baseEndurance = pilote.getEndurance();
+        double tauxCroissanceEndurance = 1.05;
+        return baseEndurance * Math.pow(tauxCroissanceEndurance, niveauMaxPersonne);
+    }
+    public static double calculerCoefficientPilote(Pilote pilote){
+        double force = calculerForce(pilote);
+        double endurance = calculerEndurance(pilote);
+        double sommeMaxNiveauMax = calculerForce(pilote, niveauMaxPersonne) + calculerEndurance(pilote, niveauMaxPersonne);
         return (force + endurance) / sommeMaxNiveauMax;
     }
 }

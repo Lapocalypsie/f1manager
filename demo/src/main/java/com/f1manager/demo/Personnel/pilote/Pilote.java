@@ -32,13 +32,12 @@ public class Pilote extends Personne {
     public Pilote() {
     }
 
-    public Pilote(String nom, String prenom, int number, double price, double force, double endurance, double coefficient, boolean appartient, String imagePilote, int nivActuel) {
+    public Pilote(String nom, String prenom, int number, double price, double force, double endurance, boolean appartient, String imagePilote, int nivActuel) {
         super(nom, prenom, nivActuel);
         this.number = number;
         this.price = price;
         this.force = force;
         this.endurance = endurance;
-        this.coefficient = coefficient;
         this.imagePilote = imagePilote;
         this.appartient = appartient;
     }

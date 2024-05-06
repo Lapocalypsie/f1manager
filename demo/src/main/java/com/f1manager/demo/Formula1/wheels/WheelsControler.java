@@ -29,8 +29,5 @@ public class WheelsControler {
     public ResponseEntity<Wheels> updateConsommationmoteur(@PathVariable int idPneus, @PathVariable double prixUnitairePneus){
         return new ResponseEntity<>(wheelsService.updatePrixWheels(idPneus, prixUnitairePneus), HttpStatus.OK);
     }
-    @PutMapping("/monteeNivRoues/{idPneus}/{idJoueur}")
-    public ResponseEntity<Double> monteeRoues(@PathVariable int idPneus, @PathVariable int idJoueur){
-        return new ResponseEntity<>(wheelsService.levelUpWheels(idPneus, idJoueur), HttpStatus.OK);
-    }
+
 }

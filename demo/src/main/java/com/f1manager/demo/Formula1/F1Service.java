@@ -5,7 +5,10 @@ import com.f1manager.demo.Formula1.Aileron.AileronsService;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.Moteurs.MoteursService;
+import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Utils.Check;
+import com.f1manager.demo.Utils.Niveaux;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.Wheels;
@@ -27,6 +30,7 @@ public class F1Service {
     private final MoteursService moteursService;
     private final AileronsService aileronsService;
     private final WheelsService wheelsService;
+    private final JoueurService joueurService;
 
     public Double coefTotal(F1 f1, Moteurs moteur, Ailerons ailerons){
         return f1.getCoef() + moteur.getCoefMoteur() + ailerons.getCoefAileron();
@@ -149,5 +153,64 @@ public class F1Service {
         F1 f1 = getF1ById(idF1);
         f1.setVitesseMax(vitesseMax);
         return f1;
+    }
+    public double levelUpWheels(int idF1, int idJoueur) {
+        F1 f1 = getF1ById(idF1);
+        Wheels wheels = wheelsService.getWheelsById(f1.getWheels().getId());
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        if (Niveaux.isAmeliorationPossible(wheels.getNivActuel())) {
+            double prixPourProchainNiveau = Niveaux.nextLevel(wheels.getNivActuel());
+            if (joueur.getArgent() >= prixPourProchainNiveau) {
+                wheels.setNivActuel(wheels.getNivActuel() + 1);
+                joueur.setArgent(joueur.getArgent() - prixPourProchainNiveau);
+                wheelsService.saveWheels(wheels);
+                System.out.println("La montée de niveau de ces roues ont été effectué");
+            } else {
+                throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
+            }
+        } else {
+            throwException.throwIllegalArgumentException("Ces roues ont déjà atteint le niveau maximum.");
+        }
+        return wheels.getNivActuel();
+    }
+
+    public double levelUpMoteur(int idF1, int idJoueur) {
+        F1 f1 = getF1ById(idF1);
+        Moteurs moteurs = moteursService.getMoteurById(f1.getMoteur().getId());
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        if (Niveaux.isAmeliorationPossible(moteurs.getNivActuel())) {
+            double prixPourProchainNiveau = Niveaux.nextLevel(moteurs.getNivActuel());
+            if (joueur.getArgent() >= prixPourProchainNiveau) {
+                moteurs.setNivActuel(moteurs.getNivActuel() + 1);
+                joueur.setArgent(joueur.getArgent() - prixPourProchainNiveau);
+                moteursService.saveMoteur(moteurs);
+                System.out.println("La montée de niveau du moteur a été effectué");
+            } else {
+                throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
+            }
+        } else {
+            throwException.throwIllegalArgumentException("Ce moteur a déjà atteint le niveau maximum.");
+        }
+        return moteurs.getNivActuel();
+    }
+
+    public double levelUpAileron(int idF1, int idJoueur) {
+        F1 f1 = getF1ById(idF1);
+        Ailerons ailerons = aileronsService.getAileronsById(f1.getAilerons().getId());
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        if (Niveaux.isAmeliorationPossible(ailerons.getNivActuel())) {
+            double prixPourProchainNiveau = Niveaux.nextLevel(ailerons.getNivActuel());
+            if (joueur.getArgent() >= prixPourProchainNiveau) {
+                ailerons.setNivActuel(ailerons.getNivActuel() + 1);
+                joueur.setArgent(joueur.getArgent() - prixPourProchainNiveau);
+                aileronsService.saveAileron(ailerons);
+                System.out.println("La montée de niveau de l'aileron a été effectué");
+            } else {
+                throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
+            }
+        } else {
+            throwException.throwIllegalArgumentException("Cet aileron a déjà atteint le niveau maximum.");
+        }
+        return ailerons.getNivActuel();
     }
 }

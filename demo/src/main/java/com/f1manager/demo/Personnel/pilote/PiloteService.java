@@ -32,8 +32,8 @@ public class PiloteService {
     }
 
     public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, boolean appartient, String imagePilote) {
-        double coefficient = CalculStats.doublecalculerCoefficientPilote(niveauActuel);
-        Pilote pilote = new Pilote(nom, prenom, number, price, force, endurance, coefficient, appartient, imagePilote, niveauActuel);
+        Pilote pilote = new Pilote(nom, prenom, number, price, force, endurance, appartient, imagePilote, niveauActuel);
+        pilote.setCoefficient(CalculStats.calculerCoefficientPilote(pilote));
         savePilote(pilote);
         return pilote;
     }
@@ -93,7 +93,7 @@ public class PiloteService {
     }
     public double getPiloteCoef(int idPilote){
         Pilote pilote = getPiloteById(idPilote);
-        return CalculStats.doublecalculerCoefficientPilote(pilote.getNiveauActuel());
+        return CalculStats.calculerCoefficientPilote(pilote);
     }
     public double buyPilote(int idPilote, int idJoueur) {
         Pilote pilote = getPiloteById(idPilote);
