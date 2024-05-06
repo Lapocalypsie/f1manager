@@ -1,21 +1,33 @@
 package com.f1manager.demo.Utils;
 
+import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
+
 public class CalculStats {
     private static final int niveauMaxPersonne = 10;
-    public static double calculerVitesse(int niveau) {
-        double baseVitesse = 10.0;
+    public static double calculerVitesse(Mecanicien mecanicien) {
+        double baseVitesse = mecanicien.getVitesse();
         double tauxCroissanceVitesse = 1.05;
-        return baseVitesse * Math.pow(tauxCroissanceVitesse, niveau - 1);
+        return baseVitesse * Math.pow(tauxCroissanceVitesse, mecanicien.getNiveauActuel() - 1);
     }
-    public static double calculerPerformance(int niveau) {
-        double basePerformance = 5.0;
+    public static double calculerVitesse(Mecanicien mecanicien, int niveauMax) {
+        double baseVitesse = mecanicien.getVitesse();
+        double tauxCroissanceVitesse = 1.05;
+        return baseVitesse * Math.pow(tauxCroissanceVitesse, niveauMax);
+    }
+    public static double calculerPerformance(Mecanicien mecanicien) {
+        double basePerformance = mecanicien.getPerformance();
         double tauxCroissancePerformance = 1.07;
-        return basePerformance * Math.pow(tauxCroissancePerformance, niveau - 1);
+        return basePerformance * Math.pow(tauxCroissancePerformance, mecanicien.getNiveauActuel() - 1);
     }
-    public static double calculerCoefficientMecanicien(int niveau) {
-        double vitesse = calculerVitesse(niveau);
-        double performance = calculerPerformance(niveau);
-        double sommeMaxNiveauMax = calculerPerformance(niveauMaxPersonne) + calculerVitesse(niveauMaxPersonne); // La somme des valeurs de vitesse et productivité au niveau 10
+    public static double calculerPerformance(Mecanicien mecanicien, int niveauMax) {
+        double basePerformance = mecanicien.getPerformance();
+        double tauxCroissancePerformance = 1.07;
+        return basePerformance * Math.pow(tauxCroissancePerformance, niveauMax);
+    }
+    public static double calculerCoefficientMecanicien(Mecanicien mecanicien) {
+        double vitesse = calculerVitesse(mecanicien);
+        double performance = calculerPerformance(mecanicien);
+        double sommeMaxNiveauMax = calculerPerformance(mecanicien,niveauMaxPersonne) + calculerVitesse(mecanicien,niveauMaxPersonne); // La somme des valeurs de vitesse et productivité au niveau 10
         return (vitesse + performance) / sommeMaxNiveauMax;
     }
     public static double calculerForce(int niveau){

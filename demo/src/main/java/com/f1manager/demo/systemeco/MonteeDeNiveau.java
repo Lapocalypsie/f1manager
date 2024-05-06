@@ -19,7 +19,11 @@ public class MonteeDeNiveau {
     private static WheelsService wheelsService;
 
     public static boolean isAmeliorationPossible(int nivActuel){
-        return nivActuel < 10;
+        if(nivActuel < 10){
+            return true;
+        }
+        throwException.throwIllegalArgumentException("Le niveau est déjà au maximum");
+        return false;
     }
     public static void monteeAilerons(Ailerons ailerons, Joueur joueur) {
         if (isAmeliorationPossible(ailerons.getNivActuel())) {

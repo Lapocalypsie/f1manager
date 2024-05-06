@@ -34,7 +34,7 @@ public class MecanicienService {
 
     public Mecanicien creerMecanicien(String nom, String prenom, int level, double vitesse, double performance, double price, boolean appartient){
         Mecanicien mecanicien = new Mecanicien(nom, prenom, level, vitesse, performance, price, appartient);
-        mecanicien.setCoefficient(CalculStats.calculerCoefficientMecanicien(mecanicien.getNiveauActuel()));
+        mecanicien.setCoefficient(CalculStats.calculerCoefficientMecanicien(mecanicien));
         saveMecanicien(mecanicien);
         return mecanicien;
     }
@@ -55,7 +55,7 @@ public class MecanicienService {
     }
     public double getMecanicienCoef(int idMecanicien){
         Mecanicien mecanicien = getMecanicienById(idMecanicien);
-        return CalculStats.calculerCoefficientMecanicien(mecanicien.getNiveauActuel());
+        return CalculStats.calculerCoefficientMecanicien(mecanicien);
     }
     public double buyMecanicien(int idMecanicien, int idJoueur) {
         Mecanicien mecanicien = getMecanicienById(idMecanicien);

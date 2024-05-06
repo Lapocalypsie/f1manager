@@ -47,17 +47,6 @@ public class F1 {
     private String imageF1;
     public F1(){}
 
-    public F1(double poidsF1, double vitesseMax, double zeroTo100, double maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, Double coef, String imageF1) {
-        this.poidsF1 = poidsF1;
-        this.vitesseMax = vitesseMax;
-        this.zeroTo100 = zeroTo100;
-        this.maniabilty = maniabilty;
-        this.wheels = wheels;
-        this.moteur = moteur;
-        this.ailerons = ailerons;
-        this.coef = coef;
-        this.imageF1 = imageF1;
-    }
 
     public F1(double poidsF1, double vitesseMax, double zeroTo100, int maniabilty, Wheels wheels, Moteurs moteur, Ailerons ailerons, String imageF1) {
         this.poidsF1 = poidsF1;

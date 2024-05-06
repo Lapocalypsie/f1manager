@@ -75,7 +75,6 @@ public class F1Service {
         return (getPoidsCoef(f1) + getManiabilityCoef(f1) + vMaxCoef(f1) + getZeroTo100Coef(f1))/4;
     }
     public Double f1MoyenneCoef (F1 f1){
-        System.out.println(f1.getMoteur().getCoefMoteur());
         return (getPoidsCoef(f1) + getManiabilityCoef(f1) + vMaxCoef(f1) + getZeroTo100Coef(f1))/4;
     }
 
@@ -128,6 +127,7 @@ public class F1Service {
         F1 f1 = getF1ById(idF1);
         Wheels wheels = wheelsService.getWheelsById(idWheels);
         f1.setWheels(wheels);
+        saveF1(f1);
         return f1;
     }
     public F1 changeManiabilityF1(int idF1, double maniability){

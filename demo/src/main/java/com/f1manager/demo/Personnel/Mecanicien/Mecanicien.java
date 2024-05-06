@@ -19,7 +19,7 @@ public class Mecanicien extends Personne {
     private double performance;
     @Column(name = "price")
     private double price;
-    @Column (name = "coefficient")
+    @Column (name = "coef")
     private double coefficient;
     @Column(name = "appartient")
     private boolean appartient;
