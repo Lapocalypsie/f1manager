@@ -18,6 +18,12 @@ public class MonteeDeNiveau {
     private static MoteursService moteursService;
     private static WheelsService wheelsService;
 
+    public MonteeDeNiveau(AileronsService aileronsService, MoteursService moteursService, WheelsService wheelsService) {
+        MonteeDeNiveau.aileronsService = aileronsService;
+        MonteeDeNiveau.moteursService = moteursService;
+        MonteeDeNiveau.wheelsService = wheelsService;
+    }
+
     public static boolean isAmeliorationPossible(int nivActuel){
         if(nivActuel < 10){
             return true;

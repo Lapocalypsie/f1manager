@@ -3,6 +3,7 @@ package com.f1manager.demo.Personnel;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.Mecanicien.MecanicienService;
 import com.f1manager.demo.Personnel.pilote.Pilote;
+import com.f1manager.demo.Personnel.pilote.PiloteService;
 import com.f1manager.demo.Utils.CalculStats;
 import com.f1manager.demo.Utils.Niveaux;
 import com.f1manager.demo.systemeco.MonteeDeNiveau;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 public class PersonneService {
 
     private static  MecanicienService mecanicienService;
+    private static PiloteService piloteService;
 
-    public PersonneService(MecanicienService mecanicienService) {
+    public PersonneService(MecanicienService mecanicienService, PiloteService piloteService) {
         PersonneService.mecanicienService = mecanicienService;
+        PersonneService.piloteService = piloteService;
     }
 
     public static void upgradePersonneLevel(Mecanicien mecanicien) {
@@ -28,8 +31,14 @@ public class PersonneService {
     }
 
     public static void upgradePersonneLevel(Pilote pilote) {
-        pilote.setNiveauActuel(pilote.getNiveauActuel() + 1);
-        pilote.setForce(CalculStats.calculerForce(pilote.getNiveauActuel()));
-        pilote.setEndurance(CalculStats.calculerEndurance(pilote.getNiveauActuel()));
+        if (MonteeDeNiveau.isAmeliorationPossible(pilote.getNiveauActuel())) {
+            pilote.setNiveauActuel(pilote.getNiveauActuel() + 1);
+            ////problème changer les lignes ici
+            pilote.setForce(CalculStats.calculerForce(pilote.getNiveauActuel()));
+            pilote.setEndurance(CalculStats.calculerEndurance(pilote.getNiveauActuel()));
+            ////
+            pilote.setCoefficient(piloteService.getPiloteCoef(pilote.getId()));
+            pilote.setPrice(Niveaux.getPrixNextUpdate(pilote.getNiveauActuel()));
+        }
     }
 }
