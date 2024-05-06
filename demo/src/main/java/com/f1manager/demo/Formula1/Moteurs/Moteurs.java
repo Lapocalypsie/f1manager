@@ -18,14 +18,16 @@ public class Moteurs {
     private double puissance;
     private double coefMoteur;
     private double prixMoteur;
+    private int nivActuel;
     private String imageMoteur;
 
-    public Moteurs(String nomMoteur, double consommationEssence, double puissance, double prixMoteur, String imageMoteur) {
+    public Moteurs(String nomMoteur, double consommationEssence, double puissance, double prixMoteur, String imageMoteur, int nivActuel) {
         this.nomMoteur = nomMoteur;
         this.consommationEssence = consommationEssence;
         this.puissance = puissance;
         this.prixMoteur = prixMoteur;
         this.imageMoteur = imageMoteur;
+        this.nivActuel = nivActuel;
     }
 
     public Moteurs() {

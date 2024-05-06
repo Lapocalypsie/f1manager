@@ -22,19 +22,27 @@ public class Pilote extends Personne {
     private double force;
     @Column(name = "endurance")
     private double endurance;
+    @Column(name = "coefficient")
+    private double coefficient;
+    @Column(name = "appartient")
+    private boolean appartient;
+
     @Column(name = "image_pilote")
     private String imagePilote;
     public Pilote() {
     }
 
-    public Pilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, String imagePilote) {
-        super(nom, prenom, niveauActuel);
+    public Pilote(String nom, String prenom, int number, double price, double force, double endurance, double coefficient, boolean appartient, String imagePilote, int nivActuel) {
+        super(nom, prenom, nivActuel);
         this.number = number;
         this.price = price;
         this.force = force;
         this.endurance = endurance;
+        this.coefficient = coefficient;
         this.imagePilote = imagePilote;
+        this.appartient = appartient;
     }
+
     @Override
     public String toString() {
         return "Pilote{" +

@@ -37,8 +37,9 @@ public class AileronsService {
     public List<Ailerons> getAllAilerons() {
         return aileronsRepository.findAll();
     }
-    public Ailerons createNewAileron(double poids, double prixAileron, String imageAileron){
-        Ailerons ailerons = new Ailerons(poids, prixAileron, imageAileron);
+
+    public Ailerons createNewAileron(double poids, double prixAileron, String imageAileron, int nivActuel){
+        Ailerons ailerons = new Ailerons(poids, prixAileron, imageAileron, nivActuel);
         ailerons.setCoefAileron(getAileronCoef(ailerons));
         saveAileron(ailerons);
         return ailerons;

@@ -21,13 +21,17 @@ public class Ailerons {
     private double poidsAileron;
     @Column(name="prix_aileron")
     private double prixAileron;
+    private int nivActuel;
+
     @Column(name = "image_aileron")
     private String imageAileron;
 
-    public Ailerons(double poidsAileron, double prixAileron, String imageAileron) {
+    public Ailerons(double poidsAileron, double prixAileron, String imageAileron, int nivActuel) {
         this.poidsAileron = poidsAileron;
         this.prixAileron = prixAileron;
         this.imageAileron = imageAileron;
+        this.nivActuel = nivActuel;
+
     }
     // Default constructor
     public Ailerons() {

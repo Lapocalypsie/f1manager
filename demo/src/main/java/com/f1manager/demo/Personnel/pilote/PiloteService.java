@@ -2,8 +2,11 @@ package com.f1manager.demo.Personnel.pilote;
 
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
+import com.f1manager.demo.Personnel.PersonneService;
+import com.f1manager.demo.Utils.CalculStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +24,10 @@ public class PiloteService {
     public Pilote createPilote(Pilote pilote) {
         return piloteRepository.save(pilote);
     }
-    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, String imagePilote){
-        Pilote pilote = new Pilote(nom, prenom, niveauActuel, number, price, force, endurance, imagePilote);
+
+    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, boolean appartient, String imagePilote) {
+        double coefficient = CalculStats.doublecalculerCoefficientPilote(niveauActuel);
+        Pilote pilote = new Pilote(nom, prenom, number, price, force, endurance, coefficient, appartient, imagePilote, niveauActuel);
         savePilote(pilote);
         return pilote;
     }
@@ -73,5 +78,15 @@ public class PiloteService {
         Pilote pilote = getPiloteById(id);
         pilote.setEndurance(endurance);
         savePilote(pilote);
+    }
+    public Pilote upgradePilote(int idPilote){
+        Pilote pilote = getPiloteById(idPilote);
+        PersonneService.upgradePersonneLevel(pilote);
+        savePilote(pilote);
+        return pilote;
+    }
+    public double getPiloteCoef(int idPilote){
+        Pilote pilote = getPiloteById(idPilote);
+        return CalculStats.calculerCoefficientMecanicien(pilote.getNiveauActuel());
     }
 }

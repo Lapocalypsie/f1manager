@@ -14,8 +14,10 @@ public class AileronsControler {
         this.aileronsService = aileronsService;
     }
     @PostMapping("/createAileron/{poidsAileron}/{prixAileron}")
-    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable double prixAileron, @PathVariable String imageAileron){
-        return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron,prixAileron, imageAileron), HttpStatus.OK);
+
+
+    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable double prixAileron, @PathVariable String imageAileron, int nivActuel){
+        return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron,prixAileron, imageAileron, nivActuel), HttpStatus.OK);
     }
     @PutMapping("/updatePoidsAileron/{idAileron}/{poidsAileron}")
     public ResponseEntity<Ailerons> updatePoidsAileron(@PathVariable int idAileron, @PathVariable double poidsAileron){
