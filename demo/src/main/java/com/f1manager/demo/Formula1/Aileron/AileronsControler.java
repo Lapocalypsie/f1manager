@@ -1,9 +1,12 @@
 package com.f1manager.demo.Formula1.Aileron;
 
+import com.f1manager.demo.Formula1.wheels.Wheels;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/aileron")
@@ -16,7 +19,7 @@ public class AileronsControler {
     @PostMapping("/createAileron/{poidsAileron}/{prixAileron}")
 
 
-    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable double prixAileron, @PathVariable String imageAileron, int nivActuel){
+    public ResponseEntity<Ailerons> createAileron(@PathVariable double poidsAileron, @PathVariable int prixAileron, @PathVariable String imageAileron, int nivActuel){
         return new ResponseEntity<>(aileronsService.createNewAileron(poidsAileron,prixAileron, imageAileron, nivActuel), HttpStatus.OK);
     }
     @PutMapping("/updatePoidsAileron/{idAileron}/{poidsAileron}")
@@ -24,7 +27,11 @@ public class AileronsControler {
         return new ResponseEntity<>(aileronsService.updatePoidsAileron(idAileron, poidsAileron), HttpStatus.OK);
     }
     @PutMapping("/updatePrixAileron/{idAileron}/{prixAileron}")
-    public ResponseEntity<Ailerons> updatePrixAileron(@PathVariable int idAileron, @PathVariable double prixAileron){
+    public ResponseEntity<Ailerons> updatePrixAileron(@PathVariable int idAileron, @PathVariable int prixAileron){
         return new ResponseEntity<>(aileronsService.updatePrixAileron(idAileron, prixAileron), HttpStatus.OK);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Ailerons>> getAllAilerons(){
+        return new ResponseEntity<>(aileronsService.getAllAilerons(), HttpStatus.OK);
     }
 }

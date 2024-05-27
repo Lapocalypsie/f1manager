@@ -14,7 +14,7 @@ public class Wheels {
     private int id;
     private String nomPneu;
     private double poidsPneus;
-    private double prixPneus;
+    private int prixPneus;
     private String typePneus;
     private double coefPneus;
     @Column(name = "niv_actuel")
@@ -22,7 +22,7 @@ public class Wheels {
 
     private String imagePneus;
 
-    public Wheels(String nomPneu, double poidsPneus, double prixPneus, String typePneus, String imagePneus, int nivActuel) {
+    public Wheels(String nomPneu, double poidsPneus, int prixPneus, String typePneus, String imagePneus, int nivActuel) {
         this.nomPneu = nomPneu;
         this.poidsPneus = poidsPneus;
         this.prixPneus = prixPneus;

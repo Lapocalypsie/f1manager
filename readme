@@ -1,0 +1,31 @@
+Fondamentaux :
+Entité cohérente caractérisée par :
+son comportement : méthodes
+son état : attributs
+son identité : identifiant
+
+Plusieurs Objet : AILERONS, Moteurs, Wheels, F1,Joueur, Personne ( Pilote – Mécanicien ) 
+Abstraction : 
+Modularité : Découpe en F1 – Composants F1 – Circuit; Log génériques et gestion générique des erreurs
+Encapsulation : Classes entité avec des privates – constructeur public 
+Polymorphism : Utils / CalculStats
+Héritage : Personne une mappedSuperClasse, On peut ajouter des Mecano,Pilote, Sponsor, Directeurs ect … 
+
+SOLID 
+
+Single Responsability : Chaque classe service est responsable de sa propre entité, Création d’un package ErrorHandling afin de bien séparer les responsabilités.	
+
+Open/Close : Personne avec Héritage, pas possible de modifier mais possible d’ajouter de nouvelle classe avec l’héritage 
+Liskov substitution : ? 
+Interface segregation : SRP & Liskov c’est respecté
+Dependency : On a des injections de dépendance grâce à SpringBoot, exemple F1 Service et les méthodes change(moteur,aileron,wheels). On injecte directement des dépendances qui permettent de changer les composants de la F1.
+Architecture : 
+Au lieu d’avoir 3 packages : MODEL VIEW CONTROLLER on a décidé de les décomposer par composant. 
+Donc un package F1 avec tous les composant F1, Personnel (Mecanicien,Pilote ect…) ect…
+Et chaque package contient ses propres Model View Controller. (F1 service, F1 controller, F1 Repository, F1 Entity) 
+
+On a décidé de mettre tout nos API’s public pour l’instant car par encore de front, mais une fois que Front sera fait, on restrictera les API endpoints afin de communiquer seulement les données que nous voulons recevoir et transmettre. 
+//http://localhost:8080/swagger-ui/index.html#/
+
+On a utilisé Swagger afin de faciliter la visualization de nos API endpoints.
+

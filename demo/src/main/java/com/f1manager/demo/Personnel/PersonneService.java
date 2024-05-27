@@ -1,5 +1,6 @@
 package com.f1manager.demo.Personnel;
 
+import com.f1manager.demo.Logging.Log;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.Mecanicien.MecanicienService;
 import com.f1manager.demo.Personnel.pilote.Pilote;
@@ -26,7 +27,9 @@ public class PersonneService {
             mecanicien.setPerformance(CalculStats.calculerPerformance(mecanicien));
             mecanicien.setCoefficient(mecanicienService.getMecanicienCoef(mecanicien.getId()));
             mecanicien.setPrice(Niveaux.getPrixNextUpdate(mecanicien.getNiveauActuel()));
+            Log.traceLog("Le mecanicien a été mis à jour");
         }
+
     }
 
     public static void upgradePersonneLevel(Pilote pilote) {
@@ -36,6 +39,7 @@ public class PersonneService {
             pilote.setEndurance(CalculStats.calculerEndurance(pilote));
             pilote.setCoefficient(piloteService.getPiloteCoef(pilote.getId()));
             pilote.setPrice(Niveaux.getPrixNextUpdate(pilote.getNiveauActuel()));
+            Log.traceLog("Le pilote a été mis à jour");
         }
     }
 }

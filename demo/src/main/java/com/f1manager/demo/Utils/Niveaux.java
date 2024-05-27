@@ -2,6 +2,7 @@ package com.f1manager.demo.Utils;
 
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Joueur.Joueur;
+import com.f1manager.demo.Logging.Log;
 
 public class Niveaux {
 
@@ -29,6 +30,7 @@ public class Niveaux {
         if(nivActuel < 10){
             return true;
         }
+        Log.errorLog("Le niveau est déjà au maximum");
         throwException.throwIllegalArgumentException("Le niveau est déjà au maximum");
         return false;
     }

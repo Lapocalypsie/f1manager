@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/joueur")
 public class JoueurController {
@@ -20,10 +22,8 @@ public class JoueurController {
     public ResponseEntity<Joueur> gagnerXp(@PathVariable int idJoueur, @PathVariable int quantite){
         return new ResponseEntity<>(joueurService.gagnerXp(idJoueur, quantite), HttpStatus.OK);
     }
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //hider regarde dans F1 pour void comment ca marche le controer, le service et le repository
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    @GetMapping("/all")
+    public ResponseEntity<List<Joueur>> getAllJoueurs(){
+        return new ResponseEntity<>(joueurService.getAllJoueurs(), HttpStatus.OK);
+    }
 }

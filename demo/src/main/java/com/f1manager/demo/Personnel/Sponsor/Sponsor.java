@@ -6,3 +6,5 @@ public class Sponsor {
     private double money;
     private String imageSponsor;
 }
+
+//Sponsor will be implemented after the game open beta

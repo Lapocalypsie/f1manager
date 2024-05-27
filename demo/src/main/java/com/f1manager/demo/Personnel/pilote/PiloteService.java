@@ -3,6 +3,7 @@ package com.f1manager.demo.Personnel.pilote;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
+import com.f1manager.demo.Logging.Log;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.PersonneService;
 import com.f1manager.demo.Utils.CalculStats;
@@ -35,6 +36,7 @@ public class PiloteService {
         Pilote pilote = new Pilote(nom, prenom, number, price, force, endurance, appartient, imagePilote, niveauActuel);
         pilote.setCoefficient(CalculStats.calculerCoefficientPilote(pilote));
         savePilote(pilote);
+        Log.traceLog("Le pilote a bien été créé");
         return pilote;
     }
 
@@ -49,6 +51,7 @@ public class PiloteService {
     public Pilote getPiloteById(int id) {
         Optional<Pilote> piloteoptional =  piloteRepository.findById(id);
         if (piloteoptional.isPresent()) {
+            Log.traceLog("Le pilote est bien présent en base");
             return piloteoptional.get();
         } else {
             throwException.throwIllegalArgumentException("Le pilote n'est pas présent en base");
@@ -60,35 +63,41 @@ public class PiloteService {
         pilote.setNom(firstName);
         pilote.setPrenom(lastName);
         savePilote(pilote);
+        Log.traceLog("Le nom du pilote a bien été modifié");
     }
 
     public void modifyNumberPilote(int id, int newNumber) {
         Pilote pilote = getPiloteById(id);
         pilote.setNumber(newNumber);
         savePilote(pilote);
+        Log.traceLog("Le numéro du pilote a bien été mis a jour");
     }
 
     public void modifyPricePilote(int id, int newPrice) {
         Pilote pilote = getPiloteById(id);
         pilote.setPrice( newPrice);
         savePilote(pilote);
+        Log.traceLog("Le prix du pilote a bien été mis a jour");
 }
 
     public void modifyForcePilote(int id, int newForce) {
         Pilote pilote = getPiloteById(id);
         pilote.setForce(newForce);
         savePilote(pilote);
+        Log.traceLog("La force du pilote a bien été mise a jour");
     }
 
     public void modifyEndurancePilote(int id, int endurance) {
         Pilote pilote = getPiloteById(id);
         pilote.setEndurance(endurance);
         savePilote(pilote);
+        Log.traceLog("L'endurance du pilote a bien été mise a jour");
     }
     public Pilote upgradePilote(int idPilote){
         Pilote pilote = getPiloteById(idPilote);
         PersonneService.upgradePersonneLevel(pilote);
         savePilote(pilote);
+        Log.traceLog("Le pilote a bien été mis à jour");
         return pilote;
     }
     public double getPiloteCoef(int idPilote){
@@ -99,6 +108,7 @@ public class PiloteService {
         Pilote pilote = getPiloteById(idPilote);
         Joueur joueur = joueurService.getJoueurById(idJoueur);
         Achat.effectuerAchat(pilote, joueur);
+        Log.infoLog("Le pilote a bien été acheté");
         return joueur.getArgent();
     }
 
@@ -106,6 +116,7 @@ public class PiloteService {
         Pilote pilote = getPiloteById(idPilote);
         Joueur joueur = joueurService.getJoueurById(idJoueur);
         Vente.effectuerVente(pilote, joueur);
+        Log.infoLog("Le pilote a bien été vendu");
         return joueur.getArgent();
     }
 }
