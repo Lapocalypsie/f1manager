@@ -8,18 +8,20 @@ import com.f1manager.demo.Personnel.pilote.Pilote;
 
 public class Vente {
 
+    // méthode qui permet de vendre un pilote
     public static void effectuerVente(Pilote pilote, Joueur joueur) {
 
-        if (pilote != null && pilote.isAppartient()) {
-            double nouveauSolde = joueur.getArgent() + pilote.getPrice();
-            joueur.setArgent(nouveauSolde);
-            pilote.setAppartient(false);
-            System.out.println("Vente effectuée avec succès !");
+        if (pilote != null && pilote.isAppartient()) { // si le pilote nous appartient
+            double nouveauSolde = joueur.getArgent() + pilote.getPrice(); // alors on augmente la valeur du solde du joueur du montant de la valeur du prix du pilote
+            joueur.setArgent(nouveauSolde); // on actualise le solde
+            pilote.setAppartient(false); // on actualise le statut du pilote afin que le pilote n'appartienne plus au joueur
+            System.out.println("Vente effectuée avec succès !"); // affichage du succès de la vente
         } else {
-            throwException.throwIllegalArgumentException("Ce pilote ne vous appartient pas.");
+            throwException.throwIllegalArgumentException("Ce pilote ne vous appartient pas."); // renvoie une erreur si le pilote n'appartient pas au joueur
         }
     }
 
+    // surcharge de la methode précédente afin de vendre un mécanicien à la place d'un pilote
     public static void effectuerVente(Mecanicien mecanicien, Joueur joueur) {
 
         if (mecanicien != null && mecanicien.isAppartient()) {
