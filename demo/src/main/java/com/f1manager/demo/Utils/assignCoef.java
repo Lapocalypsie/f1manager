@@ -1,6 +1,7 @@
 package com.f1manager.demo.Utils;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Logging.Log;
 
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
@@ -20,6 +21,7 @@ public class assignCoef {
         if (coef < 0.0) {
             throwException.throwUnsuportedOperationException("Le coefficient ne peut pas être négatif");
         }
+        Log.infoLog("calculateCoefficient : le coefficient est " + coef);
         return coef;
     }
 

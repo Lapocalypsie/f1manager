@@ -3,6 +3,7 @@ package com.f1manager.demo.Formula1.Aileron;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
+import com.f1manager.demo.Logging.Log;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.Niveaux;
 import com.f1manager.demo.Utils.assignCoef;
@@ -29,6 +30,7 @@ public class AileronsService {
     public  Ailerons getAileronsById(int id) {
         Optional<Ailerons> aileronOptional = aileronsRepository.findById(id);
         if (aileronOptional.isPresent()) {
+            Log.traceLog("getAileronsById : le moteur est présent");
             return aileronOptional.get();
         } else {
             throwException.throwIllegalArgumentException("L'aileron n'est pas présent en base");
@@ -47,6 +49,7 @@ public class AileronsService {
         Ailerons ailerons = new Ailerons(poids, prixAileron, imageAileron, nivActuel);
         ailerons.setCoefAileron(getAileronCoef(ailerons));
         saveAileron(ailerons);
+        Log.infoLog("createNewAIleron : aileron Sauvegardé");
         return ailerons;
     }
     public Ailerons updatePoidsAileron(int idAileron, double poids){
@@ -54,6 +57,7 @@ public class AileronsService {
         Ailerons ailerons = getAileronsById(idAileron);
         ailerons.setPoidsAileron(poids);
         saveAileron(ailerons);
+        Log.infoLog("updatePoidsAileron : aileron Sauvegardé");
         return ailerons;
     }
 
@@ -62,6 +66,7 @@ public class AileronsService {
         Ailerons ailerons = getAileronsById(idAileron);
         ailerons.setPrixAileron(prix);
         saveAileron(ailerons);
+        Log.infoLog("updatePrixAileron : aileron Sauvegardé");
         return ailerons;
     }
 
