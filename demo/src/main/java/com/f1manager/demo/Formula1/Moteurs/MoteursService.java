@@ -1,7 +1,4 @@
 package com.f1manager.demo.Formula1.Moteurs;
-
-import com.f1manager.demo.Joueur.Joueur;
-import com.f1manager.demo.Joueur.JoueurRepository;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Logging.Log;
 import com.f1manager.demo.Utils.Check;
@@ -20,21 +17,15 @@ public class MoteursService{
 
    @Autowired
     private MoteursRepository moteurRepository;
-   @Autowired
-    private JoueurService joueurService;
 
     public  Double getConsommationEscenceCoef(Moteurs moteur){
-        if (moteur.getConsommationEssence() < 0) {
-            throwException.throwIllegalArgumentException("La consommation du moteur ne peut pas être négative");
-        }
+        Check.doitEtrePlusgrandQueZero(moteur.getConsommationEssence(), "consommation du moteur");
         double[] consoList = {40.0,42.0,45.0,50.0,55.0};
         Log.infoLog("getConsommationEscenceCoef : début calcul du coefficient de consommation d'escence du moteur");
         return assignCoef.assignCoefficient(findCloserInList.findCloser(moteur.getConsommationEssence(),consoList), consoList);
     }
     public  Double getPuissanceCoef(Moteurs moteur){
-        if (moteur.getPuissance() < 0){
-            throwException.throwIllegalArgumentException("La puissance du moteur ne peut pas être négative");
-        }
+        Check.doitEtrePlusgrandQueZero(moteur.getPuissance(), "puissance du moteur");
         double[] puissanceList = {750,800,850,900,950,1000,1001};
         Log.infoLog("getPuissanceCoef : début calcul du coefficient de la puissance du moteur");
         return assignCoef.assignCoefficient(findCloserInList.findCloser(moteur.getPuissance(),puissanceList), puissanceList);
@@ -57,12 +48,10 @@ public class MoteursService{
     public void saveMoteur(Moteurs moteurs) {
         moteurRepository.save(moteurs);
     }
-
     public List<Moteurs> getAllMoteurs() {
         return moteurRepository.findAll();
     }
-
-    public Moteurs createNewMoteur(String nomMoteur, double consomationEscence, double puissance, double prixMoteur, String imageMoteur, int nivActuel){
+    public Moteurs createNewMoteur(String nomMoteur, double consomationEscence, double puissance, int prixMoteur, String imageMoteur, int nivActuel){
         Moteurs moteurs = new Moteurs(nomMoteur, consomationEscence, puissance, prixMoteur, imageMoteur, nivActuel);
         moteurs.setCoefMoteur(getMoteurCoef(moteurs));
         saveMoteur(moteurs);
@@ -86,7 +75,7 @@ public class MoteursService{
         Log.infoLog("updateConsommationMoteur : consommation du moteur mise à jour");
         return moteurs;
     }
-    public Moteurs updatePrixMoteur(int idMoteur, double prix){
+    public Moteurs updatePrixMoteur(int idMoteur, int prix){
         Check.doitEtrePlusgrandQueZero(prix, "prix du moteur");
         Moteurs moteurs = getMoteurById(idMoteur);
         moteurs.setPrixMoteur(prix);
@@ -94,5 +83,9 @@ public class MoteursService{
         Log.infoLog("updatePrixMoteur : prix du moteur mis à jour");
         return moteurs;
     }
-
+    public void levelUpMoteurs(Moteurs moteurs){
+        moteurs.setNivActuel(moteurs.getNivActuel() + 1);
+        moteurs.setPrixMoteur(Niveaux.getPrixNextUpdate(moteurs.getNivActuel()));
+        saveMoteur(moteurs);
+    }
 }

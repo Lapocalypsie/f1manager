@@ -5,17 +5,14 @@ import com.f1manager.demo.Formula1.Aileron.AileronsService;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.Moteurs.MoteursService;
-import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Logging.Log;
 import com.f1manager.demo.Utils.Check;
-import com.f1manager.demo.Utils.Niveaux;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.Wheels;
 import com.f1manager.demo.Formula1.wheels.WheelsService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.event.internal.DefaultDirtyCheckEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +30,6 @@ public class F1Service {
     private final WheelsService wheelsService;
     private final JoueurService joueurService;
 
-    public Double coefTotal(F1 f1, Moteurs moteur, Ailerons ailerons){
-        return f1.getCoef() + moteur.getCoefMoteur() + ailerons.getCoefAileron();
-    }
 
     public Double getManiabilityCoef(F1 f1) {
         double maniabilityCoef = f1.getManiabilty();
@@ -53,7 +47,6 @@ public class F1Service {
         Log.infoLog("vMaxCoef : fin calcul du coef de vMax qui vaut " + vMaxCoeff);
         return vMaxCoeff;
     }
-        //
     public Double getPoidsCoef(F1 f1) {
         double poidsMinLogique = 200.0;
         if(f1.getPoidsF1() < poidsMinLogique){
@@ -66,7 +59,6 @@ public class F1Service {
         Log.infoLog("getPoidsCoef : fin calcul du coef de poids qui vaut " + poidsCoef );
         return poidsCoef;
     }
-        //
     public Double getZeroTo100Coef(F1 f1) {
         Check.doitEtrePlusgrandQueZero(f1.getZeroTo100(), "zéro à 100");
         double[] timeList = {1.46,1.5,1.6,1.7,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8};
@@ -168,39 +160,23 @@ public class F1Service {
     public double levelUpWheels(int idF1, int idJoueur) {
         F1 f1 = getF1ById(idF1);
         Wheels wheels = wheelsService.getWheelsById(f1.getWheels().getId());
-        Joueur joueur = joueurService.getJoueurById(idJoueur);
-        if (Niveaux.isAmeliorationPossible(wheels.getNivActuel())) {
-            double prixPourProchainNiveau = Niveaux.nextLevel(wheels.getNivActuel());
-            if (joueur.getArgent() >= prixPourProchainNiveau) {
-                wheels.setNivActuel(wheels.getNivActuel() + 1);
-                joueur.setArgent(joueur.getArgent() - prixPourProchainNiveau);
-                wheelsService.saveWheels(wheels);
-                System.out.println("La montée de niveau de ces roues ont été effectué");
-            } else {
-                throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
-            }
-        } else {
-            throwException.throwIllegalArgumentException("Ces roues ont déjà atteint le niveau maximum.");
-        }
+        if(joueurService.isAchatPossible(wheels,idJoueur)){
+            wheelsService.levelUpWheels(wheels);
+            System.out.println("La montée de niveau de ces roues a été effectué");
+        }else {
+        throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
+    }
         return wheels.getNivActuel();
     }
 
     public double levelUpMoteur(int idF1, int idJoueur) {
         F1 f1 = getF1ById(idF1);
         Moteurs moteurs = moteursService.getMoteurById(f1.getMoteur().getId());
-        Joueur joueur = joueurService.getJoueurById(idJoueur);
-        if (Niveaux.isAmeliorationPossible(moteurs.getNivActuel())) {
-            double prixPourProchainNiveau = Niveaux.nextLevel(moteurs.getNivActuel());
-            if (joueur.getArgent() >= prixPourProchainNiveau) {
-                moteurs.setNivActuel(moteurs.getNivActuel() + 1);
-                joueur.setArgent(joueur.getArgent() - prixPourProchainNiveau);
-                moteursService.saveMoteur(moteurs);
-                System.out.println("La montée de niveau du moteur a été effectué");
-            } else {
-                throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
-            }
+        if (joueurService.isAchatPossible(moteurs, idJoueur)) {
+            moteursService.levelUpMoteurs(moteurs);
+            System.out.println("La montée de niveau de ce moteur a été effectué");
         } else {
-            throwException.throwIllegalArgumentException("Ce moteur a déjà atteint le niveau maximum.");
+            throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
         }
         return moteurs.getNivActuel();
     }
@@ -208,20 +184,13 @@ public class F1Service {
     public double levelUpAileron(int idF1, int idJoueur) {
         F1 f1 = getF1ById(idF1);
         Ailerons ailerons = aileronsService.getAileronsById(f1.getAilerons().getId());
-        Joueur joueur = joueurService.getJoueurById(idJoueur);
-        if (Niveaux.isAmeliorationPossible(ailerons.getNivActuel())) {
-            double prixPourProchainNiveau = Niveaux.nextLevel(ailerons.getNivActuel());
-            if (joueur.getArgent() >= prixPourProchainNiveau) {
-                ailerons.setNivActuel(ailerons.getNivActuel() + 1);
-                joueur.setArgent(joueur.getArgent() - prixPourProchainNiveau);
-                aileronsService.saveAileron(ailerons);
-                System.out.println("La montée de niveau de l'aileron a été effectué");
-            } else {
+        if(joueurService.isAchatPossible(ailerons, idJoueur)){
+            aileronsService.levelUpAilerons(ailerons);
+            System.out.println("La montée de niveau de cet aileron a été effectué");
+        }
+        else {
                 throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
             }
-        } else {
-            throwException.throwIllegalArgumentException("Cet aileron a déjà atteint le niveau maximum.");
-        }
         return ailerons.getNivActuel();
     }
 }

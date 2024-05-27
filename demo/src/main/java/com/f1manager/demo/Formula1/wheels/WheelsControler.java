@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/wheels")
 public class WheelsControler {
@@ -18,7 +20,7 @@ public class WheelsControler {
         this.wheelsService = wheelsService;
     }
     @PostMapping("/createWheels/{nomPneu}/{poidsPneus}/{prixUnitairePneus}/{typePneus}")
-    public ResponseEntity<Wheels> createPneu(@PathVariable String nomPneu, @PathVariable double poidsPneus, @PathVariable double prixUnitairePneus, @PathVariable String typePneus, @PathVariable String imagePneus, @PathVariable int nivActuel){
+    public ResponseEntity<Wheels> createPneu(@PathVariable String nomPneu, @PathVariable double poidsPneus, @PathVariable int prixUnitairePneus, @PathVariable String typePneus, @PathVariable String imagePneus, @PathVariable int nivActuel){
         return new ResponseEntity<>(wheelsService.createNewWheels(nomPneu,poidsPneus, prixUnitairePneus,typePneus, imagePneus, nivActuel), HttpStatus.OK);
     }
     @PutMapping("/updateWheelsPoids/{idPneus}/{poidsPneus}")
@@ -26,8 +28,12 @@ public class WheelsControler {
         return new ResponseEntity<>(wheelsService.updatePoidsWheels(idPneus, poidsPneus), HttpStatus.OK);
     }
     @PutMapping("/updatePrixPneux/{idPneus}/{prixUnitairePneus}")
-    public ResponseEntity<Wheels> updateConsommationmoteur(@PathVariable int idPneus, @PathVariable double prixUnitairePneus){
+    public ResponseEntity<Wheels> updateConsommationmoteur(@PathVariable int idPneus, @PathVariable int prixUnitairePneus){
         return new ResponseEntity<>(wheelsService.updatePrixWheels(idPneus, prixUnitairePneus), HttpStatus.OK);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Wheels>> getAllWeels(){
+        return new ResponseEntity<>(wheelsService.getAllWheels(), HttpStatus.OK);
     }
 
 }

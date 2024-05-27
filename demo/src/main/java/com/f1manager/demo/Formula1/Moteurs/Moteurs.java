@@ -19,13 +19,13 @@ public class Moteurs {
     @Column(name="coef_moteur")
     private double coefMoteur;
     @Column(name="prix_moteur")
-    private double prixMoteur;
+    private int prixMoteur;
     @Column(name="niv_actuel")
     private int nivActuel;
     @Column(name="image_moteur")
     private String imageMoteur;
 
-    public Moteurs(String nomMoteur, double consommationEssence, double puissance, double prixMoteur, String imageMoteur, int nivActuel) {
+    public Moteurs(String nomMoteur, double consommationEssence, double puissance, int prixMoteur, String imageMoteur, int nivActuel) {
         this.nomMoteur = nomMoteur;
         this.consommationEssence = consommationEssence;
         this.puissance = puissance;

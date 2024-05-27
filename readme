@@ -6,7 +6,7 @@ son identité : identifiant
 
 Plusieurs Objet : AILERONS, Moteurs, Wheels, F1,Joueur, Personne ( Pilote – Mécanicien ) 
 Abstraction : 
-Modularité : Découpe en F1 – Composants F1 – Circuit 
+Modularité : Découpe en F1 – Composants F1 – Circuit; Log génériques et gestion générique des erreurs
 Encapsulation : Classes entité avec des privates – constructeur public 
 Polymorphism : Utils / CalculStats
 Héritage : Personne une mappedSuperClasse, On peut ajouter des Mecano,Pilote, Sponsor, Directeurs ect … 
