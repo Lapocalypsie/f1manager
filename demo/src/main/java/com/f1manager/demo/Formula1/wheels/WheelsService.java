@@ -5,6 +5,7 @@ import com.f1manager.demo.Formula1.F1Service;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Formula1.F1;
 import com.f1manager.demo.Joueur.JoueurService;
+import com.f1manager.demo.Logging.Log;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.Niveaux;
 import com.f1manager.demo.Utils.assignCoef;
@@ -25,11 +26,13 @@ public class WheelsService {
             throwException.throwIllegalArgumentException("Le poids des roues ne peut pas être négatif");
         }
         double[] poidsList = {37,38,39,40,41,42,43,44,45,46,47,48,49};
+        Log.infoLog("getWheelsCoef : début calcul coefficient des roues");
         return assignCoef.assignCoefficient(findCloserInList.findCloser(wheels.getPoidsPneus(), poidsList), poidsList);
     }
     public  Wheels getWheelsById(int id) {
         Optional<Wheels> wheelsOptional =  wheelsRepository.findById(id);
         if (wheelsOptional.isPresent()) {
+            Log.traceLog("getWheelsById : la roue est bien présente en base");
             return wheelsOptional.get();
         } else {
             throwException.throwIllegalArgumentException("La roue n'est pas présent en base");
@@ -47,6 +50,7 @@ public class WheelsService {
         Wheels wheels = new Wheels(nomRoue, poidsPneus, prixPneus, typePneus, imagePneus, nivActuel);
         wheels.setCoefPneus(getWheelsCoef(wheels));
         saveWheels(wheels);
+        Log.infoLog("createNewWheels : la roue a bien été créée");
         return wheels;
     }
     public Wheels updatePoidsWheels(int idPneus, double poidsPneus){
@@ -54,6 +58,7 @@ public class WheelsService {
         Wheels wheels = getWheelsById(idPneus);
         wheels.setPoidsPneus(poidsPneus);
         saveWheels(wheels);
+        Log.infoLog("updatePoidsWheels le poids de la voiture a bien été mis à jour");
         return wheels;
     }
     public Wheels updatePrixWheels(int idPneus, double prixPneus){
@@ -61,6 +66,7 @@ public class WheelsService {
         Wheels wheels = getWheelsById(idPneus);
         wheels.setPrixPneus(prixPneus);
         saveWheels(wheels);
+        Log.infoLog("updatePrixWheels : le prix des roues à bien été mis à jour");
         return wheels;
     }
 }
