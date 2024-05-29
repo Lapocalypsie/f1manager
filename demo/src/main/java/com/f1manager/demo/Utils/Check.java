@@ -1,7 +1,7 @@
 package com.f1manager.demo.Utils;
 
 import com.f1manager.demo.ErrorHandling.throwException;
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 
 public class Check {
     public static void doitEtrePlusgrandQueZero(double nombre, String message){

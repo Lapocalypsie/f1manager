@@ -4,7 +4,7 @@ Cette class est faite pour générer des exceptions génériques à tout le code
 Toutes les erreurs ont ce format : ERROR plus la desciption
  */
 
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 
     //throw une exception de type illegalArgument
     public class throwException {

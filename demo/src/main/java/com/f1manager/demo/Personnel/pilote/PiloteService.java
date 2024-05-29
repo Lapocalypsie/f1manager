@@ -3,15 +3,13 @@ package com.f1manager.demo.Personnel.pilote;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
-import com.f1manager.demo.Logging.Log;
-import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
+import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.PersonneService;
 import com.f1manager.demo.Utils.CalculStats;
 import com.f1manager.demo.systemeco.Achat;
 import com.f1manager.demo.systemeco.Vente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +30,8 @@ public class PiloteService {
         return piloteRepository.save(pilote);
     }
 
-    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, boolean appartient, String imagePilote) {
+    public Pilote createPilote(String nom, String prenom, int niveauActuel, int number, double price, double force, double endurance, String imagePilote) {
+        boolean appartient = false;
         Pilote pilote = new Pilote(nom, prenom, number, price, force, endurance, appartient, imagePilote, niveauActuel);
         pilote.setCoefficient(CalculStats.calculerCoefficientPilote(pilote));
         savePilote(pilote);
@@ -108,6 +107,8 @@ public class PiloteService {
         Pilote pilote = getPiloteById(idPilote);
         Joueur joueur = joueurService.getJoueurById(idJoueur);
         Achat.effectuerAchat(pilote, joueur);
+        joueurService.saveJoueur(joueur);
+        savePilote(pilote);
         Log.infoLog("Le pilote a bien été acheté");
         return joueur.getArgent();
     }
@@ -117,6 +118,8 @@ public class PiloteService {
         Joueur joueur = joueurService.getJoueurById(idJoueur);
         Vente.effectuerVente(pilote, joueur);
         Log.infoLog("Le pilote a bien été vendu");
+        joueurService.saveJoueur(joueur);
+        savePilote(pilote);
         return joueur.getArgent();
     }
 }

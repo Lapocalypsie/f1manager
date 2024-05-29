@@ -6,8 +6,9 @@ import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.Moteurs.MoteursService;
 import com.f1manager.demo.Joueur.JoueurService;
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Utils.Check;
+import com.f1manager.demo.Utils.Lists;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.Wheels;
@@ -49,7 +50,7 @@ public class F1Service {
         //Vérifie que la vitesse max est positive
 
         Check.doitEtrePlusgrandQueZero(f1.getVitesseMax(), "vitesse max");
-        double[] vitesseList = {300, 310, 320, 330, 340, 350, 360};
+        double[] vitesseList = Lists.getVitesseListF1();
         Log.infoLog("vMaxCoef : début calcul du coef de vMax");
 
         //calcul du coefficient de vitesse de la f1 par rapport à vitesseList
@@ -69,7 +70,7 @@ public class F1Service {
         if(f1.getPoidsF1() < poidsMinLogique){
             throwException.throwIllegalArgumentException("Le poids de la f1 ne peur pas être inférieure à " + poidsMinLogique + "kg");
         }
-        double[] poidsList = {798,800,810,830,850};
+        double[] poidsList = Lists.getPoidsListF1();
         Log.infoLog("getPoidsCoef : début calcul du coef de poids");
 
         //calcul du coefficient de poids de la f1 par rapport à poidsList
@@ -83,7 +84,7 @@ public class F1Service {
     //Obtiens le coefficient de zéro à 100 de la F1
     public Double getZeroTo100Coef(F1 f1) {
         Check.doitEtrePlusgrandQueZero(f1.getZeroTo100(), "zéro à 100");
-        double[] timeList = {1.46,1.5,1.6,1.7,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8};
+        double[] timeList = Lists.getTimeListF1();
         Log.infoLog("getZeroTo100Coef : début calcul du coef de zéro à 100");
 
         //calcul du coefficient de zéro à 100  de la f1 par rapport à timeList

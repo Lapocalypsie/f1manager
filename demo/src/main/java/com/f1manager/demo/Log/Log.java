@@ -1,4 +1,4 @@
-package com.f1manager.demo.Logging;
+package com.f1manager.demo.Log;
 
 public class Log {
     public static void errorLog(String message){

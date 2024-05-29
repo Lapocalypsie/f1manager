@@ -2,7 +2,7 @@ package com.f1manager.demo.systemeco;
 
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Joueur.Joueur;
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.pilote.Pilote;
 

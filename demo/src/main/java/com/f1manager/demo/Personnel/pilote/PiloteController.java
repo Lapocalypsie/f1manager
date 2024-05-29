@@ -36,11 +36,11 @@ public class PiloteController {
         return piloteService.createPilote(pilote);
     }
 
-    @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}")
+    @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}/{imagePilote}")
 
     // PiloteController.java
-    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance, @PathVariable boolean appartient, @PathVariable String imagePilote) {
-        Pilote newPilote = piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient, imagePilote);
+    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance, @PathVariable String imagePilote) {
+        Pilote newPilote = piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance, imagePilote);
         return new ResponseEntity<>(newPilote, HttpStatus.CREATED);
     }
 

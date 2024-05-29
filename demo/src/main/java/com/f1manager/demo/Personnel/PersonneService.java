@@ -1,6 +1,6 @@
 package com.f1manager.demo.Personnel;
 
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Personnel.Mecanicien.MecanicienService;
 import com.f1manager.demo.Personnel.pilote.Pilote;

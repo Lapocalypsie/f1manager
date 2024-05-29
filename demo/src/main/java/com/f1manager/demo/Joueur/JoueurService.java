@@ -4,7 +4,7 @@ import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Aileron.Ailerons;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.wheels.Wheels;
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.Niveaux;
 import lombok.RequiredArgsConstructor;

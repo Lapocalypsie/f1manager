@@ -1,11 +1,8 @@
 package com.f1manager.demo.Formula1.wheels;
 
 import com.f1manager.demo.ErrorHandling.throwException;
-import com.f1manager.demo.Logging.Log;
-import com.f1manager.demo.Utils.Check;
-import com.f1manager.demo.Utils.Niveaux;
-import com.f1manager.demo.Utils.assignCoef;
-import com.f1manager.demo.Utils.findCloserInList;
+import com.f1manager.demo.Log.Log;
+import com.f1manager.demo.Utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +15,7 @@ public class WheelsService {
     private WheelsRepository wheelsRepository;
     public  double getWheelsCoef(Wheels wheels){
         Check.doitEtrePlusgrandQueZero(wheels.getPoidsPneus(), "poids des roues");
-        double[] poidsList = {37,38,39,40,41,42,43,44,45,46,47,48,49};
+        double[] poidsList = Lists.getPoidsListWheels();
         Log.infoLog("getWheelsCoef : début calcul coefficient des roues");
         return assignCoef.assignCoefficient(findCloserInList.findCloser(wheels.getPoidsPneus(), poidsList), poidsList);
     }

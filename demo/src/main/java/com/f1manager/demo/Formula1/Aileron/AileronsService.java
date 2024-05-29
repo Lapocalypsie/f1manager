@@ -1,12 +1,8 @@
 package com.f1manager.demo.Formula1.Aileron;
 
 import com.f1manager.demo.ErrorHandling.throwException;
-import com.f1manager.demo.Joueur.JoueurService;
-import com.f1manager.demo.Logging.Log;
-import com.f1manager.demo.Utils.Check;
-import com.f1manager.demo.Utils.Niveaux;
-import com.f1manager.demo.Utils.assignCoef;
-import com.f1manager.demo.Utils.findCloserInList;
+import com.f1manager.demo.Log.Log;
+import com.f1manager.demo.Utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +16,7 @@ public class AileronsService {
 
     public  Double getAileronCoef(Ailerons ailerons){
         Check.doitEtrePlusgrandQueZero(ailerons.getPoidsAileron(), "poide de l'aileron");
-        double[] poidsListe = {300,310,320,330,340,350,360};
+        double[] poidsListe = Lists.getPoidsListeAilerons();
         return assignCoef.assignCoefficient(findCloserInList.findCloser(ailerons.getPoidsAileron(), poidsListe), poidsListe);
     }
     public  Ailerons getAileronsById(int id) {

@@ -3,7 +3,7 @@ package com.f1manager.demo.Personnel.Mecanicien;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.PersonneService;
 import com.f1manager.demo.Utils.CalculStats;
 import com.f1manager.demo.systemeco.Achat;
@@ -35,7 +35,8 @@ public class MecanicienService {
         return mecano.getPerformance();
     }
 
-    public Mecanicien creerMecanicien(String nom, String prenom, int level, double vitesse, double performance, double price, boolean appartient){
+    public Mecanicien creerMecanicien(String nom, String prenom, int level, double vitesse, double performance, double price){
+        boolean appartient = false;
         Mecanicien mecanicien = new Mecanicien(nom, prenom, level, vitesse, performance, price, appartient);
         mecanicien.setCoefficient(CalculStats.calculerCoefficientMecanicien(mecanicien));
         saveMecanicien(mecanicien);
@@ -69,6 +70,8 @@ public class MecanicienService {
         Mecanicien mecanicien = getMecanicienById(idMecanicien);
         Joueur joueur = joueurService.getJoueurById(idJoueur);
         Achat.effectuerAchat(mecanicien, joueur);
+        joueurService.saveJoueur(joueur);
+        saveMecanicien(mecanicien);
         Log.infoLog("Le mecanicien à bien été acheté");
         return joueur.getArgent();
     }
@@ -77,6 +80,8 @@ public class MecanicienService {
         Mecanicien mecanicien = getMecanicienById(idMecanicien);
         Joueur joueur = joueurService.getJoueurById(idJoueur);
         Vente.effectuerVente(mecanicien, joueur);
+        joueurService.saveJoueur(joueur);
+        saveMecanicien(mecanicien);
         Log.infoLog("Le mecanicien à bien été vendu");
         return joueur.getArgent();
     }

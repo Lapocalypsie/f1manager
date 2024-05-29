@@ -1,10 +1,6 @@
 package com.f1manager.demo.Formula1.Moteurs;
-import com.f1manager.demo.Joueur.JoueurService;
-import com.f1manager.demo.Logging.Log;
-import com.f1manager.demo.Utils.Check;
-import com.f1manager.demo.Utils.Niveaux;
-import com.f1manager.demo.Utils.assignCoef;
-import com.f1manager.demo.Utils.findCloserInList;
+import com.f1manager.demo.Log.Log;
+import com.f1manager.demo.Utils.*;
 import com.f1manager.demo.ErrorHandling.throwException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +16,13 @@ public class MoteursService{
 
     public  Double getConsommationEscenceCoef(Moteurs moteur){
         Check.doitEtrePlusgrandQueZero(moteur.getConsommationEssence(), "consommation du moteur");
-        double[] consoList = {40.0,42.0,45.0,50.0,55.0};
+        double[] consoList = Lists.getConsoListMoteur();
         Log.infoLog("getConsommationEscenceCoef : début calcul du coefficient de consommation d'escence du moteur");
         return assignCoef.assignCoefficient(findCloserInList.findCloser(moteur.getConsommationEssence(),consoList), consoList);
     }
     public  Double getPuissanceCoef(Moteurs moteur){
         Check.doitEtrePlusgrandQueZero(moteur.getPuissance(), "puissance du moteur");
-        double[] puissanceList = {750,800,850,900,950,1000,1001};
+        double[] puissanceList = Lists.getPuissanceListMoteur();
         Log.infoLog("getPuissanceCoef : début calcul du coefficient de la puissance du moteur");
         return assignCoef.assignCoefficient(findCloserInList.findCloser(moteur.getPuissance(),puissanceList), puissanceList);
     }
