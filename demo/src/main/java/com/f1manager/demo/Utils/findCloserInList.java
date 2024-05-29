@@ -1,6 +1,8 @@
 package com.f1manager.demo.Utils;
 
 
+import com.f1manager.demo.Logging.Log;
+
 import static java.lang.Math.abs;
 /*
 Cette classe trouve l'élément d'une liste le plus proche  par rapport à un élément donné.
@@ -17,11 +19,14 @@ public class findCloserInList {
                 bestEcart = ecart;
             }
         }
+        Log.traceLog("L'élément le plus proche est" + plusProcheElement);
         return  plusProcheElement;
     }
+    /*
     public static void main(String[] args){
         double[] timeList = {1.46, 1.6, 1.9, 2.1, 2.3, 2.5, 2.8};
         System.out.println(findCloserInList.findCloser(2.6, timeList));
     }
+     */
 }
 
