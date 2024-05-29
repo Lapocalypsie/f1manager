@@ -18,20 +18,20 @@ public class LapTime {
 
         for (String key : Circuit.keySet()) {
             if (key.startsWith("DROITE")) {
-                //Recupération distance ligne droite
+                // Recupération distance ligne droite
                 Double distance = Circuit.get(key);
-                //Recuperation de la nouvelle Vitesse de Sortie et du Temps Total
+                // Recuperation de la nouvelle Vitesse de Sortie et du Temps Total
                 resultat = LigneDroiteTime.calculVitesseSortie(distance, vitesseTempsEntree, voiture);
-            }else if (key.startsWith("VIRAGE")) {
-                //Recupération angle virage
+            } else if (key.startsWith("VIRAGE")) {
+                // Recupération angle virage
                 Double angle = Circuit.get(key);
-                //Recuperation de la nouvelle Vitesse de Sortie et du Temps Total
+                // Recuperation de la nouvelle Vitesse de Sortie et du Temps Total
                 resultat = LigneDroiteTime.calculVitesseSortie(angle, vitesseTempsEntree, voiture);
             }
 
         }
 
-        //Renvoie la vitesse de fin de tour et le Temps au Tour
+        // Renvoie la vitesse de fin de tour et le Temps au Tour
         return resultat;
     }
 }
