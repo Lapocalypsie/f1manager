@@ -8,7 +8,49 @@ import coefficientIcon from "../../assets/icons/coefficient.png";
 import enduranceIcon from "../../assets/icons/Endurance.png";
 import forceIcon from "../../assets/icons/force.png";
 
+// CAROUSEL
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { useEffect, useState } from "react";
+
+// API
+
+import { GetPilots } from "../../network/endpoints/Pilots";
+
+import { Pilot } from "../../types/types";
+
 const DriversSec = () => {
+  const [pilots, setPilots] = useState<Pilot[]>();
+
+  const getAllPilotsFromApi = async () => {
+    const pilots = await GetPilots();
+    setPilots(pilots);
+    console.log(pilots);
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
+  useEffect(() => {
+    getAllPilotsFromApi();
+  }, []);
+
   return (
     <div className="bg-[#030710] text-white py-8">
       <div className="max-w-screen-xl mx-auto ">
@@ -27,140 +69,70 @@ const DriversSec = () => {
             Engine
           </div>
         </div>
-        <div className="my-12 flex flex-row items-center justify-between">
-          {/* USER ONE */}
-          <div className="bg-[#070B16] rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg">
-            <div className="text-center flex flex-col items-center justify-start ">
-              <img src={userOneProfileImage} />
-              <h3 className="k2d-bold text-2xl pt-2">1. Max Verstappen</h3>
-              <p className="text-lg text-gray-400 font-bold font-poppins">33</p>
-
-              <div className=" px-8  flex flex-col items-center justify-center gap-2 py-4">
-                <div className="flex flex-row items-center justify-start">
-                  <img src={enduranceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver’s Endurance is 90
-                  </p>
+        <div className="my-12">
+          {pilots ? (
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              draggable
+              keyBoardControl
+              minimumTouchDrag={80}
+              pauseOnHover
+              responsive={responsive}
+              shouldResetAutoplay
+              slidesToSlide={1}
+              swipeable
+            >
+              {pilots.map((pilot) => (
+                <div
+                  key={pilot.id}
+                  className="bg-[#070B16] my-4 rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg mx-4"
+                >
+                  <div className="text-center flex flex-col items-center justify-start select-none">
+                    <img
+                      className="w-32 h-32 rounded-full object-cover"
+                      src={pilot.imagePilote}
+                      alt={`${pilot.nom} ${pilot.prenom}`}
+                    />
+                    <h3 className="k2d-bold text-2xl pt-2">
+                      {pilot.id}. {pilot.nom} {pilot.prenom}
+                    </h3>
+                    <p className="text-lg text-gray-400 font-bold font-poppins">
+                      {pilot.number}
+                    </p>
+                    <div className="px-8 flex flex-col items-center justify-center gap-2 py-4">
+                      <div className="flex flex-row items-center justify-start">
+                        <img src={enduranceIcon} alt="Endurance Icon" />
+                        <p className="ml-2 font-poppins text-gray-300">
+                          Driver’s Endurance is {pilot.endurance}
+                        </p>
+                      </div>
+                      <div className="flex flex-row items-center justify-start">
+                        <img src={forceIcon} alt="Force Icon" />
+                        <p className="ml-2 font-poppins text-gray-300">
+                          Total force {pilot.force}
+                        </p>
+                      </div>
+                      <div className="flex flex-row items-center justify-start">
+                        <img src={coefficientIcon} alt="Coefficient Icon" />
+                        <p className="ml-2 font-poppins text-gray-300">
+                          Driver has coefficient of {pilot.coefficient}
+                        </p>
+                      </div>
+                    </div>
+                    <img
+                      src={decals}
+                      className="w-full pl-2 py-2"
+                      alt="Decals"
+                    />
+                  </div>
                 </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={forceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Total force 95
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={coefficientIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver has coefficient of 0.5
-                  </p>
-                </div>
-              </div>
-              <img src={decals} className="w-full pl-2 py-2" />
-            </div>
-          </div>
-
-          {/* USER TWO */}
-
-          <div className="bg-[#070B16] rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg">
-            <div className="text-center flex flex-col items-center justify-start ">
-              <img src={userTwoProfileImage} />
-              <h3 className="k2d-bold text-2xl pt-2">2. Pérez Sergio</h3>
-              <p className="text-lg text-gray-400 font-bold font-poppins">33</p>
-
-              <div className=" px-8  flex flex-col items-center justify-center gap-2 py-4">
-                <div className="flex flex-row items-center justify-start">
-                  <img src={enduranceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver’s Endurance is 85
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={forceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Total force 95
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={coefficientIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver has coefficient of 0.5
-                  </p>
-                </div>
-              </div>
-              <img src={decals} className="w-full pl-2 py-2" />
-            </div>
-          </div>
-
-          {/* USER THREE */}
-
-          <div className="bg-[#070B16] rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg">
-            <div className="text-center flex flex-col items-center justify-start ">
-              <img src={userThreeProfileImage} />
-              <h3 className="k2d-bold text-2xl pt-2">3. Leclerc Charles </h3>
-              <p className="text-lg text-gray-400 font-bold font-poppins">12</p>
-
-              <div className=" px-8  flex flex-col items-center justify-center gap-2 py-4">
-                <div className="flex flex-row items-center justify-start">
-                  <img src={enduranceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver’s Endurance is 73
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={forceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Total force 90
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={coefficientIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver has coefficient of 0.1
-                  </p>
-                </div>
-              </div>
-              <img src={decals} className="w-full pl-2 py-2" />
-            </div>
-          </div>
-
-          {/* USER ONE */}
-          <div className="bg-[#070B16] rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg">
-            <div className="text-center flex flex-col items-center justify-start ">
-              <img src={userOneProfileImage} />
-              <h3 className="k2d-bold text-2xl pt-2">1. Max Verstappen</h3>
-              <p className="text-lg text-gray-400 font-bold font-poppins">33</p>
-
-              <div className=" px-8  flex flex-col items-center justify-center gap-2 py-4">
-                <div className="flex flex-row items-center justify-start">
-                  <img src={enduranceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver’s Endurance is 90
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={forceIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Total force 95
-                  </p>
-                </div>
-
-                <div className="flex flex-row items-center justify-start">
-                  <img src={coefficientIcon} />
-                  <p className="ml-2 font-poppins text-gray-300">
-                    Driver has coefficient of 0.5
-                  </p>
-                </div>
-              </div>
-              <img src={decals} className="w-full pl-2 py-2" />
-            </div>
-          </div>
+              ))}
+            </Carousel>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import SplashScreen from "./components/Shared/SplashScreen.tsx";
 function App() {
   return (
     <div>
-      <SplashScreen />
+      {/* <SplashScreen /> */}
       <Navbar />
       <Hero />
       <DriversSec />
