@@ -19,14 +19,31 @@ public class JoueurService {
 
     private final JoueurRepository joueurRepository;
 
+    /**
+     * Sauvegarde un joueur dans le repository.
+     *
+     * @param joueur Le joueur à sauvegarder
+     * @return Le joueur sauvegardé
+     */
     public Joueur saveJoueur(Joueur joueur) {
         return joueurRepository.save(joueur);
     }
 
+    /**
+     * Récupère tous les joueurs depuis le repository.
+     *
+     * @return La liste de tous les joueurs
+     */
     public List<Joueur> getAllJoueurs() {
         return joueurRepository.findAll();
     }
 
+    /**
+     * Récupère un joueur par son identifiant.
+     *
+     * @param id L'identifiant du joueur
+     * @return Le joueur correspondant à l'identifiant
+     */
     public Joueur getJoueurById(int id) {
         Optional<Joueur> joueurOptional =  joueurRepository.findById(id);
         if (joueurOptional.isPresent()) {
@@ -37,6 +54,12 @@ public class JoueurService {
             return null;
         }
     }
+
+    /**
+     * Augmente le niveau d'un joueur si les conditions sont remplie : le joueur a assez d'xp pour monter de niveau
+     *
+     * @param idJoueur L'identifiant du joueur
+     */
     public void monterDeNiveauJoueur(int idJoueur){
         Joueur joueur = getJoueurById(idJoueur);
         if (Niveaux.isLevelUp(joueur.getNivActuel(), joueur.getXpActuelle())){
@@ -46,6 +69,14 @@ public class JoueurService {
             saveJoueur(joueur);
         }
     }
+
+    /**
+     * Ajoute de l'XP à un joueur et vérifie s'il peut monter de niveau.
+     *
+     * @param idJoueur L'identifiant du joueur
+     * @param quantite La quantité d'XP à ajouter
+     * @return Le joueur mis à jour
+     */
     public Joueur gagnerXp(int idJoueur, int quantite){
         Check.doitEtrePlusgrandQueZero(quantite, "xp");
         Joueur joueur = getJoueurById(idJoueur);
@@ -55,14 +86,30 @@ public class JoueurService {
         Log.infoLog("L'xp a été ajoutée");
         return joueur;
     }
+
+    /**
+     * Crée un nouveau joueur avec un nom et un prénom.
+     *
+     * @param nom Le nom du joueur
+     * @param prenom Le prénom du joueur
+     * @return Le joueur créé
+     */
     public Joueur creerJoueur(String nom, String prenom){
         Joueur joueur = new Joueur(nom, prenom);
         saveJoueur(joueur);
         Log.infoLog("Le joueur à été créé");
         return joueur;
     }
+
+    /**
+     * Vérifie si un achat de roues est possible pour un joueur (surchargé pour les roues)
+     *
+     * @param wheels Les roues à acheter
+     * @param idJoueur L'identifiant du joueur
+     * @return true si l'achat est possible, sinon false
+     */
     public boolean isAchatPossible(Wheels wheels, int idJoueur){
-        if(! Niveaux.isAmeliorationPossible(wheels.getNivActuel())){
+        if(!Niveaux.isAmeliorationPossible(wheels.getNivActuel())){
             Log.errorLog("Le niveau des roues est déjà au maximum");
             return false;
         }
@@ -77,8 +124,16 @@ public class JoueurService {
         Log.infoLog("L'achat est impossible");
         return false;
     }
+
+    /**
+     * Vérifie si un achat de moteur est possible pour un joueur (surchargé pour le moteur)
+     *
+     * @param moteur Le moteur à acheter
+     * @param idJoueur L'identifiant du joueur
+     * @return true si l'achat est possible, sinon false
+     */
     public boolean isAchatPossible(Moteurs moteur, int idJoueur){
-        if(! Niveaux.isAmeliorationPossible(moteur.getNivActuel())){
+        if(!Niveaux.isAmeliorationPossible(moteur.getNivActuel())){
             Log.errorLog("Le niveau du moteur est déjà au maximum");
             return false;
         }
@@ -93,8 +148,16 @@ public class JoueurService {
         Log.infoLog("L'achat est impossible");
         return false;
     }
+
+    /**
+     * Vérifie si un achat d'ailerons est possible pour un joueur (surchargé pour l'aileron)
+     *
+     * @param ailerons L'ailerons à acheter
+     * @param idJoueur L'identifiant du joueur
+     * @return true si l'achat est possible, sinon false
+     */
     public boolean isAchatPossible(Ailerons ailerons, int idJoueur){
-        if(! Niveaux.isAmeliorationPossible(ailerons.getNivActuel())){
+        if(!Niveaux.isAmeliorationPossible(ailerons.getNivActuel())){
             Log.errorLog("Le niveau de l'aileron est déjà au maximum");
             return false;
         }
