@@ -35,13 +35,14 @@ public class PiloteController {
     public Pilote createPilote(@RequestBody Pilote pilote) {
         return piloteService.createPilote(pilote);
     }
+
     @PostMapping("/createPilote/{nom}/{prenom}/{niveauActuel}/{number}/{price}/{force}/{endurance}")
 
-// PiloteController.java
-public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance, @PathVariable boolean appartient, @PathVariable String imagePilote) {
-    Pilote newPilote = piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient, imagePilote);
-    return new ResponseEntity<>(newPilote, HttpStatus.CREATED);
-}
+    // PiloteController.java
+    public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariable String prenom, @PathVariable int niveauActuel, @PathVariable int number, @PathVariable double price, @PathVariable double force, @PathVariable double endurance, @PathVariable boolean appartient, @PathVariable String imagePilote) {
+        Pilote newPilote = piloteService.createPilote(nom, prenom, niveauActuel, number, price, force, endurance, appartient, imagePilote);
+        return new ResponseEntity<>(newPilote, HttpStatus.CREATED);
+    }
 
     // Endpoint pour supprimer un pilote
     @DeleteMapping("/{id}")
@@ -73,14 +74,17 @@ public ResponseEntity<Pilote> createPilote(@PathVariable String nom, @PathVariab
     public void modifyEndurancePilote(@PathVariable int id, @RequestBody int endurance) {
         piloteService.modifyEndurancePilote(id, endurance);
     }
+
     @PutMapping("/upgradePilote/{idPilote}")
-    public ResponseEntity<Pilote> upgradePilote(@PathVariable int idPilote){
+    public ResponseEntity<Pilote> upgradePilote(@PathVariable int idPilote) {
         return new ResponseEntity<>(piloteService.upgradePilote(idPilote), HttpStatus.OK);
     }
+
     @GetMapping("/piloteCoefficientById/{idPilote}")
-    public ResponseEntity<Double>getPiloteCoef(@PathVariable int idPilote){
-        return new ResponseEntity<>(piloteService.getPiloteCoef(idPilote),HttpStatus.OK);
+    public ResponseEntity<Double> getPiloteCoef(@PathVariable int idPilote) {
+        return new ResponseEntity<>(piloteService.getPiloteCoef(idPilote), HttpStatus.OK);
     }
+
     @PutMapping("acheterPilote/{idPilote}/{idJoueur}")
     public ResponseEntity<Double> acheterPilote(@PathVariable int idPilote, @PathVariable int idJoueur) {
         return new ResponseEntity<>(piloteService.buyPilote(idPilote, idJoueur), HttpStatus.OK);

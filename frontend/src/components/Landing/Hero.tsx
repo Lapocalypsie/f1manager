@@ -7,7 +7,7 @@ const Hero = () => {
       <div className="text-white pl-8 relative py-20">
         <h2 className="k2d-bold text-5xl">
           Formula One
-          <br /> Makkers Online Racing
+          <br /> Makers Online Racing
         </h2>
         <p className="text-md text-gray-100 font-medium pt-4">
           Become the ultimate F1 manager. Strategize,
