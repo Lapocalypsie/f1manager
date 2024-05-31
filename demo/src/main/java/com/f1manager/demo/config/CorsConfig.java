@@ -9,6 +9,20 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
+    /**
+     * Configures and returns a {@link CorsFilter} bean that allows cross-origin
+     * requests.
+     * This configuration is particularly useful for enabling CORS in a Spring Boot
+     * application.
+     *
+     * <p>
+     * The CORS configuration allows requests from the specified origin,
+     * permits any header, and allows all HTTP methods.
+     * </p>
+     *
+     * @return a {@link CorsFilter} configured with the specified CORS settings.
+     */
+    
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

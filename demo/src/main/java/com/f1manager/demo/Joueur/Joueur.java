@@ -1,6 +1,5 @@
 package com.f1manager.demo.Joueur;
 
-import com.fasterxml.jackson.databind.annotation.EnumNaming;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +12,7 @@ public class Joueur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column (name = "nom")
+    @Column(name = "nom")
     private String nom;
     @Column(name = "prenom")
     private String prenom;

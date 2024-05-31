@@ -14,7 +14,8 @@ public class LigneDroiteTime {
         // Calcul de la vitesse de sortie du virage (hypothétique)
         double vitesseSortie = calculVitesseSortie(vitesseEntree, voiture);
 
-        // Calcul du temps parcouru sur la distance donnée en fonction de la moyenne pondérée entre la vitesse d'entrée et la vitesse de sortie
+        // Calcul du temps parcouru sur la distance donnée en fonction de la moyenne
+        // pondérée entre la vitesse d'entrée et la vitesse de sortie
         double tempsParcouru = (distance / ((vitesseEntree + vitesseSortie) / 2));
 
         // Mise à jour du temps total
@@ -30,7 +31,7 @@ public class LigneDroiteTime {
 
     // Méthode pour calculer la vitesse de sortie du virage
     private static double calculVitesseSortie(double vitesseEntree, F1 voiture) {
-        //Fonction calcul vitesse sortie
+        // Fonction calcul vitesse sortie
         return 0.0; // Placeholder, remplacez par le calcul réel
     }
 }

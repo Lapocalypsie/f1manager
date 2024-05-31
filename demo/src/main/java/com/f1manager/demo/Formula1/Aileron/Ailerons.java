@@ -3,25 +3,24 @@ package com.f1manager.demo.Formula1.Aileron;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "aileron") 
+@Table(name = "aileron")
 public class Ailerons {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="coef_aileron")
+    @Column(name = "coef_aileron")
     private double coefAileron;
 
-    @Column(name="poid_aileron")
+    @Column(name = "poid_aileron")
     private double poidsAileron;
-    @Column(name="prix_aileron")
+    @Column(name = "prix_aileron")
     private int prixAileron;
-    @Column(name="niv_actuel")
+    @Column(name = "niv_actuel")
     private int nivActuel;
     @Column(name = "image_aileron")
     private String imageAileron;
@@ -33,6 +32,7 @@ public class Ailerons {
         this.nivActuel = nivActuel;
 
     }
+
     // Default constructor
     public Ailerons() {
     }

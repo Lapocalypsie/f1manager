@@ -4,7 +4,6 @@ import com.f1manager.demo.Personnel.Personne;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
 @Entity
 @Table(name = "pilote")
@@ -29,10 +28,12 @@ public class Pilote extends Personne {
 
     @Column(name = "image_pilote")
     private String imagePilote;
+
     public Pilote() {
     }
 
-    public Pilote(String nom, String prenom, int number, double price, double force, double endurance, boolean appartient, String imagePilote, int nivActuel) {
+    public Pilote(String nom, String prenom, int number, double price, double force, double endurance,
+            boolean appartient, String imagePilote, int nivActuel) {
         super(nom, prenom, nivActuel);
         this.number = number;
         this.price = price;

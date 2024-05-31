@@ -7,23 +7,23 @@ public class ReglageUser {
     public Double newZeroa100;
     public Double newManiabiliteCoef;
 
-    public Double getNewVmax(F1 voiture){
+    public Double getNewVmax(F1 voiture) {
         Double Vmax = voiture.getVitesseMax();
-        //Changer réglages en fonction de
+        // Changer réglages en fonction de
         newVmax = Vmax;
         return newVmax;
     }
 
-    public Double setNewZeroa100(F1 voiture){
+    public Double setNewZeroa100(F1 voiture) {
         Double Zeroa100 = voiture.getZeroTo100();
-        //Changer réglages en fonction de
+        // Changer réglages en fonction de
         newZeroa100 = Zeroa100;
         return newZeroa100;
     }
 
-    public Double getNewManiabilite(F1 voiture){
-        //Double ManiabiliteCoef = voiture.getManiabilty();
-        //Changer reglages en fonction de
+    public Double getNewManiabilite(F1 voiture) {
+        // Double ManiabiliteCoef = voiture.getManiabilty();
+        // Changer reglages en fonction de
         return newManiabiliteCoef;
     }
 }
