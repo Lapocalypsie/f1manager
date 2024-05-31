@@ -1,7 +1,7 @@
 package com.f1manager.demo.Utils;
 
 
-import com.f1manager.demo.Logging.Log;
+import com.f1manager.demo.Log.Log;
 
 import static java.lang.Math.abs;
 /*

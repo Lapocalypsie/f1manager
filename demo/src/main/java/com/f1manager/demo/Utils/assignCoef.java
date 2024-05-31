@@ -30,6 +30,7 @@ public class assignCoef {
                 .filter(i -> liste[i] == target)
                 .findFirst();
         if (index.isPresent()) {
+            Log.traceLog("Le coefficient est bien présent");
             return calculateCoefficient(index.getAsInt(), liste.length);
         } else {
             throwException.throwIllegalArgumentException("La target n'est pas présente dans la liste");
