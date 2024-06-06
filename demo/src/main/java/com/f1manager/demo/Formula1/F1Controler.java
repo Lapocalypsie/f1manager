@@ -75,4 +75,18 @@ public class F1Controler {
     public ResponseEntity<Double> monteeNivAileronByF1(@PathVariable int idF1, @PathVariable int idJoueur){
         return new ResponseEntity<>(f1Service.levelUpAileron(idF1, idJoueur), HttpStatus.OK);
     }
+    @PutMapping("acheterF1/{idF1}/{idJoueur}")
+    public ResponseEntity<Double> acheterF1(@PathVariable int idF1, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(f1Service.buyF1(idF1, idJoueur), HttpStatus.OK);
+    }
+
+    @PutMapping("vendreF1/{idF1}/{idJoueur}")
+    public ResponseEntity<Double> vendreMecanicien(@PathVariable int idF1, @PathVariable int idJoueur) {
+        return new ResponseEntity<>(f1Service.sellF1(idF1, idJoueur), HttpStatus.OK);
+    }
+    // Endpoint pour supprimer une F1
+    @DeleteMapping("/{id}")
+    public void deleteF1(@PathVariable int id) {
+        f1Service.deleteF1(id);
+    }
 }

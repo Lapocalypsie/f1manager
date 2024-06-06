@@ -5,14 +5,18 @@ import com.f1manager.demo.Formula1.Aileron.AileronsService;
 import com.f1manager.demo.ErrorHandling.throwException;
 import com.f1manager.demo.Formula1.Moteurs.Moteurs;
 import com.f1manager.demo.Formula1.Moteurs.MoteursService;
+import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Log.Log;
+import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.Lists;
 import com.f1manager.demo.Utils.assignCoef;
 import com.f1manager.demo.Utils.findCloserInList;
 import com.f1manager.demo.Formula1.wheels.Wheels;
 import com.f1manager.demo.Formula1.wheels.WheelsService;
+import com.f1manager.demo.systemeco.Achat;
+import com.f1manager.demo.systemeco.Vente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +33,9 @@ public class F1Service {
     private final MoteursService moteursService;
     private final AileronsService aileronsService;
     private final WheelsService wheelsService;
-    private final JoueurService joueurService;
+    private JoueurService joueurService;
+    @Autowired
+    private F1Repository f1Repository;
 
     // Obtiens le coefficient de maniabilité de la F1
 
@@ -301,5 +307,39 @@ public class F1Service {
                     "Vous n'avez pas assez d'argent pour effectuer cette montée de niveau.");
         }
         return ailerons.getNivActuel();
+    }
+    /**
+     * Achète une f1 pour un joueur à partir des identifiants de la f1 et du joueur.
+     *
+     * @param idF1 l'identifiant de la f1 à acheter.
+     * @param idJoueur     l'identifiant du joueur qui achète le mécanicien.
+     * @return le montant d'argent restant au joueur après l'achat.
+     */
+    public double buyF1(int idF1, int idJoueur) {
+        F1 f1 = getF1ById(idF1);
+        Joueur joueur = joueurService.getJoueurById(idJoueur);
+        Achat.effectuerAchat(f1, joueur);
+        joueurService.saveJoueur(joueur);
+        saveF1(f1);
+        Log.infoLog("Le mecanicien à bien été acheté");
+        return joueur.getArgent();
+    }
+
+    /**
+     * Vend une f1 pour un joueur à partir des identifiants de la f1 et du joueur.
+     * @param idF1 l'identifiant de la f1 à acheter.
+     * @param idJoueur l'identifiant du mécanicien à vendre.
+     */
+    public double sellF1(int idF1, int idJoueur) {
+        F1 f1 = getF1ById(idF1);
+        Joueur joueur=  joueurService.getJoueurById(idJoueur);
+        Vente.effectuerVente(f1, joueur);
+        joueurService.saveJoueur(joueur);
+        saveF1(f1);
+        Log.infoLog("La f1 à bien été vendue");
+        return joueur.getArgent();
+    }
+    public void deleteF1(int id) {
+        f1Repository.deleteById(id);
     }
 }

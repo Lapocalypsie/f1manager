@@ -1,6 +1,7 @@
 package com.f1manager.demo.systemeco;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Formula1.F1;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
@@ -29,6 +30,18 @@ public class Vente {
             double nouveauSolde = joueur.getArgent() + mecanicien.getPrice();
             joueur.setArgent(nouveauSolde);
             mecanicien.setAppartient(false);
+            Log.infoLog("Vente effectuée avec succès !");
+        } else {
+            throwException.throwIllegalArgumentException("Ce mécanicien ne vous appartient pas.");
+        }
+    }
+    // surcharge de la methode précédente afin de vendre un mécanicien à la place d'un pilote
+    public static void effectuerVente(F1 f1, Joueur joueur) {
+
+        if (f1 != null && f1.isAppartient()) {
+            double nouveauSolde = joueur.getArgent() + f1.getPrice();
+            joueur.setArgent(nouveauSolde);
+            f1.setAppartient(false);
             Log.infoLog("Vente effectuée avec succès !");
         } else {
             throwException.throwIllegalArgumentException("Ce mécanicien ne vous appartient pas.");

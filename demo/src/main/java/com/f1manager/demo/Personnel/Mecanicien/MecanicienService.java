@@ -153,4 +153,7 @@ public class MecanicienService {
         Log.infoLog("Le mecanicien à bien été vendu");
         return joueur.getArgent();
     }
+    public void deleteMecanicien(int id) {
+        mecanicienRepository.deleteById(id);
+    }
 }

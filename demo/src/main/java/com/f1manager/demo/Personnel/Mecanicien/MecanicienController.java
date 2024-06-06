@@ -42,6 +42,11 @@ public class MecanicienController {
     public ResponseEntity<Double> vendreMecanicien(@PathVariable int idMecanicien, @PathVariable int idJoueur) {
         return new ResponseEntity<>(mecanicienService.sellMecanicien(idMecanicien, idJoueur), HttpStatus.OK);
     }
+    // Endpoint pour supprimer un mecanicien
+    @DeleteMapping("/{id}")
+    public void deleteMecanicien(@PathVariable int id) {
+        mecanicienService.deleteMecanicien(id);
+    }
 
 
 }

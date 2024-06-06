@@ -1,6 +1,7 @@
 package com.f1manager.demo.systemeco;
 
 import com.f1manager.demo.ErrorHandling.throwException;
+import com.f1manager.demo.Formula1.F1;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
@@ -30,6 +31,18 @@ public class Achat {
             joueur.setArgent(nouveauSolde);
             mecanicien.setAppartient(true);
 
+            Log.infoLog("Achat effectué avec succès !");
+        } else {
+            throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour acheter ce mécanicien.");
+        }
+    }
+    // surcharge de la methode précédente afin d'acheter une f1 à la place d'un pilote
+    public static void effectuerAchat(F1 f1, Joueur joueur) {
+
+        if (f1 != null && f1.getPrice() <= joueur.getArgent()) {
+            double nouveauSolde = joueur.getArgent() - f1.getPrice();
+            joueur.setArgent(nouveauSolde);
+            f1.setAppartient(true);
             Log.infoLog("Achat effectué avec succès !");
         } else {
             throwException.throwIllegalArgumentException("Vous n'avez pas assez d'argent pour acheter ce mécanicien.");

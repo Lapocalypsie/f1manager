@@ -32,6 +32,10 @@ public class F1 {
     @Column(name = "coef")
     private Double coef;
 
+    @Column(name = "appartient")
+    private boolean appartient;
+    @Column(name = "Price")
+    private int price;
     @ManyToOne
     @JoinColumn(name = "wheel_id")
     private Wheels wheels;
@@ -45,6 +49,7 @@ public class F1 {
     private Ailerons ailerons;
     @Column(name = "image_f1")
     private String imageF1;
+
     public F1(){}
 
 
@@ -57,5 +62,8 @@ public class F1 {
         this.moteur = moteur;
         this.ailerons = ailerons;
         this.imageF1 = imageF1;
+        this.appartient = false;
+        this.price = 100_000;
     }
+
 }
