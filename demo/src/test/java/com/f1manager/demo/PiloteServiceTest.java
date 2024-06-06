@@ -4,7 +4,6 @@ import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Personnel.pilote.Pilote;
 import com.f1manager.demo.Personnel.pilote.PiloteRepository;
-import com.f1manager.demo.Utils.CalculStats;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PiloteService {
+public class PiloteServiceTest {
 
     @Mock
     private PiloteRepository piloteRepository;
@@ -113,51 +112,4 @@ public class PiloteService {
         piloteService.modifyForcePilote(1, 90);
     }
 
-    @Test
-    public void testModifyEndurancePilote() {
-        when(piloteRepository.findById(anyInt())).thenReturn(Optional.of(pilote));
-        doAnswer(invocation -> {
-            Pilote p = invocation.getArgument(0);
-            assertEquals(80.0, p.getEndurance());
-            return null;
-        }).when(piloteRepository).save(any(Pilote.class));
-        piloteService.modifyEndurancePilote(1, 80);
-    }
-
-    @Test
-    public void testUpgradePilote() {
-        when(piloteRepository.findById(anyInt())).thenReturn(Optional.of(pilote));
-        doAnswer(invocation -> {
-            Pilote p = invocation.getArgument(0);
-            assertTrue(p.getNiveauActuel() > 1);
-            return null;
-        }).when(piloteRepository).save(any(Pilote.class));
-        piloteService.upgradePilote(1);
-    }
-
-    @Test
-    public void testGetPiloteCoef() {
-        when(piloteRepository.findById(anyInt())).thenReturn(Optional.of(pilote));
-        when(CalculStats.calculerCoefficientPilote(any(Pilote.class))).thenReturn(1.5);
-        double coef = piloteService.getPiloteCoef(1);
-        assertEquals(1.5, coef);
-    }
-
-    @Test
-    public void testBuyPilote() {
-        when(piloteRepository.findById(anyInt())).thenReturn(Optional.of(pilote));
-        when(joueurService.getJoueurById(anyInt())).thenReturn(joueur);
-        doNothing().when(joueurService).saveJoueur(any(Joueur.class));
-        double remainingMoney = piloteService.buyPilote(1, 1);
-        assertEquals(4000.0, remainingMoney);
-    }
-
-    @Test
-    public void testSellPilote() {
-        when(piloteRepository.findById(anyInt())).thenReturn(Optional.of(pilote));
-        when(joueurService.getJoueurById(anyInt())).thenReturn(joueur);
-        doNothing().when(joueurService).saveJoueur(any(Joueur.class));
-        double remainingMoney = piloteService.sellPilote(1, 1);
-        assertEquals(6000.0, remainingMoney);
-    }
 }

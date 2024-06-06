@@ -1,127 +1,98 @@
 package com.f1manager.demo;
 
-
-import com.f1manager.demo.Joueur.Joueur;
-import com.f1manager.demo.Joueur.JoueurService;
-import com.f1manager.demo.Log.Log;
-import com.f1manager.demo.Utils.CalculStats;
-import com.f1manager.demo.systemeco.Achat;
-import com.f1manager.demo.systemeco.Vente;
+import com.f1manager.demo.Formula1.Aileron.Ailerons;
+import com.f1manager.demo.Formula1.Aileron.AileronsRepository;
+import com.f1manager.demo.Formula1.Aileron.AileronsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
 
-
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-@PrepareForTest({CalculStats.class, Log.class, Achat.class, Vente.class})
-public class MecanicienServiceTest {
+public class AileronsServiceTest {
 
     @Mock
-    private MecanicienRepository mecanicienRepository;
-
-    @Mock
-    private JoueurService joueurService;
+    private AileronsRepository aileronsRepository;
 
     @InjectMocks
-    private MecanicienService mecanicienService;
-
-    private Mecanicien mecanicien;
-    private Joueur joueur;
+    private AileronsService aileronsService;
 
     @BeforeEach
-    public void setup() {
-        mecanicien = new Mecanicien("John", "Doe", 1, 10.0, 9.0, 1000.0, false);
-        joueur = new Joueur("Player1", 5000.0);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testGetVitesseMecanicienbyId() {
-        when(mecanicienRepository.findById(1)).thenReturn(Optional.of(mecanicien));
+    void testGetAileronsById() {
+        Ailerons ailerons = new Ailerons(10.0, 1000, "image.png", 1);
+        when(aileronsRepository.findById(anyInt())).thenReturn(Optional.of(ailerons));
 
-        double vitesse = mecanicienService.getVitesseMecanicienbyId(1);
+        Ailerons result = aileronsService.getAileronsById(1);
 
-        assertEquals(10.0, vitesse);
-        verify(mecanicienRepository).findById(1);
+        assertNotNull(result);
+        assertEquals(ailerons, result);
     }
 
     @Test
-    public void testGetPerformanceMecanicienbyId() {
-        when(mecanicienRepository.findById(1)).thenReturn(Optional.of(mecanicien));
+    void testGetAileronsByIdNotFound() {
+        when(aileronsRepository.findById(anyInt())).thenReturn(Optional.empty());
 
-        double performance = mecanicienService.getPerformanceMecanicienbyId(1);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            aileronsService.getAileronsById(1);
+        });
 
-        assertEquals(9.0, performance);
-        verify(mecanicienRepository).findById(1);
+        String expectedMessage = "L'aileron n'est pas présent en base";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
-    public void testCreerMecanicien() {
-        PowerMockito.mockStatic(CalculStats.class);
-        when(CalculStats.calculerCoefficientMecanicien(any(Mecanicien.class))).thenReturn(1.5);
-
-        Mecanicien newMecanicien = mecanicienService.creerMecanicien("John", "Doe", 1, 10.0, 9.0, 1000.0);
-
-        assertEquals("John", newMecanicien.getNom());
-        assertEquals("Doe", newMecanicien.getPrenom());
-        assertEquals(1.5, newMecanicien.getCoefficient());
-        verify(mecanicienRepository).save(any(Mecanicien.class));
+    void testSaveAileron() {
+        Ailerons ailerons = new Ailerons(10.0, 1000, "image.png", 1);
+        aileronsService.saveAileron(ailerons);
+        verify(aileronsRepository, times(1)).save(ailerons);
     }
 
     @Test
-    public void testGetMecanicienCoef() {
-        PowerMockito.mockStatic(CalculStats.class);
-        when(mecanicienRepository.findById(1)).thenReturn(Optional.of(mecanicien));
-        when(CalculStats.calculerCoefficientMecanicien(any(Mecanicien.class))).thenReturn(1.5);
+    void testGetAllAilerons() {
+        List<Ailerons> aileronsList = List.of(new Ailerons(10.0, 1000, "image.png", 1));
+        when(aileronsRepository.findAll()).thenReturn(aileronsList);
 
-        double coefficient = mecanicienService.getMecanicienCoef(1);
+        List<Ailerons> result = aileronsService.getAllAilerons();
 
-        assertEquals(1.5, coefficient);
-        verify(mecanicienRepository).findById(1);
+        assertNotNull(result);
+        assertEquals(1, result.size());
     }
 
     @Test
-    public void testBuyMecanicien() {
-        PowerMockito.mockStatic(Achat.class);
-        when(mecanicienRepository.findById(1)).thenReturn(Optional.of(mecanicien));
-        when(joueurService.getJoueurById(1)).thenReturn(joueur);
+    void testUpdatePoidsAileron() {
+        Ailerons ailerons = new Ailerons(10.0, 1000, "image.png", 1);
+        when(aileronsRepository.findById(anyInt())).thenReturn(Optional.of(ailerons));
 
-        double remainingMoney = mecanicienService.buyMecanicien(1, 1);
+        Ailerons result = aileronsService.updatePoidsAileron(1, 15.0);
 
-        verify(mecanicienRepository).findById(1);
-        verify(joueurService).getJoueurById(1);
-        verify(joueurService).saveJoueur(joueur);
-        verify(mecanicienRepository).save(mecanicien);
-        assertEquals(joueur.getArgent(), remainingMoney);
+        assertNotNull(result);
+        assertEquals(15.0, result.getPoidsAileron());
+        verify(aileronsRepository, times(1)).save(result);
     }
 
     @Test
-    public void testSellMecanicien() {
-        PowerMockito.mockStatic(Vente.class);
-        when(mecanicienRepository.findById(1)).thenReturn(Optional.of(mecanicien));
-        when(joueurService.getJoueurById(1)).thenReturn(joueur);
+    void testUpdatePrixAileron() {
+        Ailerons ailerons = new Ailerons(10.0, 1000, "image.png", 1);
+        when(aileronsRepository.findById(anyInt())).thenReturn(Optional.of(ailerons));
 
-        double remainingMoney = mecanicienService.sellMecanicien(1, 1);
+        Ailerons result = aileronsService.updatePrixAileron(1, 2000);
 
-        verify(mecanicienRepository).findById(1);
-        verify(joueurService).getJoueurById(1);
-        verify(joueurService).saveJoueur(joueur);
-        verify(mecanicienRepository).save(mecanicien);
-        assertEquals(joueur.getArgent(), remainingMoney);
+        assertNotNull(result);
+        assertEquals(2000, result.getPrixAileron());
+        verify(aileronsRepository, times(1)).save(result);
     }
 
-    @Test
-    public void testDeleteMecanicien() {
-        mecanicienService.deleteMecanicien(1);
-
-        verify(mecanicienRepository).deleteById(1);
-    }
 }
