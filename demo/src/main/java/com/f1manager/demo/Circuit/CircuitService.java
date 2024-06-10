@@ -2,7 +2,7 @@ package com.f1manager.demo.Circuit;
 
 import java.util.*;
 
-public class CircuitRepository {
+public class CircuitService {
 
     //Saisie de circuit Brut sous forme de texte
     private String saisieMonaco = "DROITE:100,VIRAGE:90,DROITE:300,VIRAGE:15,VIRAGE:160,VIRAGE:90,DROITE:140,VIRAGE:110," +

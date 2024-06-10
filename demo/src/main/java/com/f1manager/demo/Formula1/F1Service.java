@@ -8,7 +8,6 @@ import com.f1manager.demo.Formula1.Moteurs.MoteursService;
 import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Log.Log;
-import com.f1manager.demo.Personnel.Mecanicien.Mecanicien;
 import com.f1manager.demo.Utils.Check;
 import com.f1manager.demo.Utils.Lists;
 import com.f1manager.demo.Utils.assignCoef;
@@ -33,9 +32,7 @@ public class F1Service {
     private final MoteursService moteursService;
     private final AileronsService aileronsService;
     private final WheelsService wheelsService;
-    private JoueurService joueurService;
-    @Autowired
-    private F1Repository f1Repository;
+    private final JoueurService joueurService;
 
     // Obtiens le coefficient de maniabilité de la F1
 
@@ -340,6 +337,9 @@ public class F1Service {
         return joueur.getArgent();
     }
     public void deleteF1(int id) {
-        f1Repository.deleteById(id);
+        repository.deleteById(id);
+    }
+    public List<Integer> getAllF1Ids() {
+        return repository.findAllF1Ids();
     }
 }

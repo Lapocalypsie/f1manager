@@ -6,12 +6,10 @@ public class Circuit {
 
     private final LinkedHashMap<String, Double> circuit;
 
-    // ==== CONSTRUCTEUR ==== //
     public Circuit(LinkedHashMap<String, Double> circuit) {
         this.circuit = new LinkedHashMap<>(circuit);
     }
 
-    // ==== METHODES ==== //
     public LinkedHashMap<String, Double> getCircuit(Circuit Circuit) {
         return circuit;
     }

@@ -122,4 +122,7 @@ public class PiloteService {
         savePilote(pilote);
         return joueur.getArgent();
     }
+    public List<Integer> getAllPilotesIds() {
+        return piloteRepository.findAllPiloteIds();
+    }
 }
