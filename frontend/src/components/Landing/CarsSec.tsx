@@ -15,17 +15,16 @@ import { useEffect, useState } from "react";
 
 // API
 
-import { GetPilots } from "../../network/endpoints/Pilots";
+import { GetCars } from "../../network/endpoints/Car";
+import { Car } from "../../types/types";
 
-import { Pilot } from "../../types/types";
+const CarsSec = () => {
+  const [cars, setCars] = useState<Car[]>();
 
-const DriversSec = () => {
-  const [pilots, setPilots] = useState<Pilot[]>();
-
-  const getAllPilotsFromApi = async () => {
-    const pilots = await GetPilots();
-    setPilots(pilots);
-    console.log(pilots);
+  const getAllCarsFromApi = async () => {
+    const cars = await GetCars();
+    setCars(cars);
+    console.log(cars);
   };
 
   const responsive = {
@@ -48,12 +47,12 @@ const DriversSec = () => {
   };
 
   useEffect(() => {
-    getAllPilotsFromApi();
+    getAllCarsFromApi();
   }, []);
 
   return (
     <div className="my-12">
-      {pilots ? (
+      {cars ? (
         <Carousel
           additionalTransfrom={0}
           arrows
@@ -67,40 +66,51 @@ const DriversSec = () => {
           slidesToSlide={1}
           swipeable
         >
-          {pilots.map((pilot) => (
+          {cars.map((car) => (
             <div
-              key={pilot.id}
+              key={car.id}
               className="bg-[#070B16] my-4 rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg mx-4"
             >
               <div className="text-center flex flex-col items-center justify-start select-none">
                 <img
                   className="w-32 h-32 rounded-full object-cover"
-                  src={pilot.imagePilote}
-                  alt={`${pilot.nom} ${pilot.prenom}`}
+                  src={car.imageF1}
                 />
                 <h3 className="k2d-bold text-2xl pt-2">
-                  {pilot.id}. {pilot.nom} {pilot.prenom}
+                  Voiture de course N°{car.id}
                 </h3>
                 <p className="text-lg text-gray-400 font-bold font-poppins">
-                  {pilot.number}
+                  {car.poidsF1}
                 </p>
                 <div className="px-8 flex flex-col items-center justify-center gap-2 py-4">
                   <div className="flex flex-row items-center justify-start">
                     <img src={enduranceIcon} alt="Endurance Icon" />
                     <p className="ml-2 font-poppins text-gray-300">
-                      Driver’s Endurance is {pilot.endurance}
+                      Weight: {car.poidsF1}
                     </p>
                   </div>
                   <div className="flex flex-row items-center justify-start">
                     <img src={forceIcon} alt="Force Icon" />
                     <p className="ml-2 font-poppins text-gray-300">
-                      Total force {pilot.force}
+                      Max Speed: {car.vitesseMax}
                     </p>
                   </div>
                   <div className="flex flex-row items-center justify-start">
                     <img src={coefficientIcon} alt="Coefficient Icon" />
                     <p className="ml-2 font-poppins text-gray-300">
-                      Driver has coefficient of {pilot.coefficient}
+                      Coefficient: {car.coef}
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center justify-start">
+                    <img src={forceIcon} alt="Force Icon" />
+                    <p className="ml-2 font-poppins text-gray-300">
+                      0-100 km/h: {car.zeroTo100}
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center justify-start">
+                    <img src={enduranceIcon} alt="Endurance Icon" />
+                    <p className="ml-2 font-poppins text-gray-300">
+                      Maniability: {car.maniabilty}
                     </p>
                   </div>
                 </div>
@@ -124,4 +134,4 @@ const DriversSec = () => {
   );
 };
 
-export default DriversSec;
+export default CarsSec;

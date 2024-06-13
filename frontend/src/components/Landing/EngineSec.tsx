@@ -1,11 +1,3 @@
-import decals from "../../assets/Card Decal.png";
-
-//import userOneProfileImage from "../../assets/temp/PlayerImageOne.png";
-//import userTwoProfileImage from "../../assets/temp/PlayerImageTwo.png";
-//import userThreeProfileImage from "../../assets/temp/PlayerImageThree.png";
-
-import coefficientIcon from "../../assets/icons/coefficient.png";
-import enduranceIcon from "../../assets/icons/Endurance.png";
 import forceIcon from "../../assets/icons/force.png";
 
 // CAROUSEL
@@ -15,17 +7,16 @@ import { useEffect, useState } from "react";
 
 // API
 
-import { GetPilots } from "../../network/endpoints/Pilots";
+import { GetEngine } from "../../network/endpoints/Engine";
+import { Engine } from "../../types/types";
 
-import { Pilot } from "../../types/types";
+const EngineSec = () => {
+  const [engine, setEngine] = useState<Engine[]>();
 
-const DriversSec = () => {
-  const [pilots, setPilots] = useState<Pilot[]>();
-
-  const getAllPilotsFromApi = async () => {
-    const pilots = await GetPilots();
-    setPilots(pilots);
-    console.log(pilots);
+  const getAllEnginesFromApi = async () => {
+    const engines = await GetEngine();
+    setEngine(engines);
+    console.log(engines);
   };
 
   const responsive = {
@@ -48,12 +39,12 @@ const DriversSec = () => {
   };
 
   useEffect(() => {
-    getAllPilotsFromApi();
+    getAllEnginesFromApi();
   }, []);
 
   return (
     <div className="my-12">
-      {pilots ? (
+      {engine ? (
         <Carousel
           additionalTransfrom={0}
           arrows
@@ -67,44 +58,34 @@ const DriversSec = () => {
           slidesToSlide={1}
           swipeable
         >
-          {pilots.map((pilot) => (
+          {engine.map((engine) => (
             <div
-              key={pilot.id}
+              key={engine.id}
               className="bg-[#070B16] my-4 rounded-md overflow-hidden border-2 border-gray-700 py-4 drop-shadow-lg mx-4"
             >
               <div className="text-center flex flex-col items-center justify-start select-none">
                 <img
                   className="w-32 h-32 rounded-full object-cover"
-                  src={pilot.imagePilote}
-                  alt={`${pilot.nom} ${pilot.prenom}`}
+                  src={engine.imageMoteur}
+                  alt={engine.nomMoteur}
                 />
-                <h3 className="k2d-bold text-2xl pt-2">
-                  {pilot.id}. {pilot.nom} {pilot.prenom}
-                </h3>
+                <h3 className="k2d-bold text-2xl pt-2">{engine.nomMoteur}</h3>
                 <p className="text-lg text-gray-400 font-bold font-poppins">
-                  {pilot.number}
+                  Consommation d'essence: {engine.consommationEssence} liters
                 </p>
                 <div className="px-8 flex flex-col items-center justify-center gap-2 py-4">
                   <div className="flex flex-row items-center justify-start">
-                    <img src={enduranceIcon} alt="Endurance Icon" />
-                    <p className="ml-2 font-poppins text-gray-300">
-                      Driver’s Endurance is {pilot.endurance}
-                    </p>
-                  </div>
-                  <div className="flex flex-row items-center justify-start">
                     <img src={forceIcon} alt="Force Icon" />
                     <p className="ml-2 font-poppins text-gray-300">
-                      Total force {pilot.force}
+                      Puissance: {engine.puissance}
                     </p>
                   </div>
                   <div className="flex flex-row items-center justify-start">
-                    <img src={coefficientIcon} alt="Coefficient Icon" />
                     <p className="ml-2 font-poppins text-gray-300">
-                      Driver has coefficient of {pilot.coefficient}
+                      Prix: {engine.prixMoteur} €
                     </p>
                   </div>
                 </div>
-                <img src={decals} className="w-full pl-2 py-2" alt="Decals" />
               </div>
               <div className="px-8 flex flex-col items-center justify-center gap-2 py-4">
                 <button
@@ -124,4 +105,4 @@ const DriversSec = () => {
   );
 };
 
-export default DriversSec;
+export default EngineSec;

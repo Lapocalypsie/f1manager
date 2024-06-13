@@ -1,0 +1,74 @@
+import React, { useState } from "react";
+import DriversSec from "./DriversSec";
+import CarsSec from "./CarsSec";
+import EngineSec from "./EngineSec";
+
+const Selection = () => {
+  const [currentTab, setCurrentTab] = useState("Drivers");
+
+  const handleTabChange = (tab: string) => {
+    setCurrentTab(tab);
+  };
+
+  const handleRace = () => {
+    console.log("start race");
+  };
+
+  return (
+    <div className="bg-[#030710] text-white py-8">
+      <div className="max-w-screen-xl mx-auto ">
+        <h2 className="font-bold text-4xl">
+          Ranking of
+          <br /> Individual Standings
+        </h2>
+        <div className="w-2/5 my-4 border border-gray-400 rounded-full flex flex-row items-center justify-between">
+          <div
+            className={`bg-${
+              currentTab === "Drivers" ? "white" : "transparent"
+            } text-${
+              currentTab === "Drivers" ? "gray-900" : "white"
+            } font-bold font-poppins px-12 py-4 rounded-full cursor-pointer`}
+            onClick={() => handleTabChange("Drivers")}
+          >
+            Drivers
+          </div>
+          <div
+            className={`bg-${
+              currentTab === "Cars" ? "white" : "transparent"
+            } text-${
+              currentTab === "Cars" ? "gray-900" : "white"
+            } hover:bg-white hover:text-gray-900  duration-200 font-bold font-poppins px-12 py-4 rounded-full cursor-pointer`}
+            onClick={() => handleTabChange("Cars")}
+          >
+            Cars
+          </div>
+          <div
+            className={`bg-${
+              currentTab === "Engine" ? "white" : "transparent"
+            } text-${
+              currentTab === "Engine" ? "gray-900" : "white"
+            } hover:bg-white hover:text-gray-900 duration-200 font-bold font-poppins px-12 py-4 rounded-full cursor-pointer`}
+            onClick={() => handleTabChange("Engine")}
+          >
+            Engine
+          </div>
+        </div>
+        <div className="my-12">
+          {currentTab === "Drivers" && <DriversSec />}
+          {currentTab === "Cars" && <CarsSec />}
+          {currentTab === "Engine" && <EngineSec />}
+        </div>
+      </div>
+      <div className="text-center">
+        <button
+          className="bg-red-500 py-10 px-20 rounded-full font-bold text-xl"
+          onClick={handleRace}
+        >
+          Let's Race Now !
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Selection;

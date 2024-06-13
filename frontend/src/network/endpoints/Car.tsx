@@ -1,8 +1,8 @@
 import { axiosClient } from "../apiClient";
 
-export function GetPilots() {
+export function GetCars() {
   return axiosClient()
-    .get("/pilotes")
+    .get("/api/f1/all")
     .then((res) => res.data);
 }
 
