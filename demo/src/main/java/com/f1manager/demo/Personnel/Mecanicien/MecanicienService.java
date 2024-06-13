@@ -5,6 +5,7 @@ import com.f1manager.demo.Joueur.Joueur;
 import com.f1manager.demo.Joueur.JoueurService;
 import com.f1manager.demo.Log.Log;
 import com.f1manager.demo.Personnel.PersonneService;
+import com.f1manager.demo.Personnel.pilote.Pilote;
 import com.f1manager.demo.Utils.CalculStats;
 import com.f1manager.demo.systemeco.Achat;
 import com.f1manager.demo.systemeco.Vente;
@@ -122,6 +123,11 @@ public class MecanicienService {
         Log.traceLog("Le coefficient du mecanicient vaut " + coefficient);
         return coefficient;
     }
+    public double getMecanicienCoef(Mecanicien mecanicien){
+        double coefficient = CalculStats.calculerCoefficientMecanicien(mecanicien);
+        Log.traceLog("Le coefficient du mecanicient vaut " + coefficient);
+        return coefficient;
+    }
 
     /**
      * Achète un mécanicien pour un joueur à partir des identifiants du mécanicien et du joueur.
@@ -159,6 +165,9 @@ public class MecanicienService {
     }
     public List<Integer> getAllMecanoIds() {
         return mecanicienRepository.findAllMecanoIds();
+    }
+    public List<Mecanicien> getAllMecano() {
+        return mecanicienRepository.findAll();
     }
 
 }

@@ -39,7 +39,7 @@ public class F1Service {
     public Double getManiabilityCoef(F1 f1) {
         // obtention de la maniabilité de la F1
 
-        double maniabilityCoef = f1.getManiabilty();
+        double maniabilityCoef = f1.getManiabilty()/100;
         // calcul du coefficient :
 
         maniabilityCoef = (maniabilityCoef * 2 + aileronsService.getAileronCoef(f1.getAilerons())) / 3;

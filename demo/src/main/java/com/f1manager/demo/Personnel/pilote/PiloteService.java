@@ -102,7 +102,10 @@ public class PiloteService {
     public double getPiloteCoef(int idPilote){
         Pilote pilote = getPiloteById(idPilote);
         return CalculStats.calculerCoefficientPilote(pilote);
+    }public double getPiloteCoef(Pilote pilote){
+        return CalculStats.calculerCoefficientPilote(pilote);
     }
+
     public double buyPilote(int idPilote, int idJoueur) {
         Pilote pilote = getPiloteById(idPilote);
         Joueur joueur = joueurService.getJoueurById(idJoueur);

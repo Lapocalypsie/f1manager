@@ -1,9 +1,12 @@
 package com.f1manager.demo.Personnel.Mecanicien;
 
+import com.f1manager.demo.Personnel.pilote.Pilote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -48,5 +51,12 @@ public class MecanicienController {
         mecanicienService.deleteMecanicien(id);
     }
 
-
+    @GetMapping()
+    public List<Mecanicien> getAllMecano() {
+        List<Mecanicien> mecaniciens = mecanicienService.getAllMecano();
+        for (Mecanicien mecanicien : mecaniciens) {
+            System.out.println(mecanicien);
+        }
+        return mecaniciens;
+    }
 }
