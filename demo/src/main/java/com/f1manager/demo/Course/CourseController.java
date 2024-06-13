@@ -20,7 +20,7 @@ public class CourseController {
         this.courseService = courseService;
     }
     @GetMapping("/makeCourse/{idMecanicien1}/{idMecanicien2}/{idF11}/{idF12}/{idPilote1}/{idPilote2}/{tailleCourse}")
-    public ResponseEntity<HashMap<String, List<Object>>> makeCourse(@PathVariable int idMecanicien1, @PathVariable int idMecanicien2, @PathVariable int idF11, @PathVariable int idF12, @PathVariable int idPilote1, @PathVariable int idPilote2, @PathVariable int tailleCourse){
+    public ResponseEntity<HashMap<String, List<String>>> makeCourse(@PathVariable int idMecanicien1, @PathVariable int idMecanicien2, @PathVariable int idF11, @PathVariable int idF12, @PathVariable int idPilote1, @PathVariable int idPilote2, @PathVariable int tailleCourse){
         return new ResponseEntity<>(courseService.course(idMecanicien1, idMecanicien2, idF11, idF12, idPilote1, idPilote2, tailleCourse), HttpStatus.OK);
     }
 }

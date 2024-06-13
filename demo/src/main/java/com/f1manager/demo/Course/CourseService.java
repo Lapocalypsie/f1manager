@@ -97,26 +97,24 @@ public class CourseService {
         }
         return result;
     }
-    public HashMap<String, List<Object>> calculOrdreCourse(List<Double> moyenneListe, List<Pilote> piloteListe, List<Mecanicien> mecanicienListe, List<F1> f1List){
-        HashMap<String, List<Object>> result = new HashMap<>();
+    public HashMap<String, List<String>> calculOrdreCourse(List<Double> moyenneListe, List<Pilote> piloteListe, List<Mecanicien> mecanicienListe, List<F1> f1List){
+        HashMap<String, List<String>> result = new HashMap<>();
         if (mecanicienListe.size() != piloteListe.size() || mecanicienListe.size() != f1List.size() || moyenneListe.size() != mecanicienListe.size()){
             throwException.throwIllegalArgumentException("Les listes ne font pas la même taille");
         }
-        List<Pilote> piloteResult = new ArrayList<>();
-        List<Mecanicien> mecanicienResult= new ArrayList<>();
-        List<F1> f1Result = new ArrayList<>();
+        List<String> piloteNomResult = new ArrayList<>();
+        List<String> pilotePrenomResult= new ArrayList<>();
+        List<String> f1ImageResult = new ArrayList<>();
+        List<String> piloteImageResult = new ArrayList<>();
         List<Double> moyenneResult = new ArrayList<>();
         System.out.println(moyenneListe);
         while (! moyenneListe.isEmpty()){
             int index = getMaxIndex(moyenneListe);
-            System.out.println("indice = " + index);
-            System.out.println("indice valeur = " + moyenneListe.get(index));
-            System.out.println("moyenne liste = " + moyenneListe);
-            System.out.println();
             //création du classement
-            piloteResult.add(piloteListe.get(index));
-            mecanicienResult.add(mecanicienListe.get(index));
-            f1Result.add(f1List.get(index));
+            piloteNomResult.add(piloteListe.get(index).getNom());
+            pilotePrenomResult.add(piloteListe.get(index).getPrenom());
+            piloteImageResult.add(piloteListe.get(index).getImagePilote());
+            f1ImageResult.add(f1List.get(index).getImageF1());
             moyenneResult.add(moyenneListe.get(index));
             //suppression des éléments déjà trouvés
             piloteListe.remove(index);
@@ -124,13 +122,13 @@ public class CourseService {
             f1List.remove(index);
             moyenneListe.remove(index);
         }
-        result.put("Pilote", Collections.singletonList(piloteResult));
-        result.put("Mecanicien", Collections.singletonList(mecanicienResult));
-        result.put("F1", Collections.singletonList(f1Result));
-        result.put("Coef", Collections.singletonList(moyenneResult));
+        result.put("nomPilote", piloteNomResult);
+        result.put("prenomPilote", pilotePrenomResult);
+        result.put("imagePilote", piloteImageResult);
+        result.put("imageF1", f1ImageResult);
         return result;
     }
-    public HashMap<String, List<Object>> course(int idMecano1, int idMecano2, int idF11, int idF12, int idPilote1, int idPilote2, int tailleCourse){
+    public HashMap<String, List<String>> course(int idMecano1, int idMecano2, int idF11, int idF12, int idPilote1, int idPilote2, int tailleCourse){
         List<F1> f1Liste =  fillF1List(idF11, idF12, tailleCourse);
         List<Mecanicien> mecanicienListe = fillMecanoList(idMecano1, idMecano2, tailleCourse);
         List<Pilote> pilotesListe = fillPiloteList(idPilote1, idPilote2, tailleCourse);
@@ -138,13 +136,12 @@ public class CourseService {
         List<Double> mecanoCoefListe = getCoefMecanoList(mecanicienListe);
         List<Double> piloteCoefListe = getCoefPiloteList(pilotesListe);
         List<Double> moyenneListe = getMoyenneListe(mecanoCoefListe, piloteCoefListe, f1CoefListe);
-        HashMap<String, List<Object>> ordreCourse =  calculOrdreCourse(moyenneListe, pilotesListe, mecanicienListe, f1Liste);
-        System.out.println("on passe là");
+        HashMap<String, List<String>> ordreCourse =  calculOrdreCourse(moyenneListe, pilotesListe, mecanicienListe, f1Liste);
         System.out.println(ordreCourse.toString());
-        System.out.println(ordreCourse.get("Pilote").toString());
-        System.out.println(ordreCourse.get("Mecanicien").toString());
-        System.out.println(ordreCourse.get("F1").toString());
-        System.out.println(ordreCourse.get("Coef").toString());
+        System.out.println(ordreCourse.get("nomPilote").toString());
+        System.out.println(ordreCourse.get("prenomPilote").toString());
+        System.out.println(ordreCourse.get("imagePilote").toString());
+        System.out.println(ordreCourse.get("imageF1").toString());
         return ordreCourse;
     }
     private int getRandomElement(List<Integer> list) {
