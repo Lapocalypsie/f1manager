@@ -1,18 +1,22 @@
-//import { Select } from "@headlessui/react";
+import React, { useState } from "react";
 import Hero from "./components/Landing/Hero.tsx";
 import Navbar from "./components/Layout/Navbar.tsx";
-//import SplashScreen from "./components/Shared/SplashScreen.tsx";
 import Selection from "./components/Landing/Selection.tsx";
 import Standings from "./components/Racing/Standings.tsx";
 
 function App() {
+  const [showStandings, setShowStandings] = useState(false);
+
+  const handleRaceStart = () => {
+    setShowStandings(true);
+  };
+
   return (
     <div>
-      {/* <SplashScreen /> */}
       <Navbar />
       <Hero />
-      <Selection />
-      <Standings />
+      <Selection onRaceStart={handleRaceStart} />
+      {showStandings ? <Standings /> : ""}
     </div>
   );
 }

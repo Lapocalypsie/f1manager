@@ -34,10 +34,3 @@ export interface Car {
   appartient: boolean
   price : number
 }
-
-export interface Race {
-  id: number
-  nom: string
-  prenom: string
-  imageF1: number
-}

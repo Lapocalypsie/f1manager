@@ -1,17 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import DriversSec from "./DriversSec";
 import CarsSec from "./CarsSec";
 import EngineSec from "./EngineSec";
 
-const Selection = () => {
+const Selection = ({ onRaceStart } : any) => {
   const [currentTab, setCurrentTab] = useState("Drivers");
 
   const handleTabChange = (tab: string) => {
     setCurrentTab(tab);
-  };
-
-  const handleRace = () => {
-    console.log("start race");
   };
 
   return (
@@ -62,7 +59,7 @@ const Selection = () => {
       <div className="text-center">
         <button
           className="bg-red-500 py-10 px-20 rounded-full font-bold text-xl"
-          onClick={handleRace}
+          onClick={onRaceStart}
         >
           Let's Race Now !
         </button>
