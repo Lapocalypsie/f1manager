@@ -130,7 +130,7 @@ public class CourseService {
         result.put("Coef", Collections.singletonList(moyenneResult));
         return result;
     }
-    public void course(int idMecano1, int idMecano2, int idF11, int idF12, int idPilote1, int idPilote2, int tailleCourse){
+    public HashMap<String, List<Object>> course(int idMecano1, int idMecano2, int idF11, int idF12, int idPilote1, int idPilote2, int tailleCourse){
         List<F1> f1Liste =  fillF1List(idF11, idF12, tailleCourse);
         List<Mecanicien> mecanicienListe = fillMecanoList(idMecano1, idMecano2, tailleCourse);
         List<Pilote> pilotesListe = fillPiloteList(idPilote1, idPilote2, tailleCourse);
@@ -145,6 +145,7 @@ public class CourseService {
         System.out.println(ordreCourse.get("Mecanicien").toString());
         System.out.println(ordreCourse.get("F1").toString());
         System.out.println(ordreCourse.get("Coef").toString());
+        return ordreCourse;
     }
     private int getRandomElement(List<Integer> list) {
         Random random = new Random();
